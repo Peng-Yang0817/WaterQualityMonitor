@@ -1,0 +1,143 @@
+﻿@using TestProject.Models;
+@{
+    ViewBag.Title = "Index";
+    List<Aquarium> TitleDataList = ViewBag.TitleDataList;
+    List<AquariumSituation> DataList = ViewBag.DataList;
+}
+<style>
+
+    .TitleSet {
+        margin-left: 30px;
+    }
+
+    .DataSet {
+        margin-left: 50px;
+        margin: 20px auto;
+        item-align: center;
+        width: 80%;
+    }
+
+        .DataSet table {
+            font-size: 20px;
+        }
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+    }
+
+        table tr {
+            border-bottom: solid 2px white;
+        }
+
+            table tr:last-child {
+                border-bottom: none;
+            }
+
+        table th {
+            position: relative;
+            width: 30%;
+            background-color: #7d7d7d;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+            table th:after {
+                display: block;
+                content: "";
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                top: calc(50% - 10px);
+                right: -10px;
+                border-left: 10px solid #7d7d7d;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+            }
+
+        table td {
+            text-align: left;
+            width: 70%;
+            background-color: #eee;
+            padding: 10px 20px;
+        }
+
+    h4, h3, h2 {
+        font-weight: bold;
+    }
+</style>
+<div style="margin-left:50px">
+    <h2>
+        魚缸水質狀況<h2>
+            @{
+                for (int i = 0; i < TitleDataList.Count; i++)
+                {
+                    <div class="TitleSet">
+                        <h3>編號 : @TitleDataList[i].AquariumUnitNum</h3>
+                        <h4>
+                            水質類型 :
+                            @if (TitleDataList[i].WaterType == "1")
+                            {
+                                <span>弱酸</span>
+                            }
+                            @if (TitleDataList[i].WaterType == "2")
+                            {
+                                <span>中性</span>
+                            }
+                            @if (TitleDataList[i].WaterType == "3")
+                            {
+                                <span>弱鹼</span>
+                            }
+                            @if (TitleDataList[i].WaterType == "4")
+                            {
+                                <span>海水</span>
+                            }
+                        </h4>
+                    </div>
+                    <div class="DataSet">
+                        <table>
+                            <tr>
+                                <th width="20%" style="text-align:left;padding-left:5px;">最後紀錄時間 :</th>
+                                <td width="80%" colspan="2">@DataList[i].createTime</td>
+                            </tr>
+                            <tr>
+                                <th width="20%" style="text-align:left;padding-left:5px;">水位高度 :</th>
+                                <td width="60%" colspan="2">@DataList[i].WaterLevel</td>
+                                @*<td width="20%" style="background-color: #7d7d7d;color:aliceblue; padding-right: 10px; ">
+                                    </td>*@
+                            </tr>
+                            <tr>
+                                <th width="20%" style="text-align:left;padding-left:5px;">水中溫度 :</th>
+                                <td width="60%">@DataList[i].temperature</td>
+                                <td width="20%" style="background-color: #7d7d7d;color:aliceblue; padding-right: 10px; ">°C</td>
+                            </tr>
+                            <tr>
+                                <th width="20%" style="text-align:left;padding-left:5px;">水中濁度 :</th>
+                                <td width="60%">@DataList[i].Turbidity</td>
+                                <td width="20%" style="background-color: #7d7d7d;color:aliceblue; padding-right: 10px; ">NTU</td>
+                            </tr>
+                            <tr>
+                                <th width="20%" style="text-align:left;padding-left:5px;">PH 值 :</th>
+                                <td width="60%">@DataList[i].PH</td>
+                                <td width="20%" style="background-color: #7d7d7d;color:aliceblue; padding-right: 10px; ">mol/L</td>
+                            </tr>
+                            <tr>
+                                <th width="20%" style="text-align:left;padding-left:5px;">TDS :</th>
+                                <td width="60%">@DataList[i].TDS</td>
+                                <td width="20%" style="background-color: #7d7d7d;color:aliceblue; padding-right: 10px; ">ppm</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <br />
+                }
+
+            }
+
+</div>
+
+
+
+
+

@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魚缸水質監控網</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="border-color:#dae8fc ">
+        <div class="container">
+            <div class="navbar-header" style="padding-top: 10px;">
+                <button type="button" class="navbar-toggle collapse " navbar-collapse collapse" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("魚缸水質監控網", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+
+            <div class="navbar-collapse collapse" style="height:110px !important;padding-top:35px;">
+                <ul class="nav navbar-nav navbar-right" style="position: relative; bottom: 0px; right: 0px;">
+                    @*<li><a href="http://tlc.sainter.com.tw/">線上提報系統</a></li>*@
+                    @{
+                        if (Session["UserEmail"] == null)
+                        {
+                            <li>@Html.ActionLink("公告與說明", "About", "Home")</li>
+                            <li>@Html.ActionLink("登入 / 註冊", "CreateOrLogIn", "LogInAndRegister")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("綁定魚缸", "Bind", "BindAquarium")</li>
+                            <li>@Html.ActionLink("魚缸水質狀況", "Index", "AquariumWaterSituation")</li>
+                            <li>@Html.ActionLink("公告與說明", "About", "Home")</li>
+                            <li>@Html.ActionLink("登出", "LogOut", "LogInAndRegister")</li>
+                        }
+                    }
+
+                </ul>
+            </div>
+            <div class="bg-pic">
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="margin-top:100px">
+        @RenderBody()
+
+        @*<footer>
+                <div style="color: #000; text-align: center; background-color: #dae8fc; height: 10vh; max-width: 100%; display: flex; align-items: center; justify-content: center ">
+                    <p style="margin-bottom:0px;font-size:15px">
+                        &copy; @DateTime.Now.Year - 網站維護：技專校院總量管制小組
+                    </p>
+                </div>
+            </footer>*@
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<style>
+
+    .navbar-brand2 {
+        background: url(/Content/web_02_new.png) no-repeat center left;
+        background-size: contain;
+        display: block;
+        width: 675px;
+        height: 110px;
+        text-indent: -9999px;
+    }
+
+    .navbar {
+        background-color: #dae8fc;
+        min-height: 120px;
+    }
+
+    .view_total > div > input {
+        background-color: #5A7C7C;
+        font-size: large;
+        height: 50px;
+        width: 90%;
+        margin: 10px;
+    }
+
+    ul {
+        padding: 0px;
+    }
+
+    /*.navbar-inverse .navbar-nav > li > a {
+        color: white;
+        transition: box-shadow 0.3s, transform 0.4s,color 0.2s;
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover,
+        .navbar_inverse .navbar-nav > li > a:focus {
+            color: #5050F7;
+            box-shadow: 3px 3px 9px #5050F7;
+            background-color: #9b8cff;
+            transform: translateY(-2px) rotate(1deg);
+            cursor: default;
+        }*/
+
+    /*選單STYLE設定*/
+    .navbar-inverse .navbar-nav > li > a {
+        font-size: 20px;
+        color: blue;
+        font-weight: bold;
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover,
+        .navbar-inverse .navbar-nav > li > a:focus {
+            color: green;
+        }
+    /*標題STYLE設定*/
+    .navbar-inverse .navbar-brand {
+        font-size: 37px;
+        color: black;
+        font-weight: bold;
+    }
+
+        .navbar-inverse .navbar-brand:hover,
+        .navbar-inverse .navbar-brand:focus {
+            color: blue;
+        }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: blue;
+        transition: box-shadow 0.3s, transform 0.4s,color 0.3s;
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover,
+        .navbar-inverse .navbar-nav > li > a:focus {
+            color: blue;
+            box-shadow: 3px 3px 9px #5050F7;
+            background-color: rgb(218, 255, 252);
+            transform: translateY(-2px);
+            cursor: default;
+        }
+
+    /*.navbar-inverse .navbar-nav > .open > a {
+        color: white;
+        transition: box-shadow 0.3s, transform 0.4s,color 0.2s;
+    }
+
+        .navbar-inverse .navbar-nav > .open > a:hover,
+        .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #5050F7;
+            box-shadow: 3px 3px 9px #5050F7;
+            background-color: #9b8cff;
+            transform: translateY(-2px) rotate(1deg);
+        }*/
+    .dropdown-menu li:hover .sub-menu {
+        visibility: visible;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+</style>

@@ -1,0 +1,118 @@
+﻿@model TestProject.Models.Auth001
+@{
+    ViewBag.Title = "Home Page";
+    var UserInit = ViewBag.UserInit;
+}
+<style>
+    .btn-primary {
+        font-size: 18px;
+        margin-top: 20px;
+        background-color: #1ba1e2;
+        width: 150px;
+        border-radius: 0px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .AccountInfo {
+        background-color: #f2f2f2;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #adb9c9;
+        border-radius: 50px;
+        width: 70%
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    input {
+        font-size: 15px;
+        width: 110%;
+    }
+
+        input:disabled {
+            
+        }
+
+    td {
+        padding: 8px 40px;
+    }
+
+    h2 {
+        font-weight: bold;
+        line-height: 15px;
+        letter-spacing: 5px;
+        margin-bottom: 20px;
+    }
+</style>
+
+@{
+    if (UserInit == false)
+    {
+        <div class="jumbotron">
+            <h2>服務介紹</h2>
+            <p class="lead">用於監控魚缸水質狀況，主要有溫度、濁度、PH，TDS與水位高度的監控。<br />請登入或註冊來繼續該服務.</p>
+            <p><a href="/LogInAndRegister/CreateOrLogIn" class="btn btn-primary btn-lg">登入 &raquo;</a></p>
+        </div>
+    }
+    else
+    {
+        <div style="display: flex; align-items: center; justify-content: center">
+            <div class="AccountInfo">
+                <form action="/LogInAndRegister/Edit" method="get">
+                    <div class="form-group">
+                        <table cellpadding="8">
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <h2>使用者資訊</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="UserName">使用者名稱</label><br />
+                                        <input type="text" id="UserName" name="UserName" disabled value=@Model.UserName>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="Password">使用者密碼</label><br />
+                                        <input type="text" id="Password" name="Password" disabled value="********">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="Email">使用者 E-mail</label><br />
+                                        <input type="email" id="Email" name="Email" disabled value=@Model.Email>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="LineID">使用者 Line ID</label><br />
+                                        <input type="text" id="LineID" name="LineID" disabled value=@Model.LineID>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">編輯</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    }
+
+}
+
+

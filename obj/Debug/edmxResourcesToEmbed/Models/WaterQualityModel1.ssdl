@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WaterQualityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Aquarium">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Auth001Id" Type="int" Nullable="false" />
+    <Property Name="AquariumUnitNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="WaterType" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'WaterQuality.dbo.AquariumSituation' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="AquariumSituation">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AquariumId" />
+      <PropertyRef Name="temperature" />
+      <PropertyRef Name="Turbidity" />
+      <PropertyRef Name="PH" />
+      <PropertyRef Name="TDS" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AquariumId" Type="int" Nullable="false" />
+    <Property Name="temperature" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Turbidity" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PH" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TDS" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="WaterLevel" Type="nvarchar" MaxLength="50" />
+    <Property Name="createTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Auth001">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LineID" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'WaterQuality.dbo.AquariumSituationManagement' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="AquariumSituationManagement">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="LineID" />
+      <PropertyRef Name="temperature" />
+      <PropertyRef Name="Turbidity" />
+      <PropertyRef Name="PH" />
+      <PropertyRef Name="TDS" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LineID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AquariumUnitNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="WaterType" Type="nvarchar" MaxLength="50" />
+    <Property Name="temperature" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Turbidity" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PH" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TDS" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="WaterLevel" Type="nvarchar" MaxLength="50" />
+    <Property Name="createTime" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="WaterQualityModelStoreContainer">
+    <EntitySet Name="Aquarium" EntityType="Self.Aquarium" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Auth001" EntityType="Self.Auth001" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AquariumSituation" EntityType="Self.AquariumSituation" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AquariumSituation].[Id] AS [Id], 
+    [AquariumSituation].[AquariumId] AS [AquariumId], 
+    [AquariumSituation].[temperature] AS [temperature], 
+    [AquariumSituation].[Turbidity] AS [Turbidity], 
+    [AquariumSituation].[PH] AS [PH], 
+    [AquariumSituation].[TDS] AS [TDS], 
+    [AquariumSituation].[WaterLevel] AS [WaterLevel], 
+    [AquariumSituation].[createTime] AS [createTime]
+    FROM [dbo].[AquariumSituation] AS [AquariumSituation]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AquariumSituationManagement" EntityType="Self.AquariumSituationManagement" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AquariumSituationManagement].[Id] AS [Id], 
+    [AquariumSituationManagement].[UserName] AS [UserName], 
+    [AquariumSituationManagement].[Email] AS [Email], 
+    [AquariumSituationManagement].[Password] AS [Password], 
+    [AquariumSituationManagement].[LineID] AS [LineID], 
+    [AquariumSituationManagement].[AquariumUnitNum] AS [AquariumUnitNum], 
+    [AquariumSituationManagement].[WaterType] AS [WaterType], 
+    [AquariumSituationManagement].[temperature] AS [temperature], 
+    [AquariumSituationManagement].[Turbidity] AS [Turbidity], 
+    [AquariumSituationManagement].[PH] AS [PH], 
+    [AquariumSituationManagement].[TDS] AS [TDS], 
+    [AquariumSituationManagement].[WaterLevel] AS [WaterLevel], 
+    [AquariumSituationManagement].[createTime] AS [createTime]
+    FROM [dbo].[AquariumSituationManagement] AS [AquariumSituationManagement]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

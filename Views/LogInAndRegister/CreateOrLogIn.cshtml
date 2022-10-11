@@ -1,0 +1,258 @@
+﻿@model TestProject.Models.Auth001
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .CreateAccount {
+        float: left;
+        background-color: #f2f2f2;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #adb9c9;
+        border-radius: 50px;
+        width: 60%
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    input {
+        font-size: 15px;
+        width: 110%;
+    }
+
+    .btn-primary {
+        font-size: 18px;
+        margin-top: 20px;
+        background-color: #1ba1e2;
+        width: 150px;
+        border-radius: 0px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    td {
+        padding: 8px 40px;
+    }
+
+    h2 {
+        font-weight: bold;
+        line-height: 15px;
+        letter-spacing: 5px;
+        margin-bottom: 20px;
+    }
+
+    .LogInAccount {
+        float: right;
+        background-color: #f2f2f2;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #adb9c9;
+        border-radius: 50px;
+        width: 30%
+    }
+</style>
+<div style="width:100%;overflow:hidden;">
+    <div class="CreateAccount">
+        <form id="CreateArea" action="/LogInAndRegister/Create" method="Post">
+            <div class="form-group">
+                <table cellpadding="8">
+                    @{
+                        if (Model != null)
+                        {
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <h2>創建帳戶</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="UserName">使用者名稱</label><br />
+                                        <input type="text" id="UserName" name="UserName" required value=@Model.UserName>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="Password">使用者密碼</label><br />
+                                        <input type="password" id="Password" name="Password" required value=@Model.Password>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="Email">使用者 E-mail</label><br />
+                                        <input type="email" id="Email" name="Email" required value=@Model.Email>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="LineID">使用者 Line ID</label><br />
+                                        <input type="text" id="LineID" name="LineID" required value=@Model.LineID>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">送出</button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <h2>創建帳戶</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="UserName">使用者名稱</label><br />
+                                        <input type="text" id="UserName" name="UserName" required>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="Password">使用者密碼</label><br />
+                                        <input type="password" id="Password" name="Password" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="Email">使用者 E-mail</label><br />
+                                        <input type="email" id="Email" name="Email" required>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="LineID">使用者 Line ID</label><br />
+                                        <input type="text" id="LineID" name="LineID" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">送出</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </form>
+    </div>
+    <div class="LogInAccount">
+        <form action="/LogInAndRegister/LogIn" method="post">
+            <div class="form-group">
+                <table cellpadding="8">
+                    @{
+                        if (base.TempData["Email"] != null)
+                        {
+                            <tr>
+                                <td colspan="1" style="text-align:center">
+                                    <h2>登入</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="LogInEmail">使用者 E-mail</label><br />
+                                        <input type="email" id="LogInEmail" name="Email" required value=@base.TempData["Email"]>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="LogInPassword">使用者密碼</label><br />
+                                        <input type="password" id="LogInPassword" name="Password" required>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="1" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">送出</button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="1" style="text-align:center">
+                                    <h2>登入</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="LogInEmail">使用者 E-mail</label><br />
+                                        <input type="email" id="LogInEmail" name="Email" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="LogInPassword">使用者密碼</label><br />
+                                        <input type="password" id="LogInPassword" name="Password" required>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="1" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">送出</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    document.getElementById("CreateArea").addEventListener("submit", function (e) {
+        if (confirm("請確認填寫資料是否正確.")) {
+            console.log("Deleting");
+            document.forms[0].submit()
+        }
+        else {
+            console.log("Cancelled");
+            e.preventDefault(); // cancelling submission
+        }
+    })
+</script>
+@{
+    if (Model != null)
+    {
+        <script>
+            window.onload = function () {
+                alert("信箱已被註冊，請更換!");
+            }
+        </script>
+    }
+    if (base.TempData["Email"] != null)
+    {
+        <script>
+            window.onload = function () {
+                alert("Email或密碼錯誤! 請再做確認.");
+            }
+        </script>
+    }
+}

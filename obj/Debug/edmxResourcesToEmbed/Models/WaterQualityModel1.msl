@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WaterQualityModelStoreContainer" CdmEntityContainer="WaterQualityEntities1">
+    <EntitySetMapping Name="Auth001">
+      <EntityTypeMapping TypeName="WaterQualityModel.Auth001">
+        <MappingFragment StoreEntitySet="Auth001">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LineID" ColumnName="LineID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aquarium">
+      <EntityTypeMapping TypeName="WaterQualityModel.Aquarium">
+        <MappingFragment StoreEntitySet="Aquarium">
+          <ScalarProperty Name="WaterType" ColumnName="WaterType" />
+          <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
+          <ScalarProperty Name="Auth001Id" ColumnName="Auth001Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AquariumSituation">
+      <EntityTypeMapping TypeName="WaterQualityModel.AquariumSituation">
+        <MappingFragment StoreEntitySet="AquariumSituation">
+          <ScalarProperty Name="createTime" ColumnName="createTime" />
+          <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+          <ScalarProperty Name="PH" ColumnName="PH" />
+          <ScalarProperty Name="Turbidity" ColumnName="Turbidity" />
+          <ScalarProperty Name="temperature" ColumnName="temperature" />
+          <ScalarProperty Name="AquariumId" ColumnName="AquariumId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AquariumSituationManagement">
+      <EntityTypeMapping TypeName="WaterQualityModel.AquariumSituationManagement">
+        <MappingFragment StoreEntitySet="AquariumSituationManagement">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="createTime" ColumnName="createTime" />
+          <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+          <ScalarProperty Name="PH" ColumnName="PH" />
+          <ScalarProperty Name="Turbidity" ColumnName="Turbidity" />
+          <ScalarProperty Name="temperature" ColumnName="temperature" />
+          <ScalarProperty Name="WaterType" ColumnName="WaterType" />
+          <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
+          <ScalarProperty Name="LineID" ColumnName="LineID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

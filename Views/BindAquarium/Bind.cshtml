@@ -1,0 +1,171 @@
+﻿@model TestProject.Models.Auth001
+@{
+    ViewBag.Title = "Bind Page";
+}
+<style>
+    .btn-primary {
+        font-size: 18px;
+        margin-top: 20px;
+        background-color: #1ba1e2;
+        width: 150px;
+        border-radius: 0px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .AccountBindInfo {
+        background-color: #f2f2f2;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #adb9c9;
+        border-radius: 50px;
+        width: 75%;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    input {
+        font-size: 15px;
+        width: 110%;
+    }
+
+        input:disabled {
+        }
+
+    td {
+        padding: 8px 40px;
+    }
+
+    h2 {
+        font-weight: bold;
+        line-height: 15px;
+        letter-spacing: 5px;
+        margin-bottom: 20px;
+    }
+</style>
+<div style="display: flex; align-items: center; justify-content: center">
+    <div class="AccountBindInfo">
+        <form action="/BindAquarium/Bind" method="post">
+            <div class="form-group">
+                <table cellpadding="8">
+                    @{
+                        if (Model == null)
+                        {
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <h2>綁定魚缸</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="Email">使用者Email</label><br />
+                                        <input type="email" id="Email" name="Email" required>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="Password">使用者密碼</label><br />
+                                        <input type="password" id="Password" name="Password" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                        <input type="text" id="UnitNum" name="UnitNum" required pattern="[a-zA-Z0-9]{16}">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
+                                        <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" placeholder="請輸入對應數字即可">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">送出</button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <h2>綁定魚缸</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="Email">使用者Email</label><br />
+                                        <input type="email" id="Email" name="Email" required value=@Model.Email>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="Password">使用者密碼</label><br />
+                                        <input type="password" id="Password" name="Password" required value=@Model.Password>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                        <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] pattern="[a-zA-Z0-9]{16}">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
+                                        <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" value=@base.TempData["WaterType"]>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">送出</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    document.getElementById("AccountBindInfo").addEventListener("submit", function (e) {
+        if (confirm("請確認填寫資料是否正確.")) {
+            console.log("Deleting");
+            document.forms[0].submit()
+        }
+        else {
+            console.log("Cancelled");
+            e.preventDefault(); // cancelling submission
+        }
+    })
+</script>
+
+
+@{
+    if (Model != null)
+    {
+        <script>
+            window.onload = function () {
+                alert("使用者資訊錯誤 或 魚缸序號已被綁定使用，請再做確認.");
+            }
+        </script>
+    }
+}
