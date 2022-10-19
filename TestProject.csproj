@@ -222,6 +222,7 @@
     <Content Include="Views\LogInAndRegister\Edit.cshtml" />
     <Content Include="Views\BindAquarium\Bind.cshtml" />
     <Content Include="Views\AquariumWaterSituation\Index.cshtml" />
+    <Content Include="Views\BindAquarium\DelectConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

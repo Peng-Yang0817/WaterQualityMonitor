@@ -43,7 +43,6 @@
 警告 6002: 資料表/檢視 'WaterQuality.dbo.AquariumSituationManagement' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
   <EntityType Name="AquariumSituationManagement">
     <Key>
-      <PropertyRef Name="Id" />
       <PropertyRef Name="UserName" />
       <PropertyRef Name="Email" />
       <PropertyRef Name="Password" />
@@ -53,7 +52,6 @@
       <PropertyRef Name="PH" />
       <PropertyRef Name="TDS" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -84,7 +82,6 @@
     </EntitySet>
     <EntitySet Name="AquariumSituationManagement" EntityType="Self.AquariumSituationManagement" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [AquariumSituationManagement].[Id] AS [Id], 
     [AquariumSituationManagement].[UserName] AS [UserName], 
     [AquariumSituationManagement].[Email] AS [Email], 
     [AquariumSituationManagement].[Password] AS [Password], 

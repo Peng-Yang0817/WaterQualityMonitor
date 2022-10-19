@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WaterQualityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WaterQualityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Aquarium">
           <Key>
             <PropertyRef Name="Id" />
@@ -48,7 +48,6 @@
 警告 6002: 資料表/檢視 'WaterQuality.dbo.AquariumSituationManagement' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="AquariumSituationManagement">
           <Key>
-            <PropertyRef Name="Id" />
             <PropertyRef Name="UserName" />
             <PropertyRef Name="Email" />
             <PropertyRef Name="Password" />
@@ -58,7 +57,6 @@
             <PropertyRef Name="PH" />
             <PropertyRef Name="TDS" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -89,7 +87,6 @@
           </EntitySet>
           <EntitySet Name="AquariumSituationManagement" EntityType="Self.AquariumSituationManagement" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [AquariumSituationManagement].[Id] AS [Id], 
     [AquariumSituationManagement].[UserName] AS [UserName], 
     [AquariumSituationManagement].[Email] AS [Email], 
     [AquariumSituationManagement].[Password] AS [Password], 
@@ -105,10 +102,20 @@
     FROM [dbo].[AquariumSituationManagement] AS [AquariumSituationManagement]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WaterQualityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aquarium">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Auth001Id" Type="Int32" Nullable="false" />
+          <Property Name="AquariumUnitNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WaterType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Auth001">
           <Key>
             <PropertyRef Name="Id" />
@@ -118,21 +125,6 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LineID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="WaterQualityEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Auth001" EntityType="Self.Auth001" />
-          <EntitySet Name="Aquarium" EntityType="WaterQualityModel.Aquarium" />
-          <EntitySet Name="AquariumSituation" EntityType="WaterQualityModel.AquariumSituation" />
-          <EntitySet Name="AquariumSituationManagement" EntityType="WaterQualityModel.AquariumSituationManagement" />
-        </EntityContainer>
-        <EntityType Name="Aquarium">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Auth001Id" Type="Int32" Nullable="false" />
-          <Property Name="AquariumUnitNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WaterType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AquariumSituation">
           <Key>
@@ -145,10 +137,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AquariumId" Type="Int32" Nullable="false" />
-          <Property Name="temperature" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Turbidity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TDS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="temperature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Turbidity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TDS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="WaterLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="createTime" Type="DateTime" Precision="3" />
         </EntityType>
@@ -162,28 +154,42 @@
             <PropertyRef Name="Turbidity" />
             <PropertyRef Name="PH" />
             <PropertyRef Name="TDS" />
-            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LineID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LineID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AquariumUnitNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WaterType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="temperature" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Turbidity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TDS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="temperature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Turbidity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TDS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="WaterLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="createTime" Type="DateTime" Precision="3" />
-          <Property Name="Id" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityContainer Name="WaterQualityEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aquarium" EntityType="Self.Aquarium" />
+          <EntitySet Name="Auth001" EntityType="Self.Auth001" />
+          <EntitySet Name="AquariumSituation" EntityType="Self.AquariumSituation" />
+          <EntitySet Name="AquariumSituationManagement" EntityType="Self.AquariumSituationManagement" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WaterQualityModelStoreContainer" CdmEntityContainer="WaterQualityEntities1">
+          <EntitySetMapping Name="Aquarium">
+            <EntityTypeMapping TypeName="WaterQualityModel.Aquarium">
+              <MappingFragment StoreEntitySet="Aquarium">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Auth001Id" ColumnName="Auth001Id" />
+                <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
+                <ScalarProperty Name="WaterType" ColumnName="WaterType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Auth001">
             <EntityTypeMapping TypeName="WaterQualityModel.Auth001">
               <MappingFragment StoreEntitySet="Auth001">
@@ -195,46 +201,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Aquarium">
-            <EntityTypeMapping TypeName="WaterQualityModel.Aquarium">
-              <MappingFragment StoreEntitySet="Aquarium">
-                <ScalarProperty Name="WaterType" ColumnName="WaterType" />
-                <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
-                <ScalarProperty Name="Auth001Id" ColumnName="Auth001Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AquariumSituation">
             <EntityTypeMapping TypeName="WaterQualityModel.AquariumSituation">
               <MappingFragment StoreEntitySet="AquariumSituation">
-                <ScalarProperty Name="createTime" ColumnName="createTime" />
-                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
-                <ScalarProperty Name="TDS" ColumnName="TDS" />
-                <ScalarProperty Name="PH" ColumnName="PH" />
-                <ScalarProperty Name="Turbidity" ColumnName="Turbidity" />
-                <ScalarProperty Name="temperature" ColumnName="temperature" />
-                <ScalarProperty Name="AquariumId" ColumnName="AquariumId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AquariumId" ColumnName="AquariumId" />
+                <ScalarProperty Name="temperature" ColumnName="temperature" />
+                <ScalarProperty Name="Turbidity" ColumnName="Turbidity" />
+                <ScalarProperty Name="PH" ColumnName="PH" />
+                <ScalarProperty Name="TDS" ColumnName="TDS" />
+                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AquariumSituationManagement">
             <EntityTypeMapping TypeName="WaterQualityModel.AquariumSituationManagement">
               <MappingFragment StoreEntitySet="AquariumSituationManagement">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="createTime" ColumnName="createTime" />
-                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
-                <ScalarProperty Name="TDS" ColumnName="TDS" />
-                <ScalarProperty Name="PH" ColumnName="PH" />
-                <ScalarProperty Name="Turbidity" ColumnName="Turbidity" />
-                <ScalarProperty Name="temperature" ColumnName="temperature" />
-                <ScalarProperty Name="WaterType" ColumnName="WaterType" />
-                <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
-                <ScalarProperty Name="LineID" ColumnName="LineID" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
+                <ScalarProperty Name="WaterType" ColumnName="WaterType" />
+                <ScalarProperty Name="temperature" ColumnName="temperature" />
+                <ScalarProperty Name="Turbidity" ColumnName="Turbidity" />
+                <ScalarProperty Name="PH" ColumnName="PH" />
+                <ScalarProperty Name="TDS" ColumnName="TDS" />
+                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

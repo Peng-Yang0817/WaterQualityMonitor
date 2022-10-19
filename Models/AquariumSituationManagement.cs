@@ -26,6 +26,5 @@ namespace TestProject.Models
         public string TDS { get; set; }
         public string WaterLevel { get; set; }
         public Nullable<System.DateTime> createTime { get; set; }
-        public int Id { get; set; }
     }
 }

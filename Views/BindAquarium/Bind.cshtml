@@ -1,6 +1,9 @@
 ﻿@model TestProject.Models.Auth001
 @{
     ViewBag.Title = "Bind Page";
+    var AquariumDataList = ViewBag.AquariumDataList;
+    var DataListSize = AquariumDataList.Count;
+    var DataCount = 0;
 }
 <style>
     .btn-primary {
@@ -34,8 +37,6 @@
         width: 110%;
     }
 
-        input:disabled {
-        }
 
     td {
         padding: 8px 40px;
@@ -47,7 +48,103 @@
         letter-spacing: 5px;
         margin-bottom: 20px;
     }
+
+    .disBindTitle {
+        font-weight: bold;
+        line-height: 15px;
+        letter-spacing: 5px;
+        margin-bottom: 20px;
+    }
+
+    .UserAquariumEditArea {
+        /*background-color: #f2f2f2;*/
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /*border: 3px solid #adb9c9;*/
+        /*border-radius: 50px;*/
+        width: 75%;
+    }
+
+    .demotbl {
+        border: 0px solid #69899F;
+    }
+
+        .demotbl th {
+            padding: 15px;
+            color: #fff;
+            text-shadow: 1px 1px 1px #568F23;
+            border-bottom: 3px solid #9ED929;
+            background-color: #9DD929;
+            background: -webkit-gradient( linear, left bottom, left top, color-stop(0.02, rgb(123,192,67)), color-stop(0.51, rgb(139,198,66)), color-stop(0.87, rgb(158,217,41)) );
+            background: -moz-linear-gradient( center bottom, rgb(123,192,67) 3%, rgb(139,198,66) 52%, rgb(158,217,41) 88% );
+            -webkit-border-top-left-radius: 5px;
+            -webkit-border-top-right-radius: 5px;
+            -moz-border-radius: 5px 5px 0px 0px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .demotbl td {
+            width: 100px;
+            padding: 10px;
+            text-align: center;
+            vertical-align: top;
+            background-color: #DEF3CA;
+            border: 1px solid #BED3AB;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            color: #666;
+            text-shadow: 1px 1px 1px #fff;
+        }
 </style>
+<div style="display: flex; align-items: center; justify-content: center;">
+    <div class="UserAquariumEditArea">
+        <table border="0" style="width:80%">
+            <tr>
+                <th colspan="3">
+                    <h2 class="disBindTitle" style="text-align:center">
+                        使用者魚缸編輯
+                    </h2>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+<div style="display: flex; align-items: center; justify-content: center;margin-bottom:30px;">
+    <div class="UserAquariumEditArea">
+        <table border="0" style="width:80%" class="demotbl">
+            <tr>
+                <th width="10%" style="text-align: center; font-weight:bold">序列</th>
+                <th width="30%" style="text-align: center; font-weight: bold">魚缸編號</th>
+                <th width="10%" style="text-align: center; font-weight: bold">刪除</th>
+            </tr>
+            @{
+                for (int i = 0; i < DataListSize; i++)
+                {
+                        <tr>
+                            @{
+                                DataCount += 1;
+                            } 
+                            <td width="10%" style="text-align:center">@DataCount</td>
+                            <td width="30%" style="text-align:center">@AquariumDataList[i].AquariumUnitNum</td>
+                            <td width="10%" style="text-align:center">
+                                <div style="font-size:15px">
+                                    @Html.ActionLink("解除", "DelectConfirmation", "Statistics009", new { area = "Statistics", href = "DelectConfirmation?DelectConfirmation=" + @AquariumDataList[i].AquariumUnitNum })
+                                    @*@Html.ActionLink("解除", "DelectConfirmation", "NForm034ClassSize", new { area = "Form", UnitNum = @AquariumDataList[i].AquariumUnitNum })*@
+                                </div>
+                            </td>
+                        </tr>
+                }
+            }
+
+        </table>
+    </div>
+</div>
+
 <div style="display: flex; align-items: center; justify-content: center">
     <div class="AccountBindInfo">
         <form action="/BindAquarium/Bind" method="post">
@@ -145,7 +242,6 @@
 </div>
 
 <script>
-
     document.getElementById("AccountBindInfo").addEventListener("submit", function (e) {
         if (confirm("請確認填寫資料是否正確.")) {
             console.log("Deleting");
@@ -156,6 +252,10 @@
             e.preventDefault(); // cancelling submission
         }
     })
+
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
 </script>
 
 
