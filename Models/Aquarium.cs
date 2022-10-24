@@ -18,5 +18,8 @@ namespace TestProject.Models
         public int Auth001Id { get; set; }
         public string AquariumUnitNum { get; set; }
         public string WaterType { get; set; }
+        public string BindTag { get; set; }
+        public Nullable<System.DateTime> createTime { get; set; }
+        public Nullable<System.DateTime> modifyTime { get; set; }
     }
 }

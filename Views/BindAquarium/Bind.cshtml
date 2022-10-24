@@ -66,40 +66,57 @@
         /*border: 3px solid #adb9c9;*/
         /*border-radius: 50px;*/
         width: 75%;
+        font-size: 130%;
     }
 
-    .demotbl {
-        border: 0px solid #69899F;
+    .TopTableStyle {
+        border-collapse: separate;
+        font-family: Tahoma, Geneva, sans-serif;
+        border-spacing: 0;
     }
 
-        .demotbl th {
+        .TopTableStyle td {
             padding: 15px;
-            color: #fff;
-            text-shadow: 1px 1px 1px #568F23;
-            border-bottom: 3px solid #9ED929;
-            background-color: #9DD929;
-            background: -webkit-gradient( linear, left bottom, left top, color-stop(0.02, rgb(123,192,67)), color-stop(0.51, rgb(139,198,66)), color-stop(0.87, rgb(158,217,41)) );
-            background: -moz-linear-gradient( center bottom, rgb(123,192,67) 3%, rgb(139,198,66) 52%, rgb(158,217,41) 88% );
-            -webkit-border-top-left-radius: 5px;
-            -webkit-border-top-right-radius: 5px;
-            -moz-border-radius: 5px 5px 0px 0px;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
         }
 
-        .demotbl td {
-            width: 100px;
-            padding: 10px;
-            text-align: center;
-            vertical-align: top;
-            background-color: #DEF3CA;
-            border: 1px solid #BED3AB;
-            -moz-border-radius: 2px;
-            -webkit-border-radius: 2px;
-            border-radius: 2px;
-            color: #666;
-            text-shadow: 1px 1px 1px #fff;
+        .TopTableStyle thead td {
+            background-color: #54585d;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 13px;
+            border: 1px solid #54585d;
         }
+
+        .TopTableStyle tbody td {
+            color: #636363;
+            border: 1px solid #dddfe1;
+        }
+
+        .TopTableStyle tbody tr {
+            background-color: #f9fafb;
+        }
+
+            .TopTableStyle tbody tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+
+    /*第一欄第一列：左上*/
+    tr:first-child td:first-child {
+        border-top-left-radius: 10px;
+    }
+    /*第一欄最後列：左下*/
+    tr:last-child td:first-child {
+        border-bottom-left-radius: 10px;
+    }
+    /*最後欄第一列：右上*/
+    tr:first-child td:last-child {
+        border-top-right-radius: 10px;
+    }
+    /*最後欄第一列：右下*/
+    tr:last-child td:last-child {
+        border-bottom-right-radius: 10px;
+    }
 </style>
 <div style="display: flex; align-items: center; justify-content: center;">
     <div class="UserAquariumEditArea">
@@ -116,31 +133,34 @@
 </div>
 <div style="display: flex; align-items: center; justify-content: center;margin-bottom:30px;">
     <div class="UserAquariumEditArea">
-        <table border="0" style="width:80%" class="demotbl">
-            <tr>
-                <th width="10%" style="text-align: center; font-weight:bold">序列</th>
-                <th width="30%" style="text-align: center; font-weight: bold">魚缸編號</th>
-                <th width="10%" style="text-align: center; font-weight: bold">刪除</th>
-            </tr>
-            @{
-                for (int i = 0; i < DataListSize; i++)
-                {
+        <table border="0" style="width:100%" class="TopTableStyle">
+            <thead>
+                <tr>
+                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">序列</td>
+                    <td width="30%" style="text-align: center; font-weight: bold; font-size: 100% ">魚缸編號</td>
+                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">刪除</td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < DataListSize; i++)
+                    {
                         <tr>
                             @{
                                 DataCount += 1;
-                            } 
+                            }
                             <td width="10%" style="text-align:center">@DataCount</td>
                             <td width="30%" style="text-align:center">@AquariumDataList[i].AquariumUnitNum</td>
                             <td width="10%" style="text-align:center">
-                                <div style="font-size:15px">
+                                <div style="font-size: 15px; font-size: 100%">
                                     @Html.ActionLink("解除", "DelectConfirmation", "Statistics009", new { area = "Statistics", href = "DelectConfirmation?DelectConfirmation=" + @AquariumDataList[i].AquariumUnitNum })
                                     @*@Html.ActionLink("解除", "DelectConfirmation", "NForm034ClassSize", new { area = "Form", UnitNum = @AquariumDataList[i].AquariumUnitNum })*@
                                 </div>
                             </td>
                         </tr>
+                    }
                 }
-            }
-
+            </tbody>
         </table>
     </div>
 </div>

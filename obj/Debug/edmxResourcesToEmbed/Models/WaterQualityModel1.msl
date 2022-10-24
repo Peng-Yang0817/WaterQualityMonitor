@@ -4,6 +4,9 @@
     <EntitySetMapping Name="Aquarium">
       <EntityTypeMapping TypeName="WaterQualityModel.Aquarium">
         <MappingFragment StoreEntitySet="Aquarium">
+          <ScalarProperty Name="modifyTime" ColumnName="modifyTime" />
+          <ScalarProperty Name="createTime" ColumnName="createTime" />
+          <ScalarProperty Name="BindTag" ColumnName="BindTag" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Auth001Id" ColumnName="Auth001Id" />
           <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />

@@ -8,6 +8,9 @@
     <Property Name="Auth001Id" Type="Int32" Nullable="false" />
     <Property Name="AquariumUnitNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="WaterType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BindTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createTime" Type="DateTime" Precision="3" />
+    <Property Name="modifyTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Auth001">
     <Key>

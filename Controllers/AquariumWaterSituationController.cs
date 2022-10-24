@@ -23,7 +23,7 @@ namespace TestProject.Controllers
             int Auth001Id = int.Parse(Session["Auth001Id"].ToString());
 
             // 該使用者所擁有的所有魚缸
-            List<Aquarium> TitleDataList = db.Aquarium.Where(x => x.Auth001Id == Auth001Id).ToList();
+            List<Aquarium> TitleDataList = db.Aquarium.Where(x => x.Auth001Id == Auth001Id && x.BindTag =="0").ToList();
             List<AquariumSituation> DataList = new List<AquariumSituation>();
             for (int i = 0; i < TitleDataList.Count; i++)
             {

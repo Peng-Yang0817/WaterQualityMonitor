@@ -8,6 +8,9 @@
     <Property Name="Auth001Id" Type="int" Nullable="false" />
     <Property Name="AquariumUnitNum" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="WaterType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BindTag" Type="nvarchar" MaxLength="50" />
+    <Property Name="createTime" Type="datetime" />
+    <Property Name="modifyTime" Type="datetime" />
   </EntityType>
   <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'WaterQuality.dbo.AquariumSituation' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->

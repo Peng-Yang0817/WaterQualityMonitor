@@ -3,9 +3,73 @@
     ViewBag.Title = "DelectConfirmation";
     var DelectConfirmation = ViewBag.UnitNum;
 }
+<style>
+    table {
+    }
 
+    td {
+        padding: 8px 40px;
+    }
+
+    .notiveArea {
+        background-color: #eeeeee;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border: 3px solid #adb9c9;
+    }
+
+    .AccountBindInfo {
+        background-color: #f2f2f2;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #adb9c9;
+        border-radius: 50px;
+        width: 75%;
+    }
+    .btn{
+        font-size:20px;
+    }
+</style>
 <h2>是否確認解除該魚缸 _ @DelectConfirmation</h2>
-
-<div style="margin-left:30px;font-size:170%;font-weight:bold">
-    @Html.ActionLink("解除該魚缸的綁定狀態.", "DelectConfirmation", "Statistics009", new { area = "Statistics", href = "ConfirmationOK?DelectConfirmation=" + DelectConfirmation })
+<div class="notiveArea">
+    <h3 style="font-size:220%;font-weight:bold;margin-left:20px;">注意!</h3>
+    <h3 style="margin: 10px 30px;">將該魚缸獎除綁定，舊有資料將無法與下次匹配使用，也就是視為硬體配置轉讓，儘管舊用戶重新綁定也無法看到先前資料。</h3>
 </div>
+
+
+<table cellpadding="8" border="0">
+    <tr>
+        <td rowspan="2">
+            <h3 style="font-weight:bold">請選擇是否解除==></h3>
+        </td>
+        <td>
+            <div style="margin-left:-50px;font-size:170%;font-weight:bold;">
+                <a href="ConfirmationOK?DelectConfirmation=@DelectConfirmation"  class="btn btn-danger">是!&nbsp;&nbsp;解除綁定.</a>
+                @*@Html.ActionLink("是! 解除綁定.", "DelectConfirmation", "Statistics009", new { area = "Statistics", href = "ConfirmationOK?DelectConfirmation=" + DelectConfirmation, @class = "btn btn-danger" })*@
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="margin-left:-50px;font-size:170%;font-weight:bold">
+                <a href="Bind" class="btn btn-info">否!&nbsp;&nbsp;回上一頁</a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+    document.getElementById("CreateArea").addEventListener("submit", function (e) {
+        if (confirm("請確認填寫資料是否正確.")) {
+            console.log("Deleting");
+            document.forms[0].submit()
+        }
+        else {
+            console.log("Cancelled");
+            e.preventDefault(); // cancelling submission
+        }
+    })
+</script>
