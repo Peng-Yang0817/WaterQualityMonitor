@@ -53,5 +53,30 @@ namespace TestProject.Controllers
             ViewBag.TitleDataList = TitleDataList;
             return View();
         }
+
+
+        public ActionResult PeriodQuality(string AquariumNum)
+        {
+            if (Session["UserEmail"] == null)
+            {
+                Session.RemoveAll();
+                return RedirectToAction("Index", "Home");
+            }
+            string Email = Session["UserEmail"].ToString();
+            int Auth001Id = int.Parse(Session["Auth001Id"].ToString());
+
+            //取幾筆資料設定
+            int RowRange = 6;
+
+            //透過魚缸編號得知該魚缸目前跟使用者對應的AquariumId
+            int AquariumIdNum = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum && x.BindTag == "0").Id;
+
+            //將最接近目前的資料抓出一個區塊
+            List<AquariumSituation> DataList = db.AquariumSituation.Where(x=>x.AquariumId== AquariumIdNum).OrderByDescending(x => x.createTime).ToList().Take(RowRange).ToList();
+
+            ViewBag.AquariumNum = AquariumNum;
+            ViewBag.DataList = DataList;
+            return View();
+        }
     }
 }

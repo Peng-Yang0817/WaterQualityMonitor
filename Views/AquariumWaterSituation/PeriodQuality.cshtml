@@ -1,0 +1,184 @@
+﻿@using TestProject.Models;
+@{
+    ViewBag.Title = "PeriodQuality";
+    var AquairmNum = ViewBag.AquariumNum;
+    List<AquariumSituation> DataList = ViewBag.DataList;
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<style>
+    .ShowBoxStyle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    table {
+        width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        
+    }
+    td {
+        padding: 50px,20px;
+    }
+    h3{
+        font-weight:bold;
+    }
+</style>
+
+
+<h2>魚缸編號: @AquairmNum _過去 7 小時水質紀錄</h2>
+<div style="height: 100%; width: 100%">
+    <table border="1" cellpadding="8">
+        <tr>
+            <td>
+                <div class="ShowBoxStyle">
+                    <div style="height: 350px;width:350px;">
+                        <h3>溫度</h3>
+                        <canvas id="myTemperature" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="ShowBoxStyle">
+                    <div style="height: 350px; width: 350px; ">
+                        <h3>濁度</h3>
+                        <canvas id="myTurbidity" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ShowBoxStyle" style="margin-top:10%;">
+                    <div style="height: 350px; width: 350px; ">
+                        <h3>PH</h3>
+                        <canvas id="myPH" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<script>
+    //~~~~~溫度
+    const ctx0 = document.getElementById('myTemperature').getContext('2d');
+    const myChart0 = new Chart(ctx0, {
+        type: 'bar',
+        data: {
+            labels: ['@DataList[0].createTime', '@DataList[1].createTime', '@DataList[2].createTime',
+                '@DataList[3].createTime', '@DataList[4].createTime', '@DataList[5].createTime'],
+            datasets: [{
+                label: 'Temperature',
+                data: [@DataList[0].temperature, @DataList[1].temperature, @DataList[2].temperature,
+                    @DataList[3].temperature, @DataList[4].temperature, @DataList[5].temperature],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    //~~~~~濁度
+    const ctx1 = document.getElementById('myTurbidity').getContext('2d');
+    const myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['@DataList[0].createTime', '@DataList[1].createTime', '@DataList[2].createTime',
+                '@DataList[3].createTime', '@DataList[4].createTime', '@DataList[5].createTime'],
+            datasets: [{
+                label: 'Turbidity',
+                data: [@DataList[0].Turbidity, @DataList[1].Turbidity, @DataList[2].Turbidity,
+                    @DataList[3].Turbidity, @DataList[4].Turbidity, @DataList[5].Turbidity],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    //~~~~~PH
+    const ctx2 = document.getElementById('myPH').getContext('2d');
+    const myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['@DataList[0].createTime', '@DataList[1].createTime', '@DataList[2].createTime',
+                '@DataList[3].createTime', '@DataList[4].createTime', '@DataList[5].createTime'],
+            datasets: [{
+                label: 'Turbidity',
+                data: [@DataList[0].PH, @DataList[1].PH, @DataList[2].PH,
+                    @DataList[3].PH, @DataList[4].PH, @DataList[5].PH],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

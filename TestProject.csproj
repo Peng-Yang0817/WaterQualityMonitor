@@ -173,6 +173,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\search.png" />
     <Content Include="Models\WaterQualityModel1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WaterQualityModel1.edmx</DependentUpon>
@@ -223,6 +224,7 @@
     <Content Include="Views\BindAquarium\Bind.cshtml" />
     <Content Include="Views\AquariumWaterSituation\Index.cshtml" />
     <Content Include="Views\BindAquarium\DelectConfirmation.cshtml" />
+    <Content Include="Views\AquariumWaterSituation\PeriodQuality.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
