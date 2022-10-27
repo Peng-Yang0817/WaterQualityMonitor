@@ -39,6 +39,7 @@
     <Property Name="TDS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="WaterLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="createTime" Type="DateTime" Precision="3" />
+    <Property Name="WaterLevelNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="AquariumSituationManagement">
     <Key>

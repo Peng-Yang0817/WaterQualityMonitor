@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     List<Aquarium> TitleDataList = ViewBag.TitleDataList;
     List<AquariumSituation> DataList = ViewBag.DataList;
+    List<int> ButtonJudge = ViewBag.ButtonJudge;
 }
 <style>
 
@@ -96,7 +97,7 @@
         line-height: 30px;
         min-height: 35px;
         border-radius: 2px;
-        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, font-weight .15s;
         color: #ffffff;
         background-color: rgb(148, 190, 214);
         border-radius: 8px;
@@ -106,8 +107,50 @@
         border: none;
         padding-right: 11px;
         /* 新增按鈕寬度 */
+        width: 135px;
+    }
+
+        .sibling-B:hover {
+            background-color: #496689;
+            font-weight: bold;
+            color: yellow;
+        }
+
+    .sibling-C {
+        position: absolute;
+        margin: 5px 3px;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 2px 13px;
+        font-size: 14px;
+        line-height: 30px;
+        min-height: 35px;
+        border-radius: 2px;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, font-weight .15s;
+        color: #ffffff;
+        background-color: #e73f31;
+        border-radius: 8px;
+        cursor: pointer;
+        letter-spacing: 2px;
+        box-shadow: 2px 2px 3px grey;
+        border: none;
+        padding-right: 11px;
+        /* 新增按鈕寬度 */
         width: 130px;
     }
+
+        .sibling-C:hover {
+            cursor: not-allowed;
+            background-color: #861b2d;
+            font-weight: bold;
+            color: red;
+        }
 </style>
 <div style="margin-left:50px">
     <h2>
@@ -117,13 +160,25 @@
                 {
                     <div class="TitleSet">
                         <h3>編號 : @TitleDataList[i].AquariumUnitNum</h3>
-
-                        <form action="/AquariumWaterSituation/PeriodQuality" method="get">
-                            <input type="text" id="AquariumNum" name="AquariumNum" value="@TitleDataList[i].AquariumUnitNum" style="display:none;">
-                            <div class="sibling-main">
-                                <button type="submit" class="sibling-B"><img src="~/img/search.png" class="searchStyle" alt="查看過去6小時的圖表" />  : 查看圖表</button>
-                            </div>
-                        </form>
+                        @{
+                            if (ButtonJudge[i] == 1)
+                            {
+                                <form action="/AquariumWaterSituation/PeriodQuality" method="get">
+                                    <input type="text" id="AquariumNum" name="AquariumNum" value="@TitleDataList[i].AquariumUnitNum" style="display:none;">
+                                    <div class="sibling-main">
+                                        <button type="submit" class="sibling-B"><img src="~/img/search.png" class="searchStyle" alt="查看過去6小時的圖表" />  : 查看圖表</button>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="sibling-main" style="display:flex;justify-content:right">
+                                    <button type="submit" class="sibling-C" tabindex="0" disabled">
+                                        <img src="~/img/warning.png" class="searchStyle" alt="查看過去6小時的圖表")/> : 資料不足
+                                    </button>
+                                </div>
+                            }
+                        }
 
                         <h4>
                             水質類型 :

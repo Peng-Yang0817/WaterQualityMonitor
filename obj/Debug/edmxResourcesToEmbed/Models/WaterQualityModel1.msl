@@ -28,6 +28,7 @@
     <EntitySetMapping Name="AquariumSituation">
       <EntityTypeMapping TypeName="WaterQualityModel.AquariumSituation">
         <MappingFragment StoreEntitySet="AquariumSituation">
+          <ScalarProperty Name="WaterLevelNum" ColumnName="WaterLevelNum" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="AquariumId" ColumnName="AquariumId" />
           <ScalarProperty Name="temperature" ColumnName="temperature" />
