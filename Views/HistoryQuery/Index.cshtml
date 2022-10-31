@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<style>
+    body {
+        font-size: 15px;
+    }
+
+    h2, h3, label {
+        font-weight: bold;
+        margin: 0px;
+    }
+
+    label {
+        font-size: 170%;
+    }
+
+    input {
+        height: 40px;
+        width: 100%
+    }
+
+    .L1Div {
+        margin-left: 5%;
+    }
+
+    .L2Div {
+        margin-left: 10%;
+    }
+
+    td {
+        padding: 20px 20px;
+    }
+
+    table {
+        width: 80%;
+    }
+
+    .btn-primary {
+        font-size: 18px;
+        background-color: #54585d;
+        width: 90px;
+        border-radius: 5px;
+        margin-top: 0px;
+        margin-bottom: 16px
+        /*border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;*/
+    }
+
+
+    .disBindTitle {
+        font-weight: bold;
+        line-height: 15px;
+        letter-spacing: 5px;
+        margin-bottom: 20px;
+    }
+
+    .UserAquariumEditArea {
+        /*background-color: #f2f2f2;*/
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /*border: 3px solid #adb9c9;*/
+        /*border-radius: 50px;*/
+        width: 75%;
+        font-size: 130%;
+    }
+
+    .TopTableStyle {
+        border-collapse: separate;
+        font-family: Tahoma, Geneva, sans-serif;
+        border-spacing: 0;
+    }
+
+        .TopTableStyle td {
+            padding: 15px;
+        }
+
+        .TopTableStyle thead td {
+            background-color: #54585d;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 13px;
+            border: 1px solid #54585d;
+            border-left: solid 1px white;
+        }
+
+        .TopTableStyle tbody td {
+            color: #636363;
+            border: 1px solid #dddfe1;
+        }
+
+        .TopTableStyle tbody tr {
+            background-color: #f9fafb;
+        }
+
+            .TopTableStyle tbody tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+    /*第一欄第一列：左上*/
+    tr:first-child td:first-child {
+        border-top-left-radius: 10px;
+    }
+    /*第一欄最後列：左下*/
+    tr:last-child td:first-child {
+        border-bottom-left-radius: 10px;
+    }
+    /*最後欄第一列：右上*/
+    tr:first-child td:last-child {
+        border-top-right-radius: 10px;
+    }
+    /*最後欄第一列：右下*/
+    tr:last-child td:last-child {
+        border-bottom-right-radius: 10px;
+</style>
+
+<div class="L1Div">
+    <h2>
+        綁定紀錄查詢
+    </h2>
+    <div class="L2Div">
+        <table border="0">
+            <tr>
+                <td width="20%">
+                    <div class="form-group">
+                        <label for="AquariumNum">魚缸編號</label>
+                    </div>
+                </td>
+                <td width="35%">
+                    <div class="form-group">
+                        <input type="text" name="AquariumNum" value="" id="AquariumNum" />
+                    </div>
+                </td>
+                <td width="45%" style="padding-left:0px">
+                    <button type="submit" class="btn btn-primary" id="SearchBtn">查詢</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: center;margin-bottom:30px;">
+    <div class="UserAquariumEditArea">
+        <table border="0" style="width:100%" class="TopTableStyle">
+            <thead>
+                <tr>
+                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">次數</td>
+                    <td width="30%" style="text-align: center; font-weight: bold; font-size: 100% ">綁定日期</td>
+                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">編輯日期</td>
+                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">狀態</td>
+                </tr>
+            </thead>
+            <tbody id="info">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(() => {
+        $('#SearchBtn').click((e) => {
+            /*alert("Hello! I am an alert box!!");*/
+            let AquariumNum = $('#AquariumNum').val();
+            $.ajax({
+                async: false,
+                url: `https://localhost:44371/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置
+                type: 'get',// post/get
+                dataType: 'json',
+                data: {},// 輸入的資料
+                error: function (xhr) {
+                    console.log('沒抓到資料耶')
+                },// 錯誤後執行的函數
+                success: function (response) {
+                    console.log(response);
+                    for (let i = 0; i < response.length; i++) {22
+                        const element = response[i];
+                        let indexNum = i + 1;
+                        $(`<tr>
+                                <td>
+                                    ${indexNum}
+                                </td>
+                                <td>
+                                    ${element.createTime}
+                                </td>
+                                <td>
+                                    ${element.modifyTime}
+                                </td>
+                                <td>
+                                    ${element.BindTag}
+                                </td>
+                            </tr>`)
+                            .appendTo('#info');
+                    }
+                }// 成功後要執行的函數 style="cursor:pointer"
+            });
+        });
+    })
+</script>

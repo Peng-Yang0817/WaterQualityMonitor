@@ -8,39 +8,115 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+
+
+
+<style>
+
+    @@media only screen and (max-width:1200px) {
+        .D1 {
+            display: none;
+        }
+
+        .D2 {
+            display: block;
+        }
+    }
+
+    @@media only screen and (min-width:1200px) {
+        .D1 {
+            display: block;
+        }
+
+        .D2 {
+            display: none;
+        }
+    }
+
+    .navbar-inverse .navbar-toggle {
+        background-color: #286090;
+    }
+
+    .navbar-toggle {
+        background-color: #286090;
+        margin-top: 5%;
+    }
+
+    .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+        background-color: #283990;
+    }
+</style>
+
+
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="border-color:#dae8fc ">
-        <div class="container">
-            <div class="navbar-header" style="padding-top: 10px;">
-                <button type="button" class="navbar-toggle collapse " navbar-collapse collapse" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("魚缸水質監控網", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-
-            <div class="navbar-collapse collapse" style="height:110px !important;padding-top:35px;">
-                <ul class="nav navbar-nav navbar-right" style="position: relative; bottom: 0px; right: 0px;">
-                    @*<li><a href="http://tlc.sainter.com.tw/">線上提報系統</a></li>*@
-                    @{
-                        if (Session["UserEmail"] == null)
-                        {
-                            <li>@Html.ActionLink("公告與說明", "About", "Home")</li>
-                            <li>@Html.ActionLink("登入 / 註冊", "CreateOrLogIn", "LogInAndRegister")</li>
+    <div class="D1">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="border-color:#dae8fc ">
+            <div class="container">
+                <div class="navbar-header" style="padding-top: 10px;">
+                    <button type="button" class="navbar-toggle collapse " navbar-collapse collapse" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("魚缸水質監控網", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse" style="height:110px !important;padding-top:35px;">
+                    <ul class="nav navbar-nav navbar-right" style="position: relative; bottom: 0px; right: 0px;">
+                        @*<li><a href="http://tlc.sainter.com.tw/">線上提報系統</a></li>*@
+                        @{
+                            if (Session["UserEmail"] == null)
+                            {
+                                <li>@Html.ActionLink("公告與說明", "About", "Home")</li>
+                                <li>@Html.ActionLink("登入 / 註冊", "CreateOrLogIn", "LogInAndRegister")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("綁定紀錄查詢", "Index", "HistoryQuery")</li>
+                                <li>@Html.ActionLink("綁定與編輯", "Bind", "BindAquarium")</li>
+                                <li>@Html.ActionLink("水質狀況", "Index", "AquariumWaterSituation")</li>
+                                <li>@Html.ActionLink("公告與說明", "About", "Home")</li>
+                                <li>@Html.ActionLink("登出", "LogOut", "LogInAndRegister")</li>
+                            }
                         }
-                        else
-                        {
-                            <li>@Html.ActionLink("魚缸綁定與編輯", "Bind", "BindAquarium")</li>
-                            <li>@Html.ActionLink("魚缸水質狀況", "Index", "AquariumWaterSituation")</li>
-                            <li>@Html.ActionLink("公告與說明", "About", "Home")</li>
-                            <li>@Html.ActionLink("登出", "LogOut", "LogInAndRegister")</li>
-                        }
-                    }
 
-                </ul>
+                    </ul>
+                </div>
+                <div class="bg-pic">
+                </div>
             </div>
-            <div class="bg-pic">
+        </div>
+    </div>
+    <div class="D2">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="其他選項">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("魚缸水質監控網", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        @{
+                            if (Session["UserEmail"] == null)
+                            {
+                                <li>@Html.ActionLink("公告與說明", "About", "Home")</li>
+                                <li>@Html.ActionLink("登入 / 註冊", "CreateOrLogIn", "LogInAndRegister")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("綁定紀錄查詢", "Index", "HistoryQuery")</li>
+                                <li>@Html.ActionLink("綁定與編輯", "Bind", "BindAquarium")</li>
+                                <li>@Html.ActionLink("水質狀況", "Index", "AquariumWaterSituation")</li>
+                                <li>@Html.ActionLink("公告與說明", "About", "Home")</li>
+                                <li>@Html.ActionLink("登出", "LogOut", "LogInAndRegister")</li>
+                            }
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
