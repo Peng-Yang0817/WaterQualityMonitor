@@ -118,6 +118,27 @@
     tr:last-child td:last-child {
         border-bottom-right-radius: 10px;
     }
+
+    /*小於750px就*/
+    @@media only screen and (max-width:750px) {
+        .D1 {
+            display: none;
+        }
+
+        .D2 {
+            display: block;
+        }
+    }
+    /*大於750px就*/
+    @@media only screen and (min-width:750px) {
+        .D1 {
+            display: block;
+        }
+
+        .D2 {
+            display: none;
+        }
+    }
 </style>
 
 
@@ -167,100 +188,204 @@
         </table>
     </div>
 </div>
-
-<div style="display: flex; align-items: center; justify-content: center">
-    <div class="AccountBindInfo">
-        <form action="/BindAquarium/Bind" method="post">
-            <div class="form-group">
-                <table cellpadding="8">
-                    @{
-                        if (Model == null)
-                        {
-                            <tr>
-                                <td colspan="2" style="text-align:center">
-                                    <h2>綁定魚缸</h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="Email">使用者Email</label><br />
-                                        <input type="email" id="Email" name="Email" required>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <label for="Password">使用者密碼</label><br />
-                                        <input type="password" id="Password" name="Password" required>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
-                                        <input type="text" id="UnitNum" name="UnitNum" required pattern="[a-zA-Z0-9]{16}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                        <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" placeholder="請輸入對應數字即可">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align:center">
-                                    <button type="submit" class="btn btn-primary">送出</button>
-                                </td>
-                            </tr>
+<div class="D1">
+    <div style="display: flex; align-items: center; justify-content: center" class="D1">
+        <div class="AccountBindInfo">
+            <form action="/BindAquarium/Bind" method="post">
+                <div class="form-group">
+                    <table cellpadding="8">
+                        @{
+                            if (Model == null)
+                            {
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <h2>綁定魚缸</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="Email">使用者Email</label><br />
+                                            <input type="email" id="Email" name="Email" required>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <label for="Password">使用者密碼</label><br />
+                                            <input type="password" id="Password" name="Password" required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                            <input type="text" id="UnitNum" name="UnitNum" required pattern="[a-zA-Z0-9]{16}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
+                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" placeholder="請輸入對應數字即可">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <button type="submit" class="btn btn-primary">送出</button>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <h2>綁定魚缸</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="Email">使用者Email</label><br />
+                                            <input type="email" id="Email" name="Email" required value=@Model.Email>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <label for="Password">使用者密碼</label><br />
+                                            <input type="password" id="Password" name="Password" required value=@Model.Password>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                            <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] pattern="[a-zA-Z0-9]{16}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
+                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" value=@base.TempData["WaterType"]>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <button type="submit" class="btn btn-primary">送出</button>
+                                    </td>
+                                </tr>
+                            }
                         }
-                        else
-                        {
-                            <tr>
-                                <td colspan="2" style="text-align:center">
-                                    <h2>綁定魚缸</h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="Email">使用者Email</label><br />
-                                        <input type="email" id="Email" name="Email" required value=@Model.Email>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <label for="Password">使用者密碼</label><br />
-                                        <input type="password" id="Password" name="Password" required value=@Model.Password>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
-                                        <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] pattern="[a-zA-Z0-9]{16}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                        <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" value=@base.TempData["WaterType"]>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align:center">
-                                    <button type="submit" class="btn btn-primary">送出</button>
-                                </td>
-                            </tr>
-                        }
-                    }
 
-                </table>
-            </div>
-        </form>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="D2">
+    <div style="display: flex; align-items: center; justify-content: center">
+        <div class="AccountBindInfo">
+            <form action="/BindAquarium/Bind" method="post">
+                <div class="form-group">
+                    <table cellpadding="8">
+                        @{
+                            if (Model == null)
+                            {
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <h2>綁定魚缸</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="Email">使用者Email</label><br />
+                                            <input type="email" id="Email" name="Email" required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="Password">使用者密碼</label><br />
+                                            <input type="password" id="Password" name="Password" required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                            <input type="text" id="UnitNum" name="UnitNum" required pattern="[a-zA-Z0-9]{16}">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
+                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" placeholder="請輸入對應數字即可">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <button type="submit" class="btn btn-primary">送出</button>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <h2>綁定魚缸</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="Email">使用者Email</label><br />
+                                            <input type="email" id="Email" name="Email" required value=@Model.Email>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <label for="Password">使用者密碼</label><br />
+                                            <input type="password" id="Password" name="Password" required value=@Model.Password>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                            <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] pattern="[a-zA-Z0-9]{16}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
+                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" value=@base.TempData["WaterType"]>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <button type="submit" class="btn btn-primary">送出</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </table>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

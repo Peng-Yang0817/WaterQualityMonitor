@@ -24,12 +24,73 @@
     td {
     }
 
-    h2,h3,h4 {
+    h2, h3, h4 {
         font-weight: bold;
     }
+
+    .D1_box {
+        text-align:left;
+    }
+
+    .D2_box {
+        text-align: center;
+        padding-right:60%;
+    }
+    /*小於1200px就*/
+    @@media only screen and (max-width:1200px) {
+        .D1_box {
+            padding-left:50%;
+        }
+    }
+    /*大於1200px就*/
+    @@media only screen and (min-width:1200px) {
+        .D1_box {
+            padding-left: 0px;
+        }
+    }
+
+    /*小於500px就*/
+    @@media only screen and (max-width:500px) {
+        .D2_box {
+            width:350px;
+            padding-left: 10%;
+            text-align:right;
+        }
+    }
+    /*大於1200px就*/
+    @@media only screen and (min-width:500px) {
+        .D2_box {
+            padding-left: 0px;
+        }
+    }
+
+
+
     .TitleSet {
-        font-weight:bold;
+        font-weight: bold;
         margin-left: 30px;
+    }
+
+
+
+    @@media only screen and (max-width:850px) {
+        .D1 {
+            display: none;
+        }
+
+        .D2 {
+            display: block;
+        }
+    }
+
+    @@media only screen and (min-width:850px) {
+        .D1 {
+            display: block;
+        }
+
+        .D2 {
+            display: none;
+        }
     }
 </style>
 
@@ -39,63 +100,122 @@
         <h3>魚缸編號: @AquairmNum </h3>
         <h4 style="margin-top:20px;">過去 x天內水質紀錄</h4>
     </div>
-    </div>
+</div>
 
-    <div style="height: 100%; width: 100%">
-        <table border="0" cellpadding="8">
-            <tr>
-                <td>
-                    <div class="ShowBoxStyle">
-                        <div style="height: 100%; width: 100%; ">
-                            <h3>溫度</h3>
-                            <canvas id="myTemperature" width="100" height="100"></canvas>
-                        </div>
+<div style="height: 100%; width: 100%" class="D1">
+    <table border="0" cellpadding="8">
+        <tr>
+            <td>
+                <div class="ShowBoxStyle">
+                    <div style="height: 100%; width: 100%; ">
+                        <h3 class="D1_box">溫度</h3>
+                        <canvas id="myTemperature" width="100" height="100"></canvas>
                     </div>
-                </td>
-                <td>
-                    <div class="ShowBoxStyle">
-                        <div style="height: 100%; width: 100%; ">
-                            <h3>濁度</h3>
-                            <canvas id="myTurbidity" width="100" height="100"></canvas>
-                        </div>
+                </div>
+            </td>
+            <td>
+                <div class="ShowBoxStyle">
+                    <div style="height: 100%; width: 100%; ">
+                        <h3 class="D1_box">濁度</h3>
+                        <canvas id="myTurbidity" width="100" height="100"></canvas>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="ShowBoxStyle" style="margin-top:10%;">
-                        <div style="height: 400px; width: 400px; ">
-                            <h3>PH</h3>
-                            <canvas id="myPH" width="100" height="100"></canvas>
-                        </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ShowBoxStyle" style="margin-top:10%;">
+                    <div style="height: 400px; width: 400px; ">
+                        <h3 class="D1_box">PH</h3>
+                        <canvas id="myPH" width="100" height="100"></canvas>
                     </div>
-                </td>
-                <td>
-                    <div class="ShowBoxStyle" style="margin-top:10%;">
-                        <div style="height: 400px; width: 400px; ">
-                            <h3>TDS</h3>
-                            <canvas id="myTDS" width="100" height="100"></canvas>
-                        </div>
+                </div>
+            </td>
+            <td>
+                <div class="ShowBoxStyle" style="margin-top:10%;">
+                    <div style="height: 400px; width: 400px; ">
+                        <h3 class="D1_box">TDS</h3>
+                        <canvas id="myTDS" width="100" height="100"></canvas>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="ShowBoxStyle" style="margin-top:10%;">
-                        <div style="height: 400px; width: 400px; ">
-                            <h3>水位高度</h3>
-                            <canvas id="myWaterLevel" width="100" height="100"></canvas>
-                        </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ShowBoxStyle" style="margin-top:10%;">
+                    <div style="height: 400px; width: 400px; ">
+                        <h3 class="D1_box">水位高度</h3>
+                        <canvas id="myWaterLevel" width="100" height="100"></canvas>
                     </div>
-                </td>
+                </div>
+            </td>
 
-            </tr>
-        </table>
-    </div>
-    <br /><br />
+        </tr>
+    </table>
+</div>
+
+<div style="height: 100%; width: 100%" class="D2">
+    <table border="0" cellpadding="8">
+        <tr>
+            <td>
+                <div class="ShowBoxStyle" style="padding-bottom:40px;">
+                    <div style="height: 400px; width: 400px;">
+                        <h3 class="D2_box">溫度</h3>
+                        <canvas id="myTemperatureMobile" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ShowBoxStyle">
+                    <div style="height: 400px; width: 400px; ">
+                        <h3 class="D2_box">濁度</h3>
+                        <canvas id="myTurbidityMobile" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ShowBoxStyle" style="margin-top:10%;">
+                    <div style="height: 400px; width: 400px; ">
+                        <h3 class="D2_box">PH</h3>
+                        <canvas id="myPHMobile" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ShowBoxStyle" style="margin-top:10%;">
+                    <div style="height: 400px; width: 400px; ">
+                        <h3 class="D2_box">TDS</h3>
+                        <canvas id="myTDSMobile" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ShowBoxStyle" style="margin-top:10%;">
+                    <div style="height: 400px; width: 400px; ">
+                        <h3 class="D2_box">水位高度</h3>
+                        <canvas id="myWaterLevelMobile" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </td>
+
+        </tr>
+    </table>
+</div>
+<br />
+<br />
 
 
-    <script>
+<script>
+    // Web~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     //~~~~~溫度
     const ctx0 = document.getElementById('myTemperature').getContext('2d');
     const myChart0 = new Chart(ctx0, {
@@ -289,4 +409,201 @@
             }
         }
     });
-    </script>
+
+
+    // 行動裝置~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    //~~~~~溫度Mobile
+    const ctx5 = document.getElementById('myTemperatureMobile').getContext('2d');
+    const myChart5 = new Chart(ctx5, {
+        type: 'bar',
+        data: {
+            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
+                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            datasets: [{
+                label: 'Temperature',
+                data: [@DataList[5].temperature, @DataList[4].temperature, @DataList[3].temperature,
+                    @DataList[2].temperature, @DataList[1].temperature, @DataList[0].temperature],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    //~~~~~濁度Mobile
+    const ctx6 = document.getElementById('myTurbidityMobile').getContext('2d');
+    const myChart6 = new Chart(ctx6, {
+        type: 'bar',
+        data: {
+            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
+                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            datasets: [{
+                label: 'Turbidity',
+                data: [@DataList[5].Turbidity, @DataList[4].Turbidity, @DataList[3].Turbidity,
+                    @DataList[2].Turbidity, @DataList[1].Turbidity, @DataList[0].Turbidity],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    //~~~~~PHMobile
+    const ctx7 = document.getElementById('myPHMobile').getContext('2d');
+    const myChart7 = new Chart(ctx7, {
+        type: 'bar',
+        data: {
+            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
+                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            datasets: [{
+                label: 'pH',
+                data: [@DataList[5].PH, @DataList[4].PH, @DataList[3].PH,
+                    @DataList[2].PH, @DataList[1].PH, @DataList[0].PH],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    //~~~~~TDSMobile
+    const ctx8 = document.getElementById('myTDSMobile').getContext('2d');
+    const myChart8 = new Chart(ctx8, {
+        type: 'bar',
+        data: {
+            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
+                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            datasets: [{
+                label: 'TDS',
+                data: [@DataList[5].TDS, @DataList[4].TDS, @DataList[3].TDS,
+                    @DataList[2].TDS, @DataList[1].TDS, @DataList[0].TDS],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    //~~~~~WaterLevelMobile
+    const ctx9 = document.getElementById('myWaterLevelMobile').getContext('2d');
+    const myChart9 = new Chart(ctx9, {
+        type: 'bar',
+        data: {
+            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
+                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            datasets: [{
+                label: '水位高度',
+                data: [@DataList[5].WaterLevelNum, @DataList[4].WaterLevelNum, @DataList[3].WaterLevelNum,
+                    @DataList[2].WaterLevelNum, @DataList[1].WaterLevelNum, @DataList[0].WaterLevelNum],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

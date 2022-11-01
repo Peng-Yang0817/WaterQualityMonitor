@@ -167,6 +167,7 @@
         $('#SearchBtn').click((e) => {
             /*alert("Hello! I am an alert box!!");*/
             let AquariumNum = $('#AquariumNum').val();
+            let ClearTag = $('#info').empty() ;
             $.ajax({
                 async: false,
                 url: `https://localhost:44371/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置
@@ -178,21 +179,21 @@
                 },// 錯誤後執行的函數
                 success: function (response) {
                     console.log(response);
-                    for (let i = 0; i < response.length; i++) {22
+                    for (let i = 0; i < response.length; i++) {
                         const element = response[i];
                         let indexNum = i + 1;
                         $(`<tr>
-                                <td>
+                                <td style="text-align:center">
                                     ${indexNum}
                                 </td>
                                 <td>
-                                    ${element.createTime}
+                                    ${element[0]}
                                 </td>
                                 <td>
-                                    ${element.modifyTime}
+                                    ${element[1]}
                                 </td>
-                                <td>
-                                    ${element.BindTag}
+                                <td style="text-align:center">
+                                    ${element[2]}
                                 </td>
                             </tr>`)
                             .appendTo('#info');
