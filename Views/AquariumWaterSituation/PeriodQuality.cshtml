@@ -29,17 +29,17 @@
     }
 
     .D1_box {
-        text-align:left;
+        text-align: left;
     }
 
     .D2_box {
         text-align: center;
-        padding-right:60%;
+        padding-right: 60%;
     }
     /*小於1200px就*/
     @@media only screen and (max-width:1200px) {
         .D1_box {
-            padding-left:50%;
+            padding-left: 50%;
         }
     }
     /*大於1200px就*/
@@ -52,9 +52,9 @@
     /*小於500px就*/
     @@media only screen and (max-width:500px) {
         .D2_box {
-            width:350px;
+            width: 350px;
             padding-left: 10%;
-            text-align:right;
+            text-align: right;
         }
     }
     /*大於1200px就*/
@@ -214,15 +214,20 @@
 
 
 <script>
-    // Web~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    const LablesDataTime = ['@DataList[5].createTime.ToString().Substring(2,14)',
+        '@DataList[4].createTime.ToString().Substring(2, 14)',
+        '@DataList[3].createTime.ToString().Substring(2, 14)',
+        '@DataList[2].createTime.ToString().Substring(2, 14)',
+        '@DataList[1].createTime.ToString().Substring(2, 14)',
+        '@DataList[0].createTime.ToString().Substring(2, 14)'];
 
+    // Web~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //~~~~~溫度
     const ctx0 = document.getElementById('myTemperature').getContext('2d');
     const myChart0 = new Chart(ctx0, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: 'Temperature',
                 data: [@DataList[5].temperature, @DataList[4].temperature, @DataList[3].temperature,
@@ -259,8 +264,7 @@
     const myChart1 = new Chart(ctx1, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: 'Turbidity',
                 data: [@DataList[5].Turbidity, @DataList[4].Turbidity, @DataList[3].Turbidity,
@@ -298,8 +302,7 @@
     const myChart2 = new Chart(ctx2, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: 'pH',
                 data: [@DataList[5].PH, @DataList[4].PH, @DataList[3].PH,
@@ -326,7 +329,9 @@
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    type: 'linear',
+                    min: 0,
+                    max: 14
                 }
             }
         }
@@ -337,8 +342,7 @@
     const myChart3 = new Chart(ctx3, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: 'TDS',
                 data: [@DataList[5].TDS, @DataList[4].TDS, @DataList[3].TDS,
@@ -376,8 +380,7 @@
     const myChart4 = new Chart(ctx4, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: '水位高度',
                 data: [@DataList[5].WaterLevelNum, @DataList[4].WaterLevelNum, @DataList[3].WaterLevelNum,
@@ -404,7 +407,9 @@
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    type: 'linear',
+                    min: 0,
+                    max: 3
                 }
             }
         }
@@ -418,8 +423,7 @@
     const myChart5 = new Chart(ctx5, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: 'Temperature',
                 data: [@DataList[5].temperature, @DataList[4].temperature, @DataList[3].temperature,
@@ -456,8 +460,7 @@
     const myChart6 = new Chart(ctx6, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: 'Turbidity',
                 data: [@DataList[5].Turbidity, @DataList[4].Turbidity, @DataList[3].Turbidity,
@@ -495,8 +498,7 @@
     const myChart7 = new Chart(ctx7, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: 'pH',
                 data: [@DataList[5].PH, @DataList[4].PH, @DataList[3].PH,
@@ -523,7 +525,9 @@
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    type: 'linear',
+                    min: 0,
+                    max: 14
                 }
             }
         }
@@ -534,8 +538,7 @@
     const myChart8 = new Chart(ctx8, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: 'TDS',
                 data: [@DataList[5].TDS, @DataList[4].TDS, @DataList[3].TDS,
@@ -573,8 +576,7 @@
     const myChart9 = new Chart(ctx9, {
         type: 'bar',
         data: {
-            labels: ['@DataList[5].createTime', '@DataList[4].createTime', '@DataList[3].createTime',
-                '@DataList[2].createTime', '@DataList[1].createTime', '@DataList[0].createTime'],
+            labels: LablesDataTime,
             datasets: [{
                 label: '水位高度',
                 data: [@DataList[5].WaterLevelNum, @DataList[4].WaterLevelNum, @DataList[3].WaterLevelNum,
@@ -601,7 +603,9 @@
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    type: 'linear',
+                    min: 0,
+                    max: 3
                 }
             }
         }

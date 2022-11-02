@@ -62,7 +62,8 @@
 
 
     .CreateAccountMoblie {
-        word-break:break-all;
+        margin-top: 5%;
+        word-break: break-all;
         background-color: #f2f2f2;
         padding-top: 15px;
         padding-bottom: 15px;
@@ -75,7 +76,6 @@
     }
 
     .LogInAccountMobile {
-        margin-top:5%;
         word-break: break-all;
         background-color: #f2f2f2;
         padding-top: 15px;
@@ -287,6 +287,79 @@
 
 
 <div class="CreateLogin_D2">
+    <div class="LogInAccountMobile">
+        <form action="/LogInAndRegister/LogIn" method="post">
+            <div class="form-group">
+                <table cellpadding="8">
+                    @{
+                        if (base.TempData["Email"] != null)
+                        {
+                            <tr>
+                                <td colspan="1" style="text-align:center">
+                                    <h2>登入</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="LogInEmail">使用者 E-mail</label><br />
+                                        <input type="email" id="LogInEmail" name="Email" required value=@base.TempData["Email"]>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="LogInPassword">使用者密碼</label><br />
+                                        <input type="password" id="LogInPassword" name="Password" required>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="1" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">送出</button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="1" style="text-align:center">
+                                    <h2>登入</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="LogInEmail">使用者 E-mail</label><br />
+                                        <input type="email" id="LogInEmail" name="Email" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <label for="LogInPassword">使用者密碼</label><br />
+                                        <input type="password" id="LogInPassword" name="Password" required>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="1" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary">送出</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        </form>
+    </div>
+
+
     <div class="CreateAccountMoblie">
         <form id="CreateAreaMobile" action="/LogInAndRegister/Create" method="Post">
             <div class="form-group">
@@ -388,77 +461,6 @@
         </form>
     </div>
 
-    <div class="LogInAccountMobile">
-        <form action="/LogInAndRegister/LogIn" method="post">
-            <div class="form-group">
-                <table cellpadding="8">
-                    @{
-                        if (base.TempData["Email"] != null)
-                        {
-                            <tr>
-                                <td colspan="1" style="text-align:center">
-                                    <h2>登入</h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="LogInEmail">使用者 E-mail</label><br />
-                                        <input type="email" id="LogInEmail" name="Email" required value=@base.TempData["Email"]>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="LogInPassword">使用者密碼</label><br />
-                                        <input type="password" id="LogInPassword" name="Password" required>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="1" style="text-align:center">
-                                    <button type="submit" class="btn btn-primary">送出</button>
-                                </td>
-                            </tr>
-                        }
-                        else
-                        {
-                            <tr>
-                                <td colspan="1" style="text-align:center">
-                                    <h2>登入</h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="LogInEmail">使用者 E-mail</label><br />
-                                        <input type="email" id="LogInEmail" name="Email" required>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="LogInPassword">使用者密碼</label><br />
-                                        <input type="password" id="LogInPassword" name="Password" required>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="1" style="text-align:center">
-                                    <button type="submit" class="btn btn-primary">送出</button>
-                                </td>
-                            </tr>
-                        }
-                    }
-
-                </table>
-            </div>
-        </form>
-    </div>
 
 </div>
 

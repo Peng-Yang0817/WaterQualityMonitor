@@ -41,7 +41,7 @@
 
     .btn-primary {
         font-size: 18px;
-        background-color: #54585d;
+        background-color: #198754;
         width: 90px;
         border-radius: 5px;
         margin-top: 0px;
@@ -117,30 +117,90 @@
     /*最後欄第一列：右下*/
     tr:last-child td:last-child {
         border-bottom-right-radius: 10px;
-</style>
+    }
 
-<div class="L1Div">
-    <h2>
-        綁定紀錄查詢
-    </h2>
-    <div class="L2Div">
-        <table border="0">
-            <tr>
-                <td width="20%">
-                    <div class="form-group">
-                        <label for="AquariumNum">魚缸編號</label>
-                    </div>
-                </td>
-                <td width="35%">
-                    <div class="form-group">
-                        <input type="text" name="AquariumNum" value="" id="AquariumNum" />
-                    </div>
-                </td>
-                <td width="45%" style="padding-left:0px">
-                    <button type="submit" class="btn btn-primary" id="SearchBtn">查詢</button>
-                </td>
-            </tr>
-        </table>
+    @@media only screen and (max-width:1000px) {
+        .HistoryQueryD1 {
+            display: none;
+        }
+
+        .HistoryQueryD2 {
+            display: block;
+        }
+    }
+
+    @@media only screen and (min-width:1000px) {
+        .HistoryQueryD1 {
+            display: block;
+        }
+
+        .HistoryQueryD2 {
+            display: none;
+        }
+    }
+</style>
+<div class="HistoryQueryD1">
+    <div class="L1Div">
+        <h2>
+            綁定紀錄查詢
+        </h2>
+        <div class="L2Div">
+            <table border="0">
+                <tr>
+                    <td width="25%">
+                        <div class="form-group">
+                            <label for="AquariumNum">魚缸編號&nbsp;:</label>
+                        </div>
+                    </td>
+                    <td width="40%">
+                        <div class="form-group">
+                            <input type="text" name="AquariumNum" value="" id="AquariumNumD1" maxlength="16"/>
+                        </div>
+                    </td>
+                    <td width="35%" style="padding-left:0px">
+                        <button type="submit" class="btn btn-primary" id="SearchBtnD1">查詢</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="HistoryQueryD2">
+    <div class="L1Div">
+        <h2>
+            綁定紀錄查詢
+        </h2>
+        <div class="L2Div">
+            <table border="0">
+                <tr>
+                    <td width="70%" style="padding:10px 20px">
+                        <div class="form-group" style="margin-bottom:0px">
+                            <label for="AquariumNum">魚缸編號</label>
+                        </div>
+                    </td>
+                    <td  width="30%">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%" style="padding:0px 20px" colspan="2">
+                        <div class="form-group">
+                            <input type="text"  name="AquariumNum" value="" id="AquariumNumD2" maxlength="16"/>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="70%" style="padding:0px">
+                        <div style="display:flex;align-items:center;justify-content:right">
+                            <button type="submit" class="btn btn-primary" id="SearchBtnD2">查詢</button>
+                        </div>
+                    </td>
+                    <td style="padding:0px 20px" width="30%">
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -150,9 +210,9 @@
             <thead>
                 <tr>
                     <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">次數</td>
-                    <td width="30%" style="text-align: center; font-weight: bold; font-size: 100% ">綁定日期</td>
-                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">編輯日期</td>
-                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">狀態</td>
+                    <td width="35%" style="text-align: center; font-weight: bold; font-size: 100% ">綁定日期</td>
+                    <td width="35%" style="text-align: center; font-weight: bold; font-size: 100%">編輯日期</td>
+                    <td width="20%" style="text-align: center; font-weight: bold; font-size: 100%">狀態</td>
                 </tr>
             </thead>
             <tbody id="info">
@@ -164,10 +224,48 @@
 
 <script>
     $(() => {
-        $('#SearchBtn').click((e) => {
+        $('#SearchBtnD1').click((e) => {
             /*alert("Hello! I am an alert box!!");*/
-            let AquariumNum = $('#AquariumNum').val();
+            let AquariumNum = $('#AquariumNumD1').val();
             let ClearTag = $('#info').empty() ;
+            $.ajax({
+                async: false,
+                url: `https://localhost:44371/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置
+                type: 'get',// post/get
+                dataType: 'json',
+                data: {},// 輸入的資料
+                error: function (xhr) {
+                    console.log('沒抓到資料耶')
+                },// 錯誤後執行的函數
+                success: function (response) {
+                    console.log(response);
+                    for (let i = 0; i < response.length; i++) {
+                        const element = response[i];
+                        let indexNum = i + 1;
+                        $(`<tr>
+                                <td style="text-align:center">
+                                    ${indexNum}
+                                </td>
+                                <td>
+                                    ${element[0]}
+                                </td>
+                                <td>
+                                    ${element[1]}
+                                </td>
+                                <td style="text-align:center">
+                                    ${element[2]}
+                                </td>
+                            </tr>`)
+                            .appendTo('#info');
+                    }
+                }// 成功後要執行的函數 style="cursor:pointer"
+            });
+        });
+
+        $('#SearchBtnD2').click((e) => {
+            /*alert("Hello! I am an alert box!!");*/
+            let AquariumNum = $('#AquariumNumD2').val();
+            let ClearTag = $('#info').empty();
             $.ajax({
                 async: false,
                 url: `https://localhost:44371/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置

@@ -42,7 +42,6 @@ namespace TestProject.Controllers
                 if (DataArray.Count == 0)
                 {
                     ButtonJudge.Add(0);
-
                     DataGarge.temperature = "沒有紀錄";
                     DataGarge.Turbidity = "沒有紀錄";
                     DataGarge.PH = "沒有紀錄";
