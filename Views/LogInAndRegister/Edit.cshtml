@@ -23,7 +23,7 @@
         justify-content: center;
         border: 3px solid #adb9c9;
         border-radius: 50px;
-        width: 70%
+        width: 85%
     }
 
     label {
@@ -48,59 +48,149 @@
         letter-spacing: 5px;
         margin-bottom: 20px;
     }
+
+
+    @@media only screen and (max-width:768px) {
+        .HomeUserInfoEdit_D1 {
+            display: none;
+        }
+
+        .HomeUserInfoEdit_D2 {
+            display: block;
+        }
+    }
+
+    @@media only screen and (min-width:768px) {
+        .HomeUserInfoEdit_D1 {
+            display: block;
+        }
+
+        .HomeUserInfoEdit_D2 {
+            display: none;
+        }
+    }
 </style>
-<div style="display: flex; align-items: center; justify-content: center">
-    <div class="AccountInfo">
-        <form id="EditArea" action="/LogInAndRegister/Edit" method="Post">
-            <div class="form-group">
-                <table cellpadding="8">
-                    <tr>
-                        <td colspan="2" style="text-align:center">
-                            <h2>使用者資訊編輯</h2>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>
-                                <label for="UserName">使用者名稱</label><br />
-                                <input type="text" id="UserName" name="UserName" required value=@Model.UserName>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <label for="Password">使用者密碼</label><br />
-                                <input type="text" id="Password" name="Password" required>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>
-                                <label for="Email">使用者 E-mail</label><br />
-                                <input type="email" id="Email" name="Email" disabled value=@Model.Email>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <label for="LineID">使用者 Line ID</label><br />
-                                <input type="text" id="LineID" name="LineID" required value=@Model.LineID>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align:center">
-                            <button type="submit" class="btn btn-primary">送出</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </form>
+<div class="HomeUserInfoEdit_D1">
+    <div style="display: flex; align-items: center; justify-content: center">
+        <div class="AccountInfo">
+            <form id="EditArea" action="/LogInAndRegister/Edit" method="Post">
+                <div class="form-group">
+                    <table cellpadding="8">
+                        <tr>
+                            <td colspan="2" style="text-align:center">
+                                <h2>編輯資訊</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label for="UserName">使用者名稱</label><br />
+                                    <input type="text" id="UserName" name="UserName" required value=@Model.UserName>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <label for="Password">使用者密碼</label><br />
+                                    <input type="text" id="Password" name="Password" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label for="Email">使用者 E-mail</label><br />
+                                    <input type="email" id="Email" name="Email" disabled value=@Model.Email>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <label for="LineID">使用者 Line ID</label><br />
+                                    <input type="text" id="LineID" name="LineID" required value=@Model.LineID>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:center">
+                                <button type="submit" class="btn btn-primary">送出</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="HomeUserInfoEdit_D2">
+    <div style="display: flex; align-items: center; justify-content: center">
+        <div class="AccountInfo">
+            <form id="EditAreaMobile" action="/LogInAndRegister/Edit" method="Post">
+                <div class="form-group">
+                    <table cellpadding="8">
+                        <tr>
+                            <td colspan="2" style="text-align:center">
+                                <h2>編輯資訊</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label for="UserName">使用者名稱</label><br />
+                                    <input type="text" id="UserName" name="UserName" required value=@Model.UserName>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label for="Password">使用者密碼</label><br />
+                                    <input type="text" id="Password" name="Password" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label for="Email">使用者 E-mail</label><br />
+                                    <input type="email" id="Email" name="Email" disabled value=@Model.Email>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label for="LineID">使用者 Line ID</label><br />
+                                    <input type="text" id="LineID" name="LineID" required value=@Model.LineID>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:center">
+                                <button type="submit" class="btn btn-primary">送出</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 <script>
 
     document.getElementById("EditArea").addEventListener("submit", function (e) {
+        if (confirm("請確認填寫資料是否正確.")) {
+            console.log("Deleting");
+            document.forms[0].submit()
+        }
+        else {
+            console.log("Cancelled");
+            e.preventDefault(); // cancelling submission
+        }
+    })
+
+    document.getElementById("EditAreaMobile").addEventListener("submit", function (e) {
         if (confirm("請確認填寫資料是否正確.")) {
             console.log("Deleting");
             document.forms[0].submit()

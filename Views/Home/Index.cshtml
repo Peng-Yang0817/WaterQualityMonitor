@@ -23,7 +23,7 @@
         justify-content: center;
         border: 3px solid #adb9c9;
         border-radius: 50px;
-        width: 70%
+        width: 85%
     }
 
     label {
@@ -36,7 +36,6 @@
     }
 
         input:disabled {
-            
         }
 
     td {
@@ -48,6 +47,26 @@
         line-height: 15px;
         letter-spacing: 5px;
         margin-bottom: 20px;
+    }
+
+    @@media only screen and (max-width:768px) {
+        .HomeUserInfo_D1 {
+            display: none;
+        }
+
+        .HomeUserInfo_D2 {
+            display: block;
+        }
+    }
+
+    @@media only screen and (min-width:768px) {
+        .HomeUserInfo_D1 {
+            display: block;
+        }
+
+        .HomeUserInfo_D2 {
+            display: none;
+        }
     }
 </style>
 
@@ -62,52 +81,109 @@
     }
     else
     {
-        <div style="display: flex; align-items: center; justify-content: center">
-            <div class="AccountInfo">
-                <form action="/LogInAndRegister/Edit" method="get">
-                    <div class="form-group">
-                        <table cellpadding="8">
-                            <tr>
-                                <td colspan="2" style="text-align:center">
-                                    <h2>使用者資訊</h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="UserName">使用者名稱</label><br />
-                                        <input type="text" id="UserName" name="UserName" disabled value=@Model.UserName>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <label for="Password">使用者密碼</label><br />
-                                        <input type="text" id="Password" name="Password" disabled value="********">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <label for="Email">使用者 E-mail</label><br />
-                                        <input type="email" id="Email" name="Email" disabled value=@Model.Email>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <label for="LineID">使用者 Line ID</label><br />
-                                        <input type="text" id="LineID" name="LineID" disabled value=@Model.LineID>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align:center">
-                                    <button type="submit" class="btn btn-primary">編輯</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </form>
+        <div class="HomeUserInfo_D1">
+            <div style="display: flex; align-items: center; justify-content: center">
+                <div class="AccountInfo">
+                    <form action="/LogInAndRegister/Edit" method="get">
+                        <div class="form-group">
+                            <table cellpadding="8">
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <h2>使用者資訊</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="UserName">使用者名稱</label><br />
+                                            <input type="text" id="UserName" name="UserName" disabled value=@Model.UserName>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <label for="Password">使用者密碼</label><br />
+                                            <input type="text" id="Password" name="Password" disabled value="********">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="Email">使用者 E-mail</label><br />
+                                            <input type="email" id="Email" name="Email" disabled value=@Model.Email>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <label for="LineID">使用者 Line ID</label><br />
+                                            <input type="text" id="LineID" name="LineID" disabled value=@Model.LineID>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <button type="submit" class="btn btn-primary">編輯</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="HomeUserInfo_D2">
+            <div style="display: flex; align-items: center; justify-content: center">
+                <div class="AccountInfo">
+                    <form action="/LogInAndRegister/Edit" method="get">
+                        <div class="form-group">
+                            <table cellpadding="8">
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <h2>使用者資訊</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="UserName">使用者名稱</label><br />
+                                            <input type="text" id="UserName" name="UserName" disabled value=@Model.UserName>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="Password">使用者密碼</label><br />
+                                            <input type="text" id="Password" name="Password" disabled value="********">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="Email">使用者 E-mail</label><br />
+                                            <input type="email" id="Email" name="Email" disabled value=@Model.Email>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="LineID">使用者 Line ID</label><br />
+                                            <input type="text" id="LineID" name="LineID" disabled value=@Model.LineID>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center">
+                                        <button type="submit" class="btn btn-primary">編輯</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
