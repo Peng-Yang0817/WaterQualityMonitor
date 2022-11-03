@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>郵件測試!</h2>
+<h3>模擬Arduino 發送到後端.</h3>
+
+<div>
+    <form action="/NotifyByMail/SendMail" method="post">
+        <div class="form-group">
+            <label for="MessageToWeb">MessageTo(收件人)</label><br />
+            <input type="email" id="MessageToWeb" name="MessageToWeb">
+        </div>
+        <div class="form-group">
+            <label for="MessageSubjectWeb">MessageSubject(主旨)</label><br />
+            <input type="text" id="MessageSubjectWeb" name="MessageSubjectWeb">
+        </div>
+        <div class="form-group">
+            <label for="MessageBodyWeb">MessageBody(內容)</label><br />
+            <input type="text" id="MessageBodyWeb" name="MessageBodyWeb">
+        </div>
+        <button type="submit" class="btn btn-primary" id="buttonCon">確定</button>
+    </form>
+</div>

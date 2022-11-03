@@ -133,6 +133,7 @@
     <Compile Include="Controllers\HistoryQueryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInAndRegisterController.cs" />
+    <Compile Include="Controllers\NotifyByMailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +147,10 @@
       <DependentUpon>WaterQualityModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Auth001.cs">
+      <DependentUpon>WaterQualityModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MailTest\sendGmail.cs" />
+    <Compile Include="Models\NotifySetRange.cs">
       <DependentUpon>WaterQualityModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WaterQualityModel1.Context.cs">
@@ -293,6 +298,12 @@
     <Content Include="Views\BindAquarium\DelectConfirmation.cshtml" />
     <Content Include="Views\AquariumWaterSituation\PeriodQuality.cshtml" />
     <Content Include="Views\HistoryQuery\Index.cshtml" />
+    <Content Include="Views\NotifyByMail\Index.cshtml" />
+    <Content Include="Views\NotifyByMail\Success.cshtml" />
+    <Content Include="Views\NotifyByMail\Error.cshtml" />
+    <Content Include="Views\NotifyByMail\CodeError.cshtml" />
+    <Content Include="Views\NotifyByMail\SetAreaRange.cshtml" />
+    <Content Include="Views\NotifyByMail\SetAreaRangeCheck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

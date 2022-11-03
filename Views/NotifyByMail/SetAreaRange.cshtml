@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "SetAreaRange";
+    var AquariumDataList = ViewBag.AquariumDataList;
+    var DataListSize = AquariumDataList.Count;
+    var DataCount = 0;
+}
+<style>
+    .btn-primary {
+        font-size: 18px;
+        margin-top: 20px;
+        background-color: #1ba1e2;
+        width: 150px;
+        border-radius: 0px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .AccountBindInfo {
+        background-color: #f2f2f2;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #adb9c9;
+        border-radius: 50px;
+        width: 75%;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    input {
+        font-size: 15px;
+        width: 110%;
+    }
+
+
+    td {
+        padding: 8px 40px;
+    }
+
+    h2 {
+        font-weight: bold;
+        line-height: 15px;
+        letter-spacing: 5px;
+        margin-bottom: 20px;
+    }
+
+    .disBindTitle {
+        font-weight: bold;
+        line-height: 15px;
+        letter-spacing: 5px;
+        margin-bottom: 20px;
+    }
+
+    .UserAquariumEditArea {
+        /*background-color: #f2f2f2;*/
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /*border: 3px solid #adb9c9;*/
+        /*border-radius: 50px;*/
+        width: 75%;
+        font-size: 130%;
+    }
+
+    .TopTableStyle {
+        border-collapse: separate;
+        font-family: Tahoma, Geneva, sans-serif;
+        border-spacing: 0;
+    }
+
+        .TopTableStyle td {
+            padding: 15px;
+        }
+
+        .TopTableStyle thead td {
+            background-color: #54585d;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 13px;
+            border: 1px solid #54585d;
+            border-left: solid 1px white;
+        }
+
+        .TopTableStyle tbody td {
+            color: #636363;
+            border: 1px solid #dddfe1;
+        }
+
+        .TopTableStyle tbody tr {
+            background-color: #f9fafb;
+        }
+
+            .TopTableStyle tbody tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+
+    /*第一欄第一列：左上*/
+    tr:first-child td:first-child {
+        border-top-left-radius: 10px;
+    }
+    /*第一欄最後列：左下*/
+    tr:last-child td:first-child {
+        border-bottom-left-radius: 10px;
+    }
+    /*最後欄第一列：右上*/
+    tr:first-child td:last-child {
+        border-top-right-radius: 10px;
+    }
+    /*最後欄第一列：右下*/
+    tr:last-child td:last-child {
+        border-bottom-right-radius: 10px;
+    }
+
+    /*小於750px就*/
+    @@media only screen and (max-width:750px) {
+        .D1 {
+            display: none;
+        }
+
+        .D2 {
+            display: block;
+        }
+    }
+    /*大於750px就*/
+    @@media only screen and (min-width:750px) {
+        .D1 {
+            display: block;
+        }
+
+        .D2 {
+            display: none;
+        }
+    }
+</style>
+
+
+<div style="display: flex; align-items: center; justify-content: center;">
+    <div class="UserAquariumEditArea">
+        <table border="0" style="width:80%">
+            <tr>
+                <th colspan="3">
+                    <h2 class="disBindTitle" style="text-align:center">
+                        通報範圍設置
+                    </h2>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+<div style="display: flex; align-items: center; justify-content: center;margin-bottom:30px;">
+    <div class="UserAquariumEditArea">
+        <table border="0" style="width:100%" class="TopTableStyle">
+            <thead>
+                <tr>
+                    <td width="15%" style="text-align: center; font-weight: bold; font-size: 100%">序列</td>
+                    <td width="70%" style="text-align: center; font-weight: bold; font-size: 100% ">魚缸編號</td>
+                    <td width="15%" style="text-align: center; font-weight: bold; font-size: 100%">設置範圍</td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < DataListSize; i++)
+                    {
+                        <tr>
+                            @{
+                                DataCount += 1;
+                            }
+                            <td width="10%" style="text-align:center">@DataCount</td>
+                            <td width="30%" style="text-align:center">@AquariumDataList[i].AquariumUnitNum</td>
+                            <td width="10%" style="text-align:center">
+                                <div style="font-size: 15px; font-size: 100%">
+                                    @Html.ActionLink("設置", "DelectConfirmation", "Statistics009", new { area = "Statistics", href = "SetAreaRangeCheck?AquariumNum=" + @AquariumDataList[i].AquariumUnitNum })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

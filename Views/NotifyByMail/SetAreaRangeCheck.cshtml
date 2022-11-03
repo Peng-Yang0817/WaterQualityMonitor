@@ -1,0 +1,215 @@
+﻿@using TestProject.Models;
+@{
+    ViewBag.Title = "SetAreaRangeCheck";
+    NotifySetRange DataTarget = ViewBag.DataTarget;
+    string AquarinmNum = ViewBag.AquarinmNum;
+}
+<style>
+    .TitleSet {
+        margin-left: 30px;
+    }
+
+    .DataSet {
+        margin-left: 50px;
+        margin: 20px auto;
+        item-align: center;
+        width: 80%;
+    }
+
+        .DataSet table {
+            font-size: 20px;
+        }
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+    }
+
+        table tr {
+            border-bottom: solid 2px white;
+        }
+
+            table tr:last-child {
+                border-bottom: none;
+            }
+
+        table th {
+            position: relative;
+            width: 25%;
+            background-color: #54585d;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+            table th:after {
+                display: block;
+                content: "";
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                top: calc(50% - 10px);
+                right: -10px;
+                border-left: 10px solid #54585d;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+            }
+
+    .UnitTd {
+        position: relative;
+        width: 15%;
+        background-color: #54585d;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    table td {
+        text-align: left;
+        /*width: 70%;*/
+        background-color: #eee;
+        padding: 10px 20px;
+    }
+
+    h4, h3, h2 {
+        font-weight: bold;
+    }
+
+
+    .searchStyle {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sibling-main {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        width: 85%;
+    }
+
+    .sibling-B {
+        position: absolute;
+        margin: 5px 3px;
+        font-weight: 400;
+        text-align: left;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 2px 13px;
+        font-size: 14px;
+        line-height: 30px;
+        min-height: 35px;
+        border-radius: 2px;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, font-weight .15s;
+        color: #ffffff;
+        background-color: rgb(148, 190, 214);
+        border-radius: 8px;
+        cursor: pointer;
+        letter-spacing: 2px;
+        box-shadow: 2px 2px 3px grey;
+        border: none;
+        padding-right: 11px;
+        /* 新增按鈕寬度 */
+        width: 135px;
+    }
+
+        .sibling-B:hover {
+            background-color: #496689;
+            font-weight: bold;
+            color: yellow;
+        }
+
+    .sibling-C {
+        position: absolute;
+        margin: 5px 3px;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 2px 13px;
+        font-size: 14px;
+        line-height: 30px;
+        min-height: 35px;
+        border-radius: 2px;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, font-weight .15s;
+        color: #ffffff;
+        background-color: #e73f31;
+        border-radius: 8px;
+        cursor: pointer;
+        letter-spacing: 2px;
+        box-shadow: 2px 2px 3px grey;
+        border: none;
+        padding-right: 11px;
+        /* 新增按鈕寬度 */
+        width: 130px;
+    }
+
+        .sibling-C:hover {
+            cursor: not-allowed;
+            background-color: #861b2d;
+            font-weight: bold;
+            color: red;
+        }
+</style>
+
+
+<div class="SituationIndex_D1">
+    <div style="margin-left:50px">
+        <h2>
+            水質範圍設置<h2>
+                <div class="TitleSet">
+                    <h3>編號 : @AquarinmNum</h3>
+                    <h4></h4>
+                    <div class="DataSet">
+                        <table>
+                            <tr>
+                                <th width="10%" style="text-align:left;padding-left:5px;">濁度上限 :</th>
+                                <td width="60%" colspan="2">@DataTarget.TurbidityUpperBound</td>
+                            </tr>
+                            <tr>
+                                <th width="10%" style="text-align:left;padding-left:5px;">水位下限 :</th>
+                                <td width="60%" colspan="2">@DataTarget.WaterLevelLowerBound</td>
+                            </tr>
+                            <tr>
+                                <th width="10%" style="text-align:left;padding-left:5px;">水溫上限 :</th>
+                                <td width="60%" colspan="1">@DataTarget.temperatureUpperBound</td>
+                                <td width="20%" class="UnitTd">°C</td>
+                            </tr>
+                            <tr>
+                                <th width="10%" style="text-align:left;padding-left:5px;">水溫下限 :</th>
+                                <td width="60%" colspan="1">@DataTarget.temperatureLowerBound</td>
+                                <td width="20%" class="UnitTd">°C</td>
+                            </tr>
+                            <tr>
+                                <th width="10%" style="text-align:left;padding-left:5px;">pH上限 :</th>
+                                <td width="60%" colspan="1">@DataTarget.pHUpperBound</td>
+                                <td width="20%" class="UnitTd">mol/L</td>
+                            </tr>
+                            <tr>
+                                <th width="10%" style="text-align:left;padding-left:5px;">pH下限 :</th>
+                                <td width="60%" colspan="1">@DataTarget.phLowerBound</td>
+                                <td width="20%" class="UnitTd">mol/L</td>
+                            </tr>
+                            <tr>
+                                <th width="10%" style="text-align:left;padding-left:5px;">TDS上限 :</th>
+                                <td width="60%" colspan="1">@DataTarget.TDSUpperBound</td>
+                                <td width="20%" class="UnitTd">ppm</td>
+                            </tr>
+                            <tr>
+                                <th width="10%" style="text-align:left;padding-left:5px;">TDS下限 :</th>
+                                <td width="60%" colspan="1">@DataTarget.TDSLowerBound</td>
+                                <td width="20%" class="UnitTd">ppm</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+    </div>
+</div>

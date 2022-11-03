@@ -43,6 +43,22 @@
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="LineID" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="NotifySetRange">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AquariumUnitNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="temperatureUpperBound" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="temperatureLowerBound" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pHUpperBound" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phLowerBound" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TDSUpperBound" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TDSLowerBound" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TurbidityUpperBound" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="WaterLevelLowerBound" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NotifyTag" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'WaterQuality.dbo.AquariumSituationManagement' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
   <EntityType Name="AquariumSituationManagement">
@@ -72,6 +88,7 @@
   <EntityContainer Name="WaterQualityModelStoreContainer">
     <EntitySet Name="Aquarium" EntityType="Self.Aquarium" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Auth001" EntityType="Self.Auth001" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotifySetRange" EntityType="Self.NotifySetRange" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AquariumSituation" EntityType="Self.AquariumSituation" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [AquariumSituation].[Id] AS [Id], 

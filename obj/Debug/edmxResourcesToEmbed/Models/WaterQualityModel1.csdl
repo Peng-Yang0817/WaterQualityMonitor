@@ -70,5 +70,22 @@
     <EntitySet Name="Auth001" EntityType="Self.Auth001" />
     <EntitySet Name="AquariumSituation" EntityType="Self.AquariumSituation" />
     <EntitySet Name="AquariumSituationManagement" EntityType="Self.AquariumSituationManagement" />
+    <EntitySet Name="NotifySetRange" EntityType="WaterQualityModel.NotifySetRange" />
   </EntityContainer>
+  <EntityType Name="NotifySetRange">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AquariumUnitNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="temperatureUpperBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="temperatureLowerBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pHUpperBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phLowerBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TDSUpperBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TDSLowerBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TurbidityUpperBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WaterLevelLowerBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NotifyTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

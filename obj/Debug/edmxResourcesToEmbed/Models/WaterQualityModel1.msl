@@ -58,5 +58,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NotifySetRange">
+      <EntityTypeMapping TypeName="WaterQualityModel.NotifySetRange">
+        <MappingFragment StoreEntitySet="NotifySetRange">
+          <ScalarProperty Name="NotifyTag" ColumnName="NotifyTag" />
+          <ScalarProperty Name="WaterLevelLowerBound" ColumnName="WaterLevelLowerBound" />
+          <ScalarProperty Name="TurbidityUpperBound" ColumnName="TurbidityUpperBound" />
+          <ScalarProperty Name="TDSLowerBound" ColumnName="TDSLowerBound" />
+          <ScalarProperty Name="TDSUpperBound" ColumnName="TDSUpperBound" />
+          <ScalarProperty Name="phLowerBound" ColumnName="phLowerBound" />
+          <ScalarProperty Name="pHUpperBound" ColumnName="pHUpperBound" />
+          <ScalarProperty Name="temperatureLowerBound" ColumnName="temperatureLowerBound" />
+          <ScalarProperty Name="temperatureUpperBound" ColumnName="temperatureUpperBound" />
+          <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
