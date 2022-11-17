@@ -199,21 +199,21 @@ namespace TestProject.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult SendMail(string MessageToWeb, string MessageSubjectWeb, string MessageBodyWeb)
-        {
-            sendGmail sendMail = new sendGmail();
+        //[HttpPost]
+        //public ActionResult SendMail(string MessageToWeb, string MessageSubjectWeb, string MessageBodyWeb)
+        //{
+        //    sendGmail sendMail = new sendGmail();
 
-            if (sendMail.Send_Gmail())
-            {
-                //成功
-                return Redirect("Success");
-            }
-            else
-            {
-                //失敗
-                return Redirect("Error");
-            }
-        }
+        //    if (sendMail.Send_Gmail())
+        //    {
+        //        //成功
+        //        return Redirect("Success");
+        //    }
+        //    else
+        //    {
+        //        //失敗
+        //        return Redirect("Error");
+        //    }
+        //}
     }
 }

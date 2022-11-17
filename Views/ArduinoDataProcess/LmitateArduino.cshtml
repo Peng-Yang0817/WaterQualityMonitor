@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "LmitateArduino";
+}
+
+<h2>模擬 Arduino 發送到Server.</h2>
+
+<div>
+    <form action="/ArduinoDataProcess/DataProcess" method="post">
+        <div class="form-group">
+            <label for="StringData">Data(打包的字串)</label><br />
+            <input type="text" id="StringData" name="StringData" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="buttonCon">確定</button>
+    </form>
+</div>

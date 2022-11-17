@@ -144,9 +144,6 @@
     <Compile Include="Models\AquariumSituation.cs">
       <DependentUpon>WaterQualityModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AquariumSituationManagement.cs">
-      <DependentUpon>WaterQualityModel1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Auth001.cs">
       <DependentUpon>WaterQualityModel1.tt</DependentUpon>
     </Compile>
@@ -305,10 +302,10 @@
     <Content Include="Views\NotifyByMail\CodeError.cshtml" />
     <Content Include="Views\NotifyByMail\SetAreaRange.cshtml" />
     <Content Include="Views\NotifyByMail\SetAreaRangeCheck.cshtml" />
+    <Content Include="Views\ArduinoDataProcess\LmitateArduino.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ArduinoDataProcess\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -5,11 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="56e106a28e364bf493a64a1629715bf8" Name="Diagram1">
-        <EntityTypeShape EntityType="WaterQualityModel.Aquarium" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WaterQualityModel.Auth001" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WaterQualityModel.AquariumSituation" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WaterQualityModel.AquariumSituationManagement" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WaterQualityModel.NotifySetRange" Width="3.125" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WaterQualityModel.Aquarium" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WaterQualityModel.AquariumSituation" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WaterQualityModel.Auth001" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WaterQualityModel.NotifySetRange" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

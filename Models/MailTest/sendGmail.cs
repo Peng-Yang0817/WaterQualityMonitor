@@ -9,7 +9,7 @@ namespace TestProject.Models.MailTest
 {
     public class sendGmail
     {
-        public bool Send_Gmail()
+        public bool Send_Gmail(string Email,string Message)
         {
             MailMessage mail = new MailMessage();
 
@@ -18,7 +18,7 @@ namespace TestProject.Models.MailTest
             mail.From = new MailAddress("tcher.2009@gmail.com", "11_10(NotifyTest)");
 
             //收信者email
-            mail.To.Add("t110318084@ntut.org.tw");
+            mail.To.Add(Email);
 
             //設定優先權
             mail.Priority = MailPriority.Normal;
@@ -27,7 +27,7 @@ namespace TestProject.Models.MailTest
             mail.Subject = "AutoEmail";
 
             //內容
-            mail.Body = "<h1>HIHI,Wellcome</h1>";
+            mail.Body = "<h1>"+ Message+"</h1>";
 
             //內容使用html
             mail.IsBodyHtml = true;
