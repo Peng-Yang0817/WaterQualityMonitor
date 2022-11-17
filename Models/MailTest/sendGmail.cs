@@ -9,44 +9,46 @@ namespace TestProject.Models.MailTest
 {
     public class sendGmail
     {
-        public bool Send_PasswordForgot()
+        public bool Send_Gmail()
         {
-            //宣告Mail的空白設定
-            MailMessage MyMail = new MailMessage();
+            MailMessage mail = new MailMessage();
 
-            //寄件者Email
-            MyMail.From = new MailAddress("t110318084@ntut.org.tw");
+            //前面是發信email
+            //後面是顯示的名稱
+            mail.From = new MailAddress("tcher.2009@gmail.com", "11_10(NotifyTest)");
 
-            //收件者Email
-            MyMail.To.Add("tcher.2009@gmail.com");
+            //收信者email
+            mail.To.Add("t110318084@ntut.org.tw");
 
-            //加入密件副本的Mail(目前沒有使用)
-            //MyMail.Bcc.Add("密件副本的收件者Mail");  
+            //設定優先權
+            mail.Priority = MailPriority.Normal;
 
-            //Email標題
-            MyMail.Subject = "測試發送";
+            //標題
+            mail.Subject = "AutoEmail";
 
-            //在信件內顯示URL(信件主體)        
-            MyMail.Body = "<label><font color=" + "red" + " size=" + "5" + ">這只是這次mail發送功能是否合用。</font></label><br />";
+            //內容
+            mail.Body = "<h1>HIHI,Wellcome</h1>";
 
-            //Body是否使用html格式(預設為false)
-            MyMail.IsBodyHtml = true;
+            //內容使用html
+            mail.IsBodyHtml = true;
 
-            //設定Gmail主機&port(寄件者一定要用Gmail 收件者則隨意) 
-            SmtpClient MySMTP = new SmtpClient("smtp.ntut.edu.tw", 25);
+            //設定gmail的smtp (這是google的)
+            SmtpClient MySmtp = new SmtpClient("smtp.gmail.com", 587);
 
-            //是否使用SSL(Secure Sockets Layer)加密連線
-            MySMTP.EnableSsl = true;
+            //您在gmail的帳號
+            //和應用程式專屬的密碼
+            MySmtp.Credentials = new System.Net.NetworkCredential("tcher.2009@gmail.com", "buibadkqenxlyumh");
 
-            //驗證寄件者
-            MySMTP.Credentials = new NetworkCredential("t110318084@ntut.org.tw", "f1302597");
+            //開啟ssl
+            MySmtp.EnableSsl = true;
+
 
             try
             {
-                MySMTP.Send(MyMail);
+                MySmtp.Send(mail);
 
                 //釋放資源
-                MyMail.Dispose();
+                MySmtp.Dispose();
             }
             catch (Exception ex)
             {

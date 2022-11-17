@@ -1,9 +1,12 @@
-﻿
+﻿@using TestProject.Models
 @{
     ViewBag.Title = "SetAreaRange";
     var AquariumDataList = ViewBag.AquariumDataList;
     var DataListSize = AquariumDataList.Count;
     var DataCount = 0;
+
+    string[] TitleDataListNotifyOnOrOff = ViewBag.TitleDataListNotifyOnOrOff;
+
 }
 <style>
     .btn-primary {
@@ -160,9 +163,10 @@
         <table border="0" style="width:100%" class="TopTableStyle">
             <thead>
                 <tr>
-                    <td width="15%" style="text-align: center; font-weight: bold; font-size: 100%">序列</td>
-                    <td width="70%" style="text-align: center; font-weight: bold; font-size: 100% ">魚缸編號</td>
-                    <td width="15%" style="text-align: center; font-weight: bold; font-size: 100%">設置範圍</td>
+                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">序列</td>
+                    <td width="40%" style="text-align: center; font-weight: bold; font-size: 100% ">魚缸編號</td>
+                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100% ">通知狀態</td>
+                    <td width="20%" style="text-align: center; font-weight: bold; font-size: 100%">設置範圍</td>
                 </tr>
             </thead>
             <tbody>
@@ -175,6 +179,7 @@
                             }
                             <td width="10%" style="text-align:center">@DataCount</td>
                             <td width="30%" style="text-align:center">@AquariumDataList[i].AquariumUnitNum</td>
+                            <td width="30%" style="text-align:center">@TitleDataListNotifyOnOrOff[i]</td>
                             <td width="10%" style="text-align:center">
                                 <div style="font-size: 15px; font-size: 100%">
                                     @Html.ActionLink("設置", "DelectConfirmation", "Statistics009", new { area = "Statistics", href = "SetAreaRangeCheck?AquariumNum=" + @AquariumDataList[i].AquariumUnitNum })
@@ -187,3 +192,4 @@
         </table>
     </div>
 </div>
+
