@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Cors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,7 @@ namespace TestProject.Controllers
             return View();
         }
 
+        [EnableCors("Policy1")]
         public ActionResult GetUserData(string AquariumNum)
         {
             //第一個物件

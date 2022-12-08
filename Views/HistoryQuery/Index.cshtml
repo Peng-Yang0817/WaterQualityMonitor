@@ -227,7 +227,7 @@
         $('#SearchBtnD1').click((e) => {
             /*alert("Hello! I am an alert box!!");*/
             let AquariumNum = $('#AquariumNumD1').val();
-            let ClearTag = $('#info').empty() ;
+            let ClearTag = $('#info').empty(); // 清空該 TAG 內部
             $.ajax({
                 async: false,
                 url: `https://localhost:44371/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置

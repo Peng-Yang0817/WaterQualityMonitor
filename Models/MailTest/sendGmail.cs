@@ -9,7 +9,7 @@ namespace TestProject.Models.MailTest
 {
     public class sendGmail
     {
-        public bool Send_Gmail(string Email,string Message)
+        public bool Send_Gmail(string AquariunNum, string Email,string Message)
         {
             MailMessage mail = new MailMessage();
 
@@ -27,7 +27,8 @@ namespace TestProject.Models.MailTest
             mail.Subject = "AutoEmail";
 
             //內容
-            mail.Body = "<h1>"+ Message+"</h1>";
+            mail.Body = "<h1>"+"魚缸編號 : "+ AquariunNum + "</h1>" +
+                        "<h2>" + Message+"</h2>";
 
             //內容使用html
             mail.IsBodyHtml = true;
@@ -58,7 +59,7 @@ namespace TestProject.Models.MailTest
             return true;
         }
 
-        public bool Send_Gmail(string Email, List<string> QualityMessage)
+        public bool Send_Gmail(string AquariunNum, string Email, List<string> QualityMessage)
         {
             MailMessage mail = new MailMessage();
 
@@ -76,6 +77,7 @@ namespace TestProject.Models.MailTest
             mail.Subject = "AutoEmail" + DateTime.Now.ToString("HH:MM");
 
             var sb = new System.Text.StringBuilder();
+            sb.AppendLine("魚缸編號 : " + AquariunNum + "<br/>");
             for (int i = 0; i < QualityMessage.Count; i++) {
                 sb.AppendLine(QualityMessage[i]+ "<br/>");
             }

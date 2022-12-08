@@ -35,6 +35,7 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="LineID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LineToken" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="NotifySetRange">
     <Key>

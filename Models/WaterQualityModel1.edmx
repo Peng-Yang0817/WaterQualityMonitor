@@ -40,6 +40,7 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LineID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LineToken" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="NotifySetRange">
           <Key>
@@ -108,6 +109,7 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LineID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LineToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NotifySetRange">
           <Key>
@@ -162,6 +164,7 @@
           <EntitySetMapping Name="Auth001">
             <EntityTypeMapping TypeName="WaterQualityModel.Auth001">
               <MappingFragment StoreEntitySet="Auth001">
+                <ScalarProperty Name="LineToken" ColumnName="LineToken" />
                 <ScalarProperty Name="LineID" ColumnName="LineID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

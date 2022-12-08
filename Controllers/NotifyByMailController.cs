@@ -6,8 +6,15 @@ using System.Web.Mvc;
 using System.Net.Mail;
 using TestProject.Models.MailTest;
 using TestProject.Models;
+
 //必須多添加這using 才能使用Entity Framework的Save功能
 using System.Data.Entity;
+
+using System.Net;
+using System.Collections.Specialized;
+using System.Text;
+using Newtonsoft.Json.Linq;
+
 
 namespace TestProject.Controllers
 {
@@ -30,7 +37,8 @@ namespace TestProject.Controllers
             string[] TitleDataListNotifyOnOrOff = new string[TitleDataListSize];
 
             //將有開啟通知的魚缸全抓出來
-            for (int i = 0; i < TitleDataListSize; i++) {
+            for (int i = 0; i < TitleDataListSize; i++)
+            {
                 string AquariumNum = TitleDataList[i].AquariumUnitNum;
                 NotifySetRange NotifyOnListData = db.NotifySetRange.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum);
                 if (NotifyOnListData != null)
@@ -44,9 +52,9 @@ namespace TestProject.Controllers
                     {
                         TitleDataListNotifyOnOrOff[i] = "關閉";
                     }
-                    
+
                 }
-                else 
+                else
                 {
                     //代表這筆未開啟通知
                     TitleDataListNotifyOnOrOff[i] = "未定";
@@ -178,6 +186,72 @@ namespace TestProject.Controllers
             }
 
         }
+
+        public ActionResult GetCodePlace(string code, string state)
+        {
+            if (Session["UserEmail"] == null)
+            {
+                Session.RemoveAll();
+                return RedirectToAction("Index", "Home");
+            }
+
+            var wb = new WebClient();
+            var data = new NameValueCollection();
+
+            string url = "https://notify-bot.line.me/oauth/token";
+            data["grant_type"] = "authorization_code";
+            data["code"] = code.ToString();
+            data["redirect_uri"] = "https://localhost:44371/NotifyByMail/GetCodePlace";
+            data["client_id"] = "uhkcosVjss3RuzULJ4uNIz";
+            data["client_secret"] = "Hrp2nTtXeEIHw574e5pVldKEODre6t9gHwiwlIu1arO";
+
+            // 送出資料
+            var response = wb.UploadValues(url, "POST", data);
+            // 取得回傳值
+            string str = Encoding.UTF8.GetString(response);
+
+            // 將回傳字串json轉為Dictionary
+            Dictionary<string, string> UserDataHaveToken = ToDictionary(str);
+            // 取出字典的 access_token，這是用戶對應的Token
+            string UserToken = UserDataHaveToken["access_token"];
+
+            string Email = Session["UserEmail"].ToString();
+            int Auth001Id = int.Parse(Session["Auth001Id"].ToString());
+
+            Auth001 auth001 = db.Auth001.FirstOrDefault(x => x.Id == Auth001Id);
+
+            auth001.LineToken = UserToken;
+
+            db.Entry(auth001).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            var wbSendUse = new WebClient();
+            var dataSendUse = new NameValueCollection();
+
+            string urlSendUse = "https://notify-api.line.me/api/notify";
+            string Bearer = "Bearer " + UserToken;
+            wb.Headers.Add("Authorization", Bearer);
+
+            dataSendUse["message"] = "安安~~~ 連動成功拉~~!";
+            var responseSendUse = wb.UploadValues(urlSendUse, "POST", dataSendUse);
+
+
+            return RedirectToAction("SetAreaRange");
+        }
+        private static Dictionary<string, string> ToDictionary(string jsonSrting)
+        {
+            var jsonObject = JObject.Parse(jsonSrting);
+            var jTokens = jsonObject.Descendants().Where(p => !p.Any());
+            var tmpKeys = jTokens.Aggregate(new Dictionary<string, string>(),
+                (properties, jToken) =>
+                {
+                    properties.Add(jToken.Path, jToken.ToString());
+                    return properties;
+                });
+            return tmpKeys;
+        }
+
         // GET: NotifyByMail
         public ActionResult Index()
         {

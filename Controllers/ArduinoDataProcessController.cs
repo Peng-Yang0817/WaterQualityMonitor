@@ -6,6 +6,11 @@ using System.Web.Mvc;
 using TestProject.Models;
 using TestProject.Models.MailTest;
 
+using System.Net;
+using System.Collections.Specialized;
+using System.Text;
+using Newtonsoft.Json.Linq;
+
 namespace TestProject.Controllers
 {
     public class ArduinoDataProcessController : Controller
@@ -47,7 +52,21 @@ namespace TestProject.Controllers
                     string auth001Mail = auth001.Email;
 
                     sendGmail sendGmail = new sendGmail();
-                    bool Confirm = sendGmail.Send_Gmail(auth001Mail, "伺服器接收參數異常，請檢察感測器.");
+                    bool Confirm = sendGmail.Send_Gmail(AquariunNum, auth001Mail, "伺服器接收參數異常，請檢察感測器.");
+
+                    if (auth001.LineToken!=null) {
+                        var wbSendUse = new WebClient();
+                        var dataSendUse = new NameValueCollection();
+
+                        string UserToken = auth001.LineToken;
+                        string urlSendUse = "https://notify-api.line.me/api/notify";
+                        string Bearer = "Bearer " + UserToken;
+
+                        wbSendUse.Headers.Add("Authorization", Bearer);
+
+                        dataSendUse["message"] = "\n魚缸編號 : "+ AquariunNum+"\n伺服器接收參數異常，請檢察感測器.";
+                        var responseSendUse = wbSendUse.UploadValues(urlSendUse, "POST", dataSendUse);
+                    }
                 }
             }
             else
@@ -181,7 +200,29 @@ namespace TestProject.Controllers
                             string auth001Mail = auth001.Email;
 
                             sendGmail sendGmail = new sendGmail();
-                            bool Confirm = sendGmail.Send_Gmail(auth001Mail, dataGarge);
+                            bool Confirm = sendGmail.Send_Gmail(AquariunNum, auth001Mail, dataGarge);
+
+                            if (auth001.LineToken != null)
+                            {
+                                var wbSendUse = new WebClient();
+                                var dataSendUse = new NameValueCollection();
+
+                                string UserToken = auth001.LineToken;
+                                string urlSendUse = "https://notify-api.line.me/api/notify";
+                                string Bearer = "Bearer " + UserToken;
+
+                                var sb = new System.Text.StringBuilder();
+                                sb.AppendLine("\n魚缸編號 : " + AquariunNum+"\n");
+                                for (int i = 0; i < dataGarge.Count; i++)
+                                {
+                                    sb.AppendLine(dataGarge[i]);
+                                }
+
+                                wbSendUse.Headers.Add("Authorization", Bearer);
+
+                                dataSendUse["message"] = sb.ToString();
+                                var responseSendUse = wbSendUse.UploadValues(urlSendUse, "POST", dataSendUse);
+                            }
                         }
                         
                     }

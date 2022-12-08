@@ -158,6 +158,12 @@
         </table>
     </div>
 </div>
+<div style="width:88%;text-align:right">
+    <button class="btn btn-success" onclick="Auth();">
+        Line 連動設置&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-random" style="color:white"></i>
+    </button>
+</div>
+
 <div style="display: flex; align-items: center; justify-content: center;margin-bottom:30px;">
     <div class="UserAquariumEditArea">
         <table border="0" style="width:100%" class="TopTableStyle">
@@ -193,3 +199,15 @@
     </div>
 </div>
 
+<script>
+    function Auth() {
+        var URL = 'https://notify-bot.line.me/oauth/authorize?';
+        URL += 'response_type=code';
+        URL += '&client_id=uhkcosVjss3RuzULJ4uNIz';
+        URL += '&redirect_uri=https://localhost:44371/NotifyByMail/GetCodePlace';
+        URL += '&scope=notify';
+        URL += '&state=abcde';
+
+        window.location.href = URL;
+    }
+</script>

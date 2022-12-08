@@ -32,6 +32,7 @@
     <EntitySetMapping Name="Auth001">
       <EntityTypeMapping TypeName="WaterQualityModel.Auth001">
         <MappingFragment StoreEntitySet="Auth001">
+          <ScalarProperty Name="LineToken" ColumnName="LineToken" />
           <ScalarProperty Name="LineID" ColumnName="LineID" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
