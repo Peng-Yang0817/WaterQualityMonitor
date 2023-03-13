@@ -186,6 +186,7 @@
     <Compile Include="Controllers\HistoryQueryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInAndRegisterController.cs" />
+    <Compile Include="Controllers\MobileServiceController.cs" />
     <Compile Include="Controllers\NotifyByMailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -358,6 +359,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MobileService\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -70,7 +70,9 @@ namespace TestProject.Controllers
             return View();
         }
 
-
+        /// <summary>
+        /// 取得用戶對應魚缸編號的水質狀況
+        /// </summary>
         public ActionResult PeriodQuality(string AquariumNum)
         {
             if (Session["UserEmail"] == null)
