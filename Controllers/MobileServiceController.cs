@@ -47,19 +47,25 @@ namespace TestProject.Controllers
                                                                 x.Email == email &&
                                                                 x.Password == password);
 
-            // 準備一個bool判斷
-            bool state; // 在這裡進行你的操作，得到一個布林值
-            if (userTarget == null)
+            // 準備好回傳狀態與內容類
+            ReturnMsg returnMsg = new ReturnMsg();
+
+            if (userTarget == null) // 為 NULL 帶表該用戶不存在
             {
-                state = false;
+                returnMsg.Status = false;
+                returnMsg.Message = "查無此用戶!";
+                returnMsg.Auth001Id = "NULL";
             }
-            else
+            else // ELSE 代表該用戶存在
             {
-                state = true;
+                returnMsg.Status = true;
+                returnMsg.Message = "通過~已成功登入!";
+                returnMsg.Auth001Id = userTarget.Id.ToString();
+                returnMsg.UserName = userTarget.UserName;
             }
 
 
-            return Json(new { State = state });
+            return Json(returnMsg);
         }
 
         /// <summary>
@@ -101,17 +107,20 @@ namespace TestProject.Controllers
                     returnMsg.Status = false;
                     returnMsg.Message = "伺服器異常! 請稍後再試。";
                 }
-                
+
 
             }
+            returnMsg.Auth001Id = "NULL";
 
             return Json(returnMsg);
         }
-    }
 
+    }
     public class ReturnMsg
     {
         public bool Status { get; set; }
         public string Message { get; set; }
+        public string Auth001Id { get; set; }
+        public string UserName { get; set; }
     }
 }

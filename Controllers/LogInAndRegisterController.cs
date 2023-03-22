@@ -12,18 +12,25 @@ namespace TestProject.Controllers
     {
         private WaterQualityEntities1 db = new WaterQualityEntities1();
         // GET: LogIn
-        public ActionResult CreateOrLogIn()
+        public ActionResult CreateOrLogIn(int id = -1)
         {
-            return View();
+            Auth001 auth001 = new Auth001();
+
+            if (id > 0)
+            {
+                auth001 = db.Auth001.FirstOrDefault(x => x.Id == id);
+            }
+
+            return View(auth001);
         }
 
         [HttpPost]
         public ActionResult Create(Auth001 auth001)
         {
-            Auth001 DataTrack = db.Auth001.FirstOrDefault(x => x.Email == auth001.Email);
-            if (DataTrack != null)
+            Auth001 _auth001 = db.Auth001.FirstOrDefault(x => x.Email == auth001.Email);
+            if (_auth001 != null)
             {
-                return View(auth001);
+                return RedirectToAction("CreateOrLogIn", new { id = _auth001.Id });
             }
             else
             {
