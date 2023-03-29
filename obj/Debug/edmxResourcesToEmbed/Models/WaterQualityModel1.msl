@@ -58,5 +58,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ViewAquaruimSituation_ForMobile">
+      <EntityTypeMapping TypeName="WaterQualityModel.ViewAquaruimSituation_ForMobile">
+        <MappingFragment StoreEntitySet="ViewAquaruimSituation_ForMobile">
+          <ScalarProperty Name="WaterLevelNum" ColumnName="WaterLevelNum" />
+          <ScalarProperty Name="createTime" ColumnName="createTime" />
+          <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+          <ScalarProperty Name="PH" ColumnName="PH" />
+          <ScalarProperty Name="Turbidity" ColumnName="Turbidity" />
+          <ScalarProperty Name="temperature" ColumnName="temperature" />
+          <ScalarProperty Name="AquariumId" ColumnName="AquariumId" />
+          <ScalarProperty Name="BindTag" ColumnName="BindTag" />
+          <ScalarProperty Name="WaterType" ColumnName="WaterType" />
+          <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
+          <ScalarProperty Name="Auth001Id" ColumnName="Auth001Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

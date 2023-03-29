@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using TestProject.Models;
+using TestProject.Service;
 
 namespace TestProject.Controllers
 {
@@ -13,28 +16,28 @@ namespace TestProject.Controllers
         /// <summary>
         /// 檢查用戶是否存在的路由
         /// </summary>
-        [HttpPost]
-        public ActionResult LoginUserChecking(string email, string password)
-        {
-            // 檢查用戶是否存在
-            Auth001 userTarget = db.Auth001.FirstOrDefault(x =>
-                                                                x.Email == email &&
-                                                                x.Password == password);
+        //[HttpPost]
+        //public ActionResult LoginUserChecking(string email, string password)
+        //{
+        //    // 檢查用戶是否存在
+        //    Auth001 userTarget = db.Auth001.FirstOrDefault(x =>
+        //                                                        x.Email == email &&
+        //                                                        x.Password == password);
 
-            // 準備一個bool判斷
-            bool state; // 在這裡進行你的操作，得到一個布林值
-            if (userTarget == null)
-            {
-                state = false;
-            }
-            else
-            {
-                state = true;
-            }
+        //    // 準備一個bool判斷
+        //    bool state; // 在這裡進行你的操作，得到一個布林值
+        //    if (userTarget == null)
+        //    {
+        //        state = false;
+        //    }
+        //    else
+        //    {
+        //        state = true;
+        //    }
 
 
-            return Json(new { State = state });
-        }
+        //    return Json(new { State = state });
+        //}
 
         /// <summary>
         /// 檢查用戶是否存在的路由_POST
@@ -114,6 +117,28 @@ namespace TestProject.Controllers
 
             return Json(returnMsg);
         }
+
+
+        /// <summary>
+        /// 取得用戶所有魚缸的當前資訊與水質現況
+        /// </summary>
+        [HttpPost]
+        public ActionResult GetAquariumDatas(int Auth001Id)
+        {
+            // 創建取資料服務
+            MobileDataProcess mobileDataProcess = new MobileDataProcess();
+
+            // 透過手機服務類，取得資料!
+            List<ViewAquaruimSituation_ForMobile> aquariumDataList = mobileDataProcess.GetAquariumDataList(Auth001Id);
+
+            // 使用 Newtonsoft.Json 將列表轉換為 JSON
+            string json = JsonConvert.SerializeObject(aquariumDataList);
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
+
+
 
     }
     public class ReturnMsg

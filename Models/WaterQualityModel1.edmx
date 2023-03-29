@@ -58,11 +58,53 @@
           <Property Name="WaterLevelLowerBound" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NotifyTag" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'WaterQuality.dbo.ViewAquaruimSituation_ForMobile' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="ViewAquaruimSituation_ForMobile">
+          <Key>
+            <PropertyRef Name="Auth001Id" />
+            <PropertyRef Name="AquariumUnitNum" />
+            <PropertyRef Name="WaterType" />
+            <PropertyRef Name="AquariumId" />
+            <PropertyRef Name="temperature" />
+            <PropertyRef Name="Turbidity" />
+            <PropertyRef Name="PH" />
+            <PropertyRef Name="TDS" />
+          </Key>
+          <Property Name="Auth001Id" Type="int" Nullable="false" />
+          <Property Name="AquariumUnitNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WaterType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BindTag" Type="nvarchar" MaxLength="50" />
+          <Property Name="AquariumId" Type="int" Nullable="false" />
+          <Property Name="temperature" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Turbidity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TDS" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WaterLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="createTime" Type="datetime" />
+          <Property Name="WaterLevelNum" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="WaterQualityModelStoreContainer">
           <EntitySet Name="Aquarium" EntityType="Self.Aquarium" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AquariumSituation" EntityType="Self.AquariumSituation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Auth001" EntityType="Self.Auth001" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotifySetRange" EntityType="Self.NotifySetRange" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewAquaruimSituation_ForMobile" EntityType="Self.ViewAquaruimSituation_ForMobile" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewAquaruimSituation_ForMobile].[Auth001Id] AS [Auth001Id], 
+    [ViewAquaruimSituation_ForMobile].[AquariumUnitNum] AS [AquariumUnitNum], 
+    [ViewAquaruimSituation_ForMobile].[WaterType] AS [WaterType], 
+    [ViewAquaruimSituation_ForMobile].[BindTag] AS [BindTag], 
+    [ViewAquaruimSituation_ForMobile].[AquariumId] AS [AquariumId], 
+    [ViewAquaruimSituation_ForMobile].[temperature] AS [temperature], 
+    [ViewAquaruimSituation_ForMobile].[Turbidity] AS [Turbidity], 
+    [ViewAquaruimSituation_ForMobile].[PH] AS [PH], 
+    [ViewAquaruimSituation_ForMobile].[TDS] AS [TDS], 
+    [ViewAquaruimSituation_ForMobile].[WaterLevel] AS [WaterLevel], 
+    [ViewAquaruimSituation_ForMobile].[createTime] AS [createTime], 
+    [ViewAquaruimSituation_ForMobile].[WaterLevelNum] AS [WaterLevelNum]
+    FROM [dbo].[ViewAquaruimSituation_ForMobile] AS [ViewAquaruimSituation_ForMobile]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -73,6 +115,7 @@
           <EntitySet Name="AquariumSituation" EntityType="WaterQualityModel.AquariumSituation" />
           <EntitySet Name="Auth001" EntityType="WaterQualityModel.Auth001" />
           <EntitySet Name="NotifySetRange" EntityType="WaterQualityModel.NotifySetRange" />
+          <EntitySet Name="ViewAquaruimSituation_ForMobile" EntityType="WaterQualityModel.ViewAquaruimSituation_ForMobile" />
         </EntityContainer>
         <EntityType Name="Aquarium">
           <Key>
@@ -126,6 +169,30 @@
           <Property Name="TurbidityUpperBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WaterLevelLowerBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NotifyTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ViewAquaruimSituation_ForMobile">
+          <Key>
+            <PropertyRef Name="Auth001Id" />
+            <PropertyRef Name="AquariumUnitNum" />
+            <PropertyRef Name="WaterType" />
+            <PropertyRef Name="AquariumId" />
+            <PropertyRef Name="temperature" />
+            <PropertyRef Name="Turbidity" />
+            <PropertyRef Name="PH" />
+            <PropertyRef Name="TDS" />
+          </Key>
+          <Property Name="Auth001Id" Type="Int32" Nullable="false" />
+          <Property Name="AquariumUnitNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaterType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BindTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AquariumId" Type="Int32" Nullable="false" />
+          <Property Name="temperature" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Turbidity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TDS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaterLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="createTime" Type="DateTime" Precision="3" />
+          <Property Name="WaterLevelNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -187,6 +254,24 @@
                 <ScalarProperty Name="temperatureUpperBound" ColumnName="temperatureUpperBound" />
                 <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewAquaruimSituation_ForMobile">
+            <EntityTypeMapping TypeName="WaterQualityModel.ViewAquaruimSituation_ForMobile">
+              <MappingFragment StoreEntitySet="ViewAquaruimSituation_ForMobile">
+                <ScalarProperty Name="WaterLevelNum" ColumnName="WaterLevelNum" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
+                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
+                <ScalarProperty Name="TDS" ColumnName="TDS" />
+                <ScalarProperty Name="PH" ColumnName="PH" />
+                <ScalarProperty Name="Turbidity" ColumnName="Turbidity" />
+                <ScalarProperty Name="temperature" ColumnName="temperature" />
+                <ScalarProperty Name="AquariumId" ColumnName="AquariumId" />
+                <ScalarProperty Name="BindTag" ColumnName="BindTag" />
+                <ScalarProperty Name="WaterType" ColumnName="WaterType" />
+                <ScalarProperty Name="AquariumUnitNum" ColumnName="AquariumUnitNum" />
+                <ScalarProperty Name="Auth001Id" ColumnName="Auth001Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

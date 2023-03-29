@@ -5,6 +5,7 @@
     <EntitySet Name="AquariumSituation" EntityType="WaterQualityModel.AquariumSituation" />
     <EntitySet Name="Auth001" EntityType="WaterQualityModel.Auth001" />
     <EntitySet Name="NotifySetRange" EntityType="WaterQualityModel.NotifySetRange" />
+    <EntitySet Name="ViewAquaruimSituation_ForMobile" EntityType="WaterQualityModel.ViewAquaruimSituation_ForMobile" />
   </EntityContainer>
   <EntityType Name="Aquarium">
     <Key>
@@ -58,5 +59,29 @@
     <Property Name="TurbidityUpperBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="WaterLevelLowerBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="NotifyTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ViewAquaruimSituation_ForMobile">
+    <Key>
+      <PropertyRef Name="Auth001Id" />
+      <PropertyRef Name="AquariumUnitNum" />
+      <PropertyRef Name="WaterType" />
+      <PropertyRef Name="AquariumId" />
+      <PropertyRef Name="temperature" />
+      <PropertyRef Name="Turbidity" />
+      <PropertyRef Name="PH" />
+      <PropertyRef Name="TDS" />
+    </Key>
+    <Property Name="Auth001Id" Type="Int32" Nullable="false" />
+    <Property Name="AquariumUnitNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WaterType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BindTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AquariumId" Type="Int32" Nullable="false" />
+    <Property Name="temperature" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Turbidity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TDS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WaterLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createTime" Type="DateTime" Precision="3" />
+    <Property Name="WaterLevelNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>
