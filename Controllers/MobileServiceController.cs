@@ -138,7 +138,45 @@ namespace TestProject.Controllers
             return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
         }
 
+        /// <summary>
+        /// 取得用戶對應魚缸的圖表按鈕是否可按
+        /// </summary>
+        [HttpPost]
+        public ActionResult GetAquariumDataStatus(int Auth001Id)
+        {
+            // 創建取資料服務
+            MobileDataProcess mobileDataProcess = new MobileDataProcess();
 
+            // 透過手機服務類，取得資料!
+            List<ViewAquaruimSituation_ForMobile> aquariumDataList = mobileDataProcess.GetAquariumDataList(Auth001Id);
+
+            // 準備狀態List
+            // List<bool> statusList = new List<bool>();
+
+            // 建立Dic
+            Dictionary<string, bool> keyValues = new Dictionary<string, bool>();
+
+            // 將對應魚缸
+            foreach (var item in aquariumDataList)
+            {
+                // 將對應 AquaruimId 的數據全部抓出
+                List<AquariumSituation> DataArray = db.AquariumSituation.Where(x => x.AquariumId == item.AquariumId).ToList();
+
+                if (DataArray.Count >= 6)
+                {
+                    keyValues.Add(item.AquariumUnitNum, true);
+                    continue;
+                }
+
+                keyValues.Add(item.AquariumUnitNum, false);
+            }
+
+            // 使用 Newtonsoft.Json 將列表轉換為 JSON
+            string json = JsonConvert.SerializeObject(keyValues);
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
 
     }
     public class ReturnMsg
