@@ -95,7 +95,7 @@ namespace TestProject.Service
             {
                 DateTime myDate = (DateTime)item.createTime;
 
-                string MyDateTime = myDate.ToString("yyyy/MM/dd");
+                string MyDateTime = myDate.ToString("yy/MM/dd-HH:mm");
 
                 DataListMotify.Add(new AquariumSituationMotify
                 {
