@@ -13,31 +13,6 @@ namespace TestProject.Controllers
     public class MobileServiceController : Controller
     {
         private WaterQualityEntities1 db = new WaterQualityEntities1();
-        /// <summary>
-        /// 檢查用戶是否存在的路由
-        /// </summary>
-        //[HttpPost]
-        //public ActionResult LoginUserChecking(string email, string password)
-        //{
-        //    // 檢查用戶是否存在
-        //    Auth001 userTarget = db.Auth001.FirstOrDefault(x =>
-        //                                                        x.Email == email &&
-        //                                                        x.Password == password);
-
-        //    // 準備一個bool判斷
-        //    bool state; // 在這裡進行你的操作，得到一個布林值
-        //    if (userTarget == null)
-        //    {
-        //        state = false;
-        //    }
-        //    else
-        //    {
-        //        state = true;
-        //    }
-
-
-        //    return Json(new { State = state });
-        //}
 
         /// <summary>
         /// 檢查用戶是否存在的路由_POST
@@ -178,6 +153,39 @@ namespace TestProject.Controllers
             return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
         }
 
+        /// <summary>
+        /// 給予用戶圖表資訊
+        /// </summary>
+        [HttpPost]
+        public ActionResult GetAquariumDatasForAquaruimId(string AquariumNum)
+        {
+            // 創建取資料服務
+            MobileDataProcess mobileDataProcess = new MobileDataProcess();
+
+            // 透過手機服務類，取得資料!
+            List<AquariumSituationMotify> aquariumDataList = mobileDataProcess.PeriodQuality(AquariumNum);
+
+            // 準備 json 字串
+            string json;
+
+            // 理論上來說不可能會等於0，但這裡先做個保險
+            if (aquariumDataList.Count < 6)
+            {
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(new List<AquariumSituationMotify>());
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+            }
+
+            // 使用 Newtonsoft.Json 將列表轉換為 JSON
+            json = JsonConvert.SerializeObject(aquariumDataList);
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+
+        }
+
     }
     public class ReturnMsg
     {
@@ -185,5 +193,19 @@ namespace TestProject.Controllers
         public string Message { get; set; }
         public string Auth001Id { get; set; }
         public string UserName { get; set; }
+    }
+
+    // 自定義魚缸水質狀況類別
+    public class AquariumSituationMotify
+    {
+        public int Id { get; set; }
+        public int AquariumId { get; set; }
+        public string temperature { get; set; }
+        public string Turbidity { get; set; }
+        public string PH { get; set; }
+        public string TDS { get; set; }
+        public string WaterLevel { get; set; }
+        public string createTime { get; set; }
+        public string WaterLevelNum { get; set; }
     }
 }

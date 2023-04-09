@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TestProject.Models;
+using TestProject.Controllers;
 
 namespace TestProject.Service
 {
@@ -23,8 +24,10 @@ namespace TestProject.Service
                 ViewAquaruimSituation_ForMobile viewAquaruimSituation_ForMobile = db.ViewAquaruimSituation_ForMobile.Where(x => x.Auth001Id == Auth001Id && x.AquariumId == item.Id)
                                                                                                                     .OrderByDescending(x => x.createTime)
                                                                                                                     .FirstOrDefault();
-                if (viewAquaruimSituation_ForMobile == null) {
-                    viewAquaruimSituation_ForMobile = new ViewAquaruimSituation_ForMobile {
+                if (viewAquaruimSituation_ForMobile == null)
+                {
+                    viewAquaruimSituation_ForMobile = new ViewAquaruimSituation_ForMobile
+                    {
                         Auth001Id = Auth001Id,
                         AquariumUnitNum = item.AquariumUnitNum,
                         WaterType = "",
@@ -45,6 +48,70 @@ namespace TestProject.Service
 
             // Replace this with your actual code to fetch the aquarium data
             return DataList;
+        }
+
+        /// <summary>
+        /// 給予該魚缸的圖表所需資訊
+        /// </summary>
+        /// <param name="AquariumNum">要查詢的魚缸編號! 必須先確保該魚缸有人綁定且正在使用!</param>
+        /// <returns></returns>
+        public List<AquariumSituationMotify> PeriodQuality(string AquariumNum)
+        {
+            // 取幾筆資料設定
+            int RowRange = 6;
+
+            // 透過魚缸編號得知該魚缸目前跟使用者對應的AquariumId
+            Aquarium Aquarium = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum && x.BindTag == "0");
+
+            // 魚缸id
+            int AquariumIdNum;
+
+            // 找無魚缸編號
+            if (Aquarium == null)
+            {
+                // TODO!!!!!!!
+                // 要是回傳為空集合，那呼叫者要在做處裡
+                return new List<AquariumSituationMotify>();
+            }
+
+            AquariumIdNum = Aquarium.Id;
+
+            //將最接近目前的資料抓出一個區塊
+            List<AquariumSituation> DataList = db.AquariumSituation.Where(x => x.AquariumId == AquariumIdNum)
+                                                                    .OrderBy(x => x.createTime)
+                                                                    .ToList().Take(RowRange).ToList();
+
+            // 不能小於 6 筆
+            if (DataList.Count < RowRange)
+            {
+                // TODO!!!!!!!
+                // 要是回傳為空集合，那呼叫者要在做處裡
+                return new List<AquariumSituationMotify>();
+            }
+
+            List<AquariumSituationMotify> DataListMotify = new List<AquariumSituationMotify>();
+            // 更改物件，改為自定義水質狀況類 AquariumSituationMotify
+            foreach (var item in DataList)
+            {
+                DateTime myDate = (DateTime)item.createTime;
+
+                string MyDateTime = myDate.ToString("yyyy/MM/dd");
+
+                DataListMotify.Add(new AquariumSituationMotify
+                {
+                    Id = item.Id,
+                    AquariumId = item.AquariumId,
+                    temperature = item.temperature,
+                    Turbidity = item.Turbidity,
+                    PH = item.PH,
+                    TDS = item.TDS,
+                    WaterLevel = item.WaterLevel,
+                    createTime = MyDateTime,
+                    WaterLevelNum = item.WaterLevelNum
+                });
+            }
+
+            return DataListMotify;
         }
     }
 }
