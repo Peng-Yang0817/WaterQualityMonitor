@@ -78,8 +78,11 @@ namespace TestProject.Service
 
             //將最接近目前的資料抓出一個區塊
             List<AquariumSituation> DataList = db.AquariumSituation.Where(x => x.AquariumId == AquariumIdNum)
+                                                                    .OrderByDescending(x => x.createTime)
+                                                                    .ToList()
+                                                                    .Take(RowRange)
                                                                     .OrderBy(x => x.createTime)
-                                                                    .ToList().Take(RowRange).ToList();
+                                                                    .ToList();
 
             // 不能小於 6 筆
             if (DataList.Count < RowRange)
