@@ -186,7 +186,56 @@ namespace TestProject.Controllers
 
         }
 
+        /// <summary>
+        /// 把魚缸的綁定紀錄送到行動端
+        /// </summary>
+        /// <param name="AquariumNum">魚缸編號</param>
+        [HttpPost]
+        public ActionResult GetAquaruimNumBindHistory(string AquariumNum)
+        {
+            // 將該魚缸編號所有的使用紀錄都掉出來
+            List<Aquarium> Datalist = db.Aquarium.Where(x => x.AquariumUnitNum == AquariumNum).ToList();
+
+            // 創建歷史紀錄的集合，等等裝MOBILE所需要的資料
+            List<AquaruimNumBindHistory> datas = new List<AquaruimNumBindHistory>();
+            AquaruimNumBindHistory data = new AquaruimNumBindHistory();
+
+            DateTime dateTime_createTime = new DateTime();
+            DateTime dateTime_modifyTime = new DateTime();
+
+            for (int i = 0; i < Datalist.Count; i++)
+            {
+                data = new AquaruimNumBindHistory();
+
+                if (Datalist[i].BindTag.Equals("1"))
+                {
+                    data.bindtag = "解綁";
+                }
+                else
+                {
+                    data.bindtag = "使用中";
+                }
+
+                dateTime_createTime = (DateTime)Datalist[i].createTime;
+                data.createTime = dateTime_createTime.ToString("yy/MM/dd-HH:mm");
+
+                dateTime_modifyTime = (DateTime)Datalist[i].modifyTime;
+                data.modifyTime = dateTime_modifyTime.ToString("yy/MM/dd-HH:mm");
+
+                datas.Add(data);
+            }
+            // 準備 json 字串
+            string json;
+
+            // 使用 Newtonsoft.Json 將列表轉換為 JSON
+            json = JsonConvert.SerializeObject(datas);
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
     }
+
+
     public class ReturnMsg
     {
         public bool Status { get; set; }
@@ -207,5 +256,13 @@ namespace TestProject.Controllers
         public string WaterLevel { get; set; }
         public string createTime { get; set; }
         public string WaterLevelNum { get; set; }
+    }
+
+    // 自定義魚缸綁定歷史紀錄類別
+    public class AquaruimNumBindHistory
+    {
+        public string createTime { get; set; }
+        public string modifyTime { get; set; }
+        public string bindtag { get; set; }
     }
 }
