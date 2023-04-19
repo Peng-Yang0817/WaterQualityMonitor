@@ -233,6 +233,84 @@ namespace TestProject.Controllers
             // 將 JSON 作為 FileResult 返回
             return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
         }
+
+
+        /// <summary>
+        /// 綁定魚缸服務__查看用戶資訊是否正確
+        /// </summary>
+        [HttpPost]
+        public ActionResult BindAquariumService(string Email, string Password,
+                                                string AquariumNum, string WaterType)
+        {
+            // 準備 json 字串
+            string json;
+            // 準備 回傳給用戶的資訊物件
+            ReturnMsg returnMsg = new ReturnMsg();
+
+            //查看使用者是否存在
+            Auth001 UserInfo = db.Auth001.FirstOrDefault(x => x.Email == Email && x.Password == Password);
+
+            // 查無該用戶，因此直接返回結果。
+            if (UserInfo == null)
+            {
+                returnMsg = new ReturnMsg();
+                returnMsg.Status = false;
+                returnMsg.Message = "查無此用戶! 請再做確認。";
+                returnMsg.Auth001Id = "-1";
+                returnMsg.UserName = "Null";
+
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(returnMsg);
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+            }
+
+            //查看魚缸是否已被綁定
+            //查看該魚缸是否BindTag為0，等於0代表有人正在使用!!
+            Aquarium AquInfo = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum && x.BindTag == "0");
+            // 要是有資料! 代表就有人正在使用! 所以
+            if (AquInfo != null)
+            {
+                returnMsg = new ReturnMsg();
+                returnMsg.Status = false;
+                returnMsg.Message = "該魚缸已有人正在使用，請確認魚缸代碼是否有被使用過。";
+                returnMsg.Auth001Id = "-1";
+                returnMsg.UserName = "Null";
+
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(returnMsg);
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+            }
+
+            // 開始準備存取魚缸綁定者資訊
+            Aquarium AddData = new Aquarium();
+            AddData.Auth001Id = UserInfo.Id;
+            AddData.AquariumUnitNum = AquariumNum;
+            AddData.WaterType = WaterType;
+            String NowTime = DateTime.Now.ToString();
+            AddData.BindTag = "0";
+            AddData.createTime = DateTime.Now;
+            AddData.modifyTime = DateTime.Now;
+
+            db.Aquarium.Add(AddData);
+            db.SaveChanges();
+
+            // 打包回傳字串
+            returnMsg = new ReturnMsg();
+            returnMsg.Status = true;
+            returnMsg.Message = "綁定成功!";
+            returnMsg.Auth001Id = UserInfo.Id.ToString();
+            returnMsg.UserName = UserInfo.UserName.ToString();
+
+            // 使用 Newtonsoft.Json 將列表轉換為 JSON
+            json = JsonConvert.SerializeObject(returnMsg);
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
     }
 
 
