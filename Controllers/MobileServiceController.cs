@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -304,6 +305,66 @@ namespace TestProject.Controllers
             returnMsg.Message = "綁定成功!";
             returnMsg.Auth001Id = UserInfo.Id.ToString();
             returnMsg.UserName = UserInfo.UserName.ToString();
+
+            // 使用 Newtonsoft.Json 將列表轉換為 JSON
+            json = JsonConvert.SerializeObject(returnMsg);
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
+
+
+        /// <summary>
+        /// 綁定魚缸服務__查看用戶資訊是否正確
+        /// </summary>
+        /// <param name="Auth001Id">用戶Id</param>
+        /// /// <param name="AquariumNum">魚缸編號</param>
+        [HttpPost]
+        public ActionResult unBindService(string Auth001Id, string AquariumNum)
+        {
+            // 準備 json 字串
+            string json;
+            // 準備 回傳給用戶的資訊物件
+            ReturnMsg returnMsg = new ReturnMsg();
+
+            int Auth001Id_int = int.Parse(Auth001Id);
+
+            // 判斷該用戶有無該魚缸的權力
+            // 用戶Id 、 魚缸編號 、 BindTag 是使用中
+            Aquarium JudgeUser = db.Aquarium.FirstOrDefault(x => x.Auth001Id == Auth001Id_int &&
+                                                                 x.AquariumUnitNum == AquariumNum &&
+                                                                 x.BindTag == "0");
+            // NULL 代表用戶沒有該魚缸的擁有權
+            if (JudgeUser == null)
+            {
+                returnMsg = new ReturnMsg();
+                returnMsg.Status = false;
+                returnMsg.Message = "該用戶並無該魚缸權限，請再做確認。";
+                returnMsg.Auth001Id = "-1";
+                returnMsg.UserName = "Null";
+
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(returnMsg);
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+            }
+
+            // 將該魚缸的BindTag設定為1
+            JudgeUser.BindTag = "1";
+            JudgeUser.modifyTime = DateTime.Now; ;
+            db.Entry(JudgeUser).State = EntityState.Modified;
+            db.SaveChanges();
+
+            // 取得用戶資訊
+            Auth001 auth001 = db.Auth001.FirstOrDefault(x => x.Id == Auth001Id_int);
+
+            // 打包成功的回傳字串
+            returnMsg = new ReturnMsg();
+            returnMsg.Status = true;
+            returnMsg.Message = "已成功將魚缸 " + AquariumNum + " 解除綁定。";
+            returnMsg.Auth001Id = Auth001Id;
+            returnMsg.UserName = auth001.UserName;
 
             // 使用 Newtonsoft.Json 將列表轉換為 JSON
             json = JsonConvert.SerializeObject(returnMsg);
