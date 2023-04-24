@@ -187,6 +187,7 @@ namespace TestProject.Controllers
 
         }
 
+
         /// <summary>
         /// 把魚缸的綁定紀錄送到行動端
         /// </summary>
@@ -234,7 +235,6 @@ namespace TestProject.Controllers
             // 將 JSON 作為 FileResult 返回
             return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
         }
-
 
         /// <summary>
         /// 綁定魚缸服務__查看用戶資訊是否正確
@@ -372,9 +372,135 @@ namespace TestProject.Controllers
             // 將 JSON 作為 FileResult 返回
             return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
         }
+
+        /// <summary>
+        /// 魚缸區間範圍設置狀態__全魚缸
+        /// </summary>
+        /// <param name="Auth001Id">用戶Id</param>
+        [HttpPost]
+        public ActionResult AquariumRangeSetNotifyState(int Auth001Id)
+        {
+            // 準備 json 字串
+            string json;
+            // 準備 回傳給用戶的資訊物件
+            ReturnMsg returnMsg = new ReturnMsg();
+
+            // 該使用者所擁有的所有魚缸
+            List<Aquarium> titleDataList = db.Aquarium.Where(x => x.Auth001Id == Auth001Id && x.BindTag == "0").ToList();
+            List<AquaruimNotifyState> notifyStateList = new List<AquaruimNotifyState>();
+            AquaruimNotifyState notifyState = new AquaruimNotifyState();
+            string string_notifyState = "";
+
+            foreach (var item in titleDataList)
+            {
+                notifyState = new AquaruimNotifyState();
+
+                // 查看有無設置區間過
+                NotifySetRange NotifyOnListData = db.NotifySetRange.FirstOrDefault(x => x.AquariumUnitNum == item.AquariumUnitNum);
+                if (NotifyOnListData != null)
+                {
+                    //代表這筆有開啟通知
+                    if (NotifyOnListData.NotifyTag == "1")
+                    {
+                        string_notifyState = "開啟";
+                    }
+                    if (NotifyOnListData.NotifyTag == "0")
+                    {
+                        string_notifyState = "關閉";
+                    }
+
+                }
+                else
+                {
+                    //代表這筆未開啟通知
+                    string_notifyState = "未定";
+                }
+
+                notifyState.aquariumNum = item.AquariumUnitNum;
+                notifyState.notifyTage = string_notifyState;
+                notifyStateList.Add(notifyState);
+            }
+
+            // 使用 Newtonsoft.Json 將列表轉換為 JSON
+            json = JsonConvert.SerializeObject(notifyStateList);
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
+
+
+        /// <summary>
+        /// 魚缸水質區間範圍設置__單一魚缸
+        /// </summary>
+        /// <param name="Auth001Id">用戶Id</param>
+        [HttpPost]
+        public ActionResult AquariumRangeSetGetDeatilToEdit(int Auth001Id, string AquariumNum)
+        {
+            // 準備 json 字串
+            string json;
+
+            //核對開參數是否是是該使用者所擁有的
+            Aquarium DataCheck = db.Aquarium.FirstOrDefault(x => x.Auth001Id == Auth001Id &&
+                                                                 x.AquariumUnitNum == AquariumNum &&
+                                                                 x.BindTag == "0");
+
+            NotifySetRange DataTarget = new NotifySetRange();
+
+            //若資料庫找不到，代表該用戶並無此魚缸使用權 (理論上來說不太會發生)
+            if (DataCheck == null)
+            {
+                DataTarget = new NotifySetRange();
+
+                DataTarget.AquariumUnitNum = AquariumNum;
+                DataTarget.temperatureUpperBound = "";
+                DataTarget.temperatureLowerBound = "";
+                DataTarget.pHUpperBound = "";
+                DataTarget.phLowerBound = "";
+                DataTarget.TDSUpperBound = "";
+                DataTarget.TDSLowerBound = "";
+                DataTarget.TurbidityUpperBound = "";
+                DataTarget.WaterLevelLowerBound = "";
+                DataTarget.NotifyTag = "";
+
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(DataTarget);
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+            }
+
+            // 返回用戶之前所編輯的資料
+            DataTarget = db.NotifySetRange.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum);
+            if (DataTarget == null)
+            {
+                //若資料庫沒有該區間設定，就先初始化該魚缸的區間設定
+                DataTarget = new NotifySetRange();
+                DataTarget.AquariumUnitNum = AquariumNum;
+                DataTarget.temperatureUpperBound = "100";
+                DataTarget.temperatureLowerBound = "0";
+                DataTarget.pHUpperBound = "14";
+                DataTarget.phLowerBound = "0";
+                DataTarget.TDSUpperBound = "10000";
+                DataTarget.TDSLowerBound = "0";
+                DataTarget.TurbidityUpperBound = "3000";
+                DataTarget.WaterLevelLowerBound = "1";
+                DataTarget.NotifyTag = "0";
+
+            }
+
+
+            // 使用 Newtonsoft.Json 將列表轉換為 JSON
+            json = JsonConvert.SerializeObject(DataTarget);
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
     }
 
 
+    // 自定義:
+    //  狀態、回復訊息、用戶Auth001Id、使用者名稱
+    // 的類別
     public class ReturnMsg
     {
         public bool Status { get; set; }
@@ -403,5 +529,12 @@ namespace TestProject.Controllers
         public string createTime { get; set; }
         public string modifyTime { get; set; }
         public string bindtag { get; set; }
+    }
+
+    // 自定義用戶魚缸  通知範圍設置狀態  類別
+    public class AquaruimNotifyState
+    {
+        public string aquariumNum { get; set; }
+        public string notifyTage { get; set; }
     }
 }
