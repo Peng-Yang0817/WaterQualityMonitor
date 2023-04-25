@@ -476,10 +476,10 @@ namespace TestProject.Controllers
                 //若資料庫沒有該區間設定，就先初始化該魚缸的區間設定
                 DataTarget = new NotifySetRange();
                 DataTarget.AquariumUnitNum = AquariumNum;
-                DataTarget.temperatureUpperBound = "100";
-                DataTarget.temperatureLowerBound = "0";
-                DataTarget.pHUpperBound = "14";
-                DataTarget.phLowerBound = "0";
+                DataTarget.temperatureUpperBound = "100.0";
+                DataTarget.temperatureLowerBound = "0.0";
+                DataTarget.pHUpperBound = "14.0";
+                DataTarget.phLowerBound = "0.0";
                 DataTarget.TDSUpperBound = "10000";
                 DataTarget.TDSLowerBound = "0";
                 DataTarget.TurbidityUpperBound = "3000";
@@ -494,6 +494,125 @@ namespace TestProject.Controllers
 
             // 將 JSON 作為 FileResult 返回
             return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
+
+        /// <summary>
+        /// 設置魚缸水質區間的路由
+        /// </summary>
+        /// <param name="DataTarget">接收到魚缸編號以及設置的所有上下區間</param>
+        /// 測試格式
+        /*
+         {
+            "Id": 0,
+            "AquariumUnitNum": "AAAAAAAA11111111",
+            "temperatureUpperBound": "",
+            "temperatureLowerBound": "",
+            "pHUpperBound": "",
+            "phLowerBound": "",
+            "TDSUpperBound": "",
+            "TDSLowerBound": "",
+            "TurbidityUpperBound": "",
+            "WaterLevelLowerBound": "",
+            "NotifyTag": ""
+        }
+        */
+        [HttpPost]
+        public ActionResult SetAquaruimRangeService(NotifySetRange DataTarget)
+        {
+            // 準備 json 字串
+            string json;
+            // 準備 回傳給用戶的資訊物件
+            ReturnMsg returnMsg = new ReturnMsg();
+
+
+            // 得知目前設定的魚缸編號
+            string AquariumTargerNum = DataTarget.AquariumUnitNum;
+            // 取得用戶設定的魚缸狀態
+            string NotifyTag = DataTarget.NotifyTag;
+
+            double temperatureUpperBound,
+                temperatureLowerBound,
+                pHUpperBound,
+                phLowerBound,
+                TDSUpperBound,
+                TDSLowerBound,
+                TurbidityUpperBound,
+                WaterLevelLowerBound;
+
+            // 確定傳過來的都為福點數後
+            if (double.TryParse(DataTarget.temperatureUpperBound, out temperatureUpperBound) &&
+                double.TryParse(DataTarget.temperatureLowerBound, out temperatureLowerBound) &&
+                double.TryParse(DataTarget.pHUpperBound, out pHUpperBound) &&
+                double.TryParse(DataTarget.phLowerBound, out phLowerBound) &&
+                double.TryParse(DataTarget.TDSUpperBound, out TDSUpperBound) &&
+                double.TryParse(DataTarget.TDSLowerBound, out TDSLowerBound) &&
+                double.TryParse(DataTarget.TurbidityUpperBound, out TurbidityUpperBound) &&
+                double.TryParse(DataTarget.WaterLevelLowerBound, out WaterLevelLowerBound))
+            {
+                //成功
+                NotifySetRange UpdateTarget = db.NotifySetRange.FirstOrDefault(x => x.AquariumUnitNum == AquariumTargerNum);
+
+                //看資料庫是否有該魚缸編號的紀錄
+                if (UpdateTarget == null)
+                {
+                    // 目前Table沒有該魚缸資料，就新增資料
+                    UpdateTarget = new NotifySetRange();
+                    UpdateTarget.AquariumUnitNum = AquariumTargerNum;
+                    UpdateTarget.temperatureUpperBound = temperatureUpperBound.ToString();
+                    UpdateTarget.temperatureLowerBound = temperatureLowerBound.ToString();
+                    UpdateTarget.pHUpperBound = pHUpperBound.ToString();
+                    UpdateTarget.phLowerBound = phLowerBound.ToString();
+                    UpdateTarget.TDSUpperBound = TDSUpperBound.ToString();
+                    UpdateTarget.TDSLowerBound = TDSLowerBound.ToString();
+                    UpdateTarget.TurbidityUpperBound = TurbidityUpperBound.ToString();
+                    UpdateTarget.WaterLevelLowerBound = WaterLevelLowerBound.ToString();
+                    UpdateTarget.NotifyTag = NotifyTag;
+
+                    db.NotifySetRange.Add(UpdateTarget);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    // 目前Table有該魚缸資料，就更新資料狀態
+                    UpdateTarget.temperatureUpperBound = temperatureUpperBound.ToString();
+                    UpdateTarget.temperatureLowerBound = temperatureLowerBound.ToString();
+                    UpdateTarget.pHUpperBound = pHUpperBound.ToString();
+                    UpdateTarget.phLowerBound = phLowerBound.ToString();
+                    UpdateTarget.TDSUpperBound = TDSUpperBound.ToString();
+                    UpdateTarget.TDSLowerBound = TDSLowerBound.ToString();
+                    UpdateTarget.TurbidityUpperBound = TurbidityUpperBound.ToString();
+                    UpdateTarget.WaterLevelLowerBound = WaterLevelLowerBound.ToString();
+                    UpdateTarget.NotifyTag = NotifyTag;
+
+                    db.Entry(UpdateTarget).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                // 打包成功的回傳字串
+                returnMsg = new ReturnMsg();
+                returnMsg.Status = true;
+                returnMsg.Message = "已成功更新魚缸 " + AquariumTargerNum + " 的水質通知區間。";
+
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(returnMsg);
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+
+            }
+            else
+            {
+                //失敗，代表不是全部都是浮點數
+                returnMsg = new ReturnMsg();
+                returnMsg.Status = false;
+                returnMsg.Message = "資料接收格式出現問題，請稍後再試。";
+
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(returnMsg);
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+            }
         }
     }
 
