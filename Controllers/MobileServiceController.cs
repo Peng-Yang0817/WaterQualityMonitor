@@ -614,6 +614,45 @@ namespace TestProject.Controllers
                 return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
             }
         }
+
+        /// <summary>
+        /// 用戶綁定前需要先登入，以便Server方便紀錄得來的Token
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BindLineNotifyNeedLogInFirst()
+        {
+            Session.RemoveAll();
+            return View();
+        }
+
+        /// <summary>
+        /// 用戶透過Mobile登入後的確認
+        /// </summary>
+        [HttpPost]
+        public ActionResult BindLineNotifyNeedLogInFirst(string email, string password)
+        {
+            Auth001 DataTrack = db.Auth001.FirstOrDefault(x => x.Email == email && x.Password == password);
+
+            if (DataTrack == null)
+            {
+                base.TempData["Email"] = email;
+                return RedirectToAction("BindLineNotifyNeedLogInFirst");
+            }
+            else
+            {
+                Session["UserEmail"] = email;
+                Session["Auth001Id"] = DataTrack.Id;
+
+                string URL = "https://notify-bot.line.me/oauth/authorize?";
+                URL += "response_type=code";
+                URL += "&client_id=uhkcosVjss3RuzULJ4uNIz";
+                URL += "&redirect_uri=http://192.168.0.80:52809/NotifyByMail/GetCodePlace";
+                URL += "&scope=notify";
+                URL += "&state=abcde";
+
+                return Redirect(URL);
+            }
+        }
     }
 
 

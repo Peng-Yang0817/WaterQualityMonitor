@@ -201,7 +201,7 @@ namespace TestProject.Controllers
             string url = "https://notify-bot.line.me/oauth/token";
             data["grant_type"] = "authorization_code";
             data["code"] = code.ToString();
-            data["redirect_uri"] = "https://localhost:44371/NotifyByMail/GetCodePlace";
+            data["redirect_uri"] = "http://192.168.0.80:52809/NotifyByMail/GetCodePlace";
             data["client_id"] = "uhkcosVjss3RuzULJ4uNIz";
             data["client_secret"] = "Hrp2nTtXeEIHw574e5pVldKEODre6t9gHwiwlIu1arO";
 

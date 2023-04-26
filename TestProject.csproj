@@ -360,10 +360,10 @@
     <Content Include="Views\NotifyByMail\SetAreaRange.cshtml" />
     <Content Include="Views\NotifyByMail\SetAreaRangeCheck.cshtml" />
     <Content Include="Views\ArduinoDataProcess\LmitateArduino.cshtml" />
+    <Content Include="Views\MobileService\BindLineNotifyNeedLogInFirst.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\MobileService\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
