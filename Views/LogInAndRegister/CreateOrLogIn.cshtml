@@ -89,7 +89,7 @@
     }
 
     .CreateLogin_D2 {
-        margin-left:10%;
+        margin-left: 10%;
         width: 100%;
         display: flex;
         /* 水平置中 */
@@ -464,6 +464,7 @@
 
 </div>
 
+
 <script>
 
     document.getElementById("CreateArea").addEventListener("submit", function (e) {
@@ -488,13 +489,18 @@
         }
     })
 </script>
+<style>
+    .swal2-popup {
+        width: 40em;
+    }
+</style>
 
 @{
     if (Model.Id > 0)
     {
         <script>
             window.onload = function () {
-                alert("信箱已被註冊，請更換!");
+                swal("信箱已被註冊過!! 請更換!");
             }
         </script>
     }
@@ -502,7 +508,7 @@
     {
         <script>
             window.onload = function () {
-                alert("Email或密碼錯誤! 請再做確認.");
+                swal("Email或密碼錯誤!請再做確認.");
             }
         </script>
     }

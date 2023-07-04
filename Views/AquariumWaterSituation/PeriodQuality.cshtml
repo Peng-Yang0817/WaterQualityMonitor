@@ -225,29 +225,15 @@
     //~~~~~溫度
     const ctx0 = document.getElementById('myTemperature').getContext('2d');
     const myChart0 = new Chart(ctx0, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: 'Temperature',
                 data: [@DataList[5].temperature, @DataList[4].temperature, @DataList[3].temperature,
                     @DataList[2].temperature, @DataList[1].temperature, @DataList[0].temperature],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -262,29 +248,15 @@
     //~~~~~濁度
     const ctx1 = document.getElementById('myTurbidity').getContext('2d');
     const myChart1 = new Chart(ctx1, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: 'Turbidity',
                 data: [@DataList[5].Turbidity, @DataList[4].Turbidity, @DataList[3].Turbidity,
                     @DataList[2].Turbidity, @DataList[1].Turbidity, @DataList[0].Turbidity],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -300,29 +272,15 @@
     //~~~~~PH
     const ctx2 = document.getElementById('myPH').getContext('2d');
     const myChart2 = new Chart(ctx2, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: 'pH',
                 data: [@DataList[5].PH, @DataList[4].PH, @DataList[3].PH,
                     @DataList[2].PH, @DataList[1].PH, @DataList[0].PH],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -340,29 +298,15 @@
     //~~~~~TDS
     const ctx3 = document.getElementById('myTDS').getContext('2d');
     const myChart3 = new Chart(ctx3, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: 'TDS',
                 data: [@DataList[5].TDS, @DataList[4].TDS, @DataList[3].TDS,
                     @DataList[2].TDS, @DataList[1].TDS, @DataList[0].TDS],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -378,29 +322,15 @@
     //~~~~~WaterLevel
     const ctx4 = document.getElementById('myWaterLevel').getContext('2d');
     const myChart4 = new Chart(ctx4, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: '水位高度',
                 data: [@DataList[5].WaterLevelNum, @DataList[4].WaterLevelNum, @DataList[3].WaterLevelNum,
                     @DataList[2].WaterLevelNum, @DataList[1].WaterLevelNum, @DataList[0].WaterLevelNum],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -421,29 +351,15 @@
     //~~~~~溫度Mobile
     const ctx5 = document.getElementById('myTemperatureMobile').getContext('2d');
     const myChart5 = new Chart(ctx5, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: 'Temperature',
                 data: [@DataList[5].temperature, @DataList[4].temperature, @DataList[3].temperature,
                     @DataList[2].temperature, @DataList[1].temperature, @DataList[0].temperature],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -458,29 +374,15 @@
     //~~~~~濁度Mobile
     const ctx6 = document.getElementById('myTurbidityMobile').getContext('2d');
     const myChart6 = new Chart(ctx6, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: 'Turbidity',
                 data: [@DataList[5].Turbidity, @DataList[4].Turbidity, @DataList[3].Turbidity,
                     @DataList[2].Turbidity, @DataList[1].Turbidity, @DataList[0].Turbidity],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -496,29 +398,15 @@
     //~~~~~PHMobile
     const ctx7 = document.getElementById('myPHMobile').getContext('2d');
     const myChart7 = new Chart(ctx7, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: 'pH',
                 data: [@DataList[5].PH, @DataList[4].PH, @DataList[3].PH,
                     @DataList[2].PH, @DataList[1].PH, @DataList[0].PH],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -536,29 +424,15 @@
     //~~~~~TDSMobile
     const ctx8 = document.getElementById('myTDSMobile').getContext('2d');
     const myChart8 = new Chart(ctx8, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: 'TDS',
                 data: [@DataList[5].TDS, @DataList[4].TDS, @DataList[3].TDS,
                     @DataList[2].TDS, @DataList[1].TDS, @DataList[0].TDS],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },
@@ -574,29 +448,15 @@
     //~~~~~WaterLevelMobile
     const ctx9 = document.getElementById('myWaterLevelMobile').getContext('2d');
     const myChart9 = new Chart(ctx9, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: LablesDataTime,
             datasets: [{
                 label: '水位高度',
                 data: [@DataList[5].WaterLevelNum, @DataList[4].WaterLevelNum, @DataList[3].WaterLevelNum,
                     @DataList[2].WaterLevelNum, @DataList[1].WaterLevelNum, @DataList[0].WaterLevelNum],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
+                backgroundColor: "rgba(74, 74, 255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
                 borderWidth: 2
             }]
         },

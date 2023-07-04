@@ -177,7 +177,10 @@
                             <td width="30%" style="text-align:center">@AquariumDataList[i].AquariumUnitNum</td>
                             <td width="10%" style="text-align:center">
                                 <div style="font-size: 15px; font-size: 100%">
-                                    @Html.ActionLink("解除", "DelectConfirmation", "Statistics009", new { area = "Statistics", href = "DelectConfirmation?DelectConfirmation=" + @AquariumDataList[i].AquariumUnitNum })
+                                    <button class="btn btn-danger unBindButton">
+                                        @Html.ActionLink("解綁", "DelectConfirmation", "Statistics009", new { href = "DelectConfirmation?DelectConfirmation=" + @AquariumDataList[i].AquariumUnitNum })
+                                    </button>
+
                                     @*@Html.ActionLink("解除", "DelectConfirmation", "NForm034ClassSize", new { area = "Form", UnitNum = @AquariumDataList[i].AquariumUnitNum })*@
                                 </div>
                             </td>
@@ -191,7 +194,7 @@
 <div class="D1">
     <div style="display: flex; align-items: center; justify-content: center" class="D1">
         <div class="AccountBindInfo">
-            <form action="/BindAquarium/Bind" method="post">
+            <form action="/BindAquarium/Bind" method="post" id="AccountBindInfo">
                 <div class="form-group">
                     <table cellpadding="8">
                         @{
@@ -220,13 +223,13 @@
                                     <td>
                                         <div>
                                             <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
-                                            <input type="text" id="UnitNum" name="UnitNum" required pattern="[a-zA-Z0-9]{16}">
+                                            <input type="text" id="UnitNum" name="UnitNum" maxlength="16" required maxlength="16" pattern="[a-zA-Z0-9]{16}">
                                         </div>
                                     </td>
                                     <td>
                                         <div>
                                             <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" placeholder="請輸入對應數字即可">
+                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" placeholder="請輸入對應數字即可">
                                         </div>
                                     </td>
                                 </tr>
@@ -261,13 +264,13 @@
                                     <td>
                                         <div>
                                             <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
-                                            <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] pattern="[a-zA-Z0-9]{16}">
+                                            <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] maxlength="16" pattern="[a-zA-Z0-9]{16}">
                                         </div>
                                     </td>
                                     <td>
                                         <div>
                                             <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" value=@base.TempData["WaterType"]>
+                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" value=@base.TempData["WaterType"]>
                                         </div>
                                     </td>
                                 </tr>
@@ -285,12 +288,14 @@
         </div>
     </div>
 </div>
-
+@*#unBindButton a {
+        color:#fff;
+    }*@
 
 <div class="D2">
     <div style="display: flex; align-items: center; justify-content: center">
         <div class="AccountBindInfo">
-            <form action="/BindAquarium/Bind" method="post">
+            <form action="/BindAquarium/Bind" method="post" id="AccountBindInfo">
                 <div class="form-group">
                     <table cellpadding="8">
                         @{
@@ -321,7 +326,7 @@
                                     <td>
                                         <div>
                                             <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
-                                            <input type="text" id="UnitNum" name="UnitNum" required pattern="[a-zA-Z0-9]{16}">
+                                            <input type="text" id="UnitNum" name="UnitNum" required maxlength="16" pattern="[a-zA-Z0-9]{16}">
                                         </div>
                                     </td>
                                 </tr>
@@ -329,7 +334,7 @@
                                     <td>
                                         <div>
                                             <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" placeholder="請輸入對應數字即可">
+                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" placeholder="請輸入對應數字即可">
                                         </div>
                                     </td>
                                 </tr>
@@ -366,7 +371,7 @@
                                     <td>
                                         <div>
                                             <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
-                                            <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] pattern="[a-zA-Z0-9]{16}">
+                                            <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] maxlength="16" pattern="[a-zA-Z0-9]{16}">
                                         </div>
                                     </td>
                                 </tr>
@@ -374,7 +379,7 @@
                                     <td>
                                         <div>
                                             <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" value=@base.TempData["WaterType"]>
+                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" value=@base.TempData["WaterType"]>
                                         </div>
                                     </td>
                                 </tr>
@@ -392,8 +397,14 @@
         </div>
     </div>
 </div>
-
 <script>
+    let button_elements = document.querySelectorAll('.unBindButton')
+    for (let i = 0; i < button_elements.length; i++) {
+        let a_element = button_elements[i].querySelector('a');
+        a_element.style.color = '#fff';
+    }
+
+
     document.getElementById("AccountBindInfo").addEventListener("submit", function (e) {
         if (confirm("請確認填寫資料是否正確.")) {
             console.log("Deleting");
@@ -416,7 +427,8 @@
     {
         <script>
             window.onload = function () {
-                alert("使用者資訊錯誤 或 魚缸序號已被綁定使用，請再做確認.");
+                let ErMsg = '@base.TempData["ErMsg"].ToString()';
+                swal(ErMsg);
             }
         </script>
     }

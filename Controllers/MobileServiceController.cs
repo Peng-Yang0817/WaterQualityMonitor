@@ -315,7 +315,7 @@ namespace TestProject.Controllers
 
 
         /// <summary>
-        /// 綁定魚缸服務__查看用戶資訊是否正確
+        /// 解綁定魚缸服務__查看用戶資訊是否正確
         /// </summary>
         /// <param name="Auth001Id">用戶Id</param>
         /// /// <param name="AquariumNum">魚缸編號</param>

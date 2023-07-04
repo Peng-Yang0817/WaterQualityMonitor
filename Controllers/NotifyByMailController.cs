@@ -62,6 +62,14 @@ namespace TestProject.Controllers
             }
             ViewBag.TitleDataListNotifyOnOrOff = TitleDataListNotifyOnOrOff;
             ViewBag.AquariumDataList = TitleDataList;
+
+            if (base.TempData["SuccessState"] != null)
+            {
+                Auth001 UserInfo = new Auth001();
+
+                return View(UserInfo);
+            }
+
             return View();
         }
 
@@ -176,6 +184,8 @@ namespace TestProject.Controllers
                     db.Entry(UpdateTarget).State = EntityState.Modified;
                     db.SaveChanges();
                 }
+                base.TempData["SuccessState"] = string.Format("編號:{0} 設定完成!", AquariumTargerNum);
+
                 return RedirectToAction("SetAreaRange");
 
             }

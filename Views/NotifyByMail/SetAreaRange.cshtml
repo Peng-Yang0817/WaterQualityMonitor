@@ -1,4 +1,4 @@
-﻿@using TestProject.Models
+﻿@model TestProject.Models.Auth001
 @{
     ViewBag.Title = "SetAreaRange";
     var AquariumDataList = ViewBag.AquariumDataList;
@@ -9,6 +9,16 @@
 
 }
 <style>
+    /* 自定義 Swal 彈出視窗的寬度和高度 */
+    .swal-modal {
+        width: 500px;
+        height: 300px;
+    }
+    /* 自定義 Swal 視窗以外的背景顏色 */
+    .swal-overlay {
+        background-color: rgba(43, 165, 137, 0.45);
+    }
+
     .btn-primary {
         font-size: 18px;
         margin-top: 20px;
@@ -211,3 +221,16 @@
         window.location.href = URL;
     }
 </script>
+
+@{
+    if (Model != null)
+    {
+        <script>
+            window.onload = function () {
+                let Msg = '@base.TempData["SuccessState"].ToString()';
+                swal("Success", Msg, "success")
+
+            }
+        </script>
+    }
+}
