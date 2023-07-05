@@ -121,11 +121,16 @@ namespace TestProject.Controllers
                 Session.RemoveAll();
                 return RedirectToAction("Index", "Home");
             }
+            // 得知操作的用戶對象
+            int Auth001Id = int.Parse(Session["Auth001Id"].ToString());
 
             // 得知目前設定的魚缸編號
             string AquariumTargerNum = DataTarget.AquariumUnitNum;
             // 取得用戶設定的魚缸狀態
             string NotifyTag = DataTarget.NotifyTag;
+
+            // 取得當前魚缸唯一碼所綁定的魚缸Id為多少
+            Aquarium DataCheck = db.Aquarium.FirstOrDefault(x => x.Auth001Id == Auth001Id && x.AquariumUnitNum == AquariumTargerNum && x.BindTag == "0");
 
             double temperatureUpperBound,
                 temperatureLowerBound,
@@ -144,7 +149,8 @@ namespace TestProject.Controllers
                 double.TryParse(DataTarget.TDSUpperBound, out TDSUpperBound) &&
                 double.TryParse(DataTarget.TDSLowerBound, out TDSLowerBound) &&
                 double.TryParse(DataTarget.TurbidityUpperBound, out TurbidityUpperBound) &&
-                double.TryParse(DataTarget.WaterLevelLowerBound, out WaterLevelLowerBound))
+                double.TryParse(DataTarget.WaterLevelLowerBound, out WaterLevelLowerBound) &&
+                DataCheck != null)
             {
                 //成功
                 NotifySetRange UpdateTarget = db.NotifySetRange.FirstOrDefault(x => x.AquariumUnitNum == AquariumTargerNum);
@@ -155,6 +161,7 @@ namespace TestProject.Controllers
                     // 目前Table沒有該魚缸資料
                     UpdateTarget = new NotifySetRange();
                     UpdateTarget.AquariumUnitNum = AquariumTargerNum;
+                    UpdateTarget.AquariumId = DataCheck.Id;
                     UpdateTarget.temperatureUpperBound = temperatureUpperBound.ToString();
                     UpdateTarget.temperatureLowerBound = temperatureLowerBound.ToString();
                     UpdateTarget.pHUpperBound = pHUpperBound.ToString();

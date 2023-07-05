@@ -98,14 +98,14 @@
     <h2>查看歷史圖表</h2>
     <div class="TitleSet">
         <h3>魚缸編號: @AquairmNum </h3>
-        <h4 style="margin-top:20px;">過去 x天內水質紀錄</h4>
+        <h4 style="margin-top:20px;">過去六小時的水質紀錄</h4>
     </div>
 </div>
 
 <div style="height: 100%; width: 100%" class="PeriodQuality_D1">
     <table border="0" cellpadding="8">
         <tr>
-            <td>
+            <td style="padding-right: 50px">
                 <div class="ShowBoxStyle">
                     <div style="height: 100%; width: 100%; ">
                         <h3 class="D1_box">溫度</h3>
@@ -123,7 +123,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td style="padding-right: 50px">
                 <div class="ShowBoxStyle" style="margin-top:10%;">
                     <div style="height: 400px; width: 400px; ">
                         <h3 class="D1_box">PH</h3>
@@ -141,7 +141,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td style="padding-right: 50px">
                 <div class="ShowBoxStyle" style="margin-top:10%;">
                     <div style="height: 400px; width: 400px; ">
                         <h3 class="D1_box">水位高度</h3>
@@ -214,12 +214,12 @@
 
 
 <script>
-    const LablesDataTime = ['@DataList[5].createTime.ToString().Substring(2,14)',
-        '@DataList[4].createTime.ToString().Substring(2, 14)',
-        '@DataList[3].createTime.ToString().Substring(2, 14)',
-        '@DataList[2].createTime.ToString().Substring(2, 14)',
-        '@DataList[1].createTime.ToString().Substring(2, 14)',
-        '@DataList[0].createTime.ToString().Substring(2, 14)'];
+    const LablesDataTime = ['@DataList[5].createTime.ToString().Substring(2,15)',
+        '@DataList[4].createTime.ToString().Substring(2, 15)',
+        '@DataList[3].createTime.ToString().Substring(2, 15)',
+        '@DataList[2].createTime.ToString().Substring(2, 15)',
+        '@DataList[1].createTime.ToString().Substring(2, 15)',
+        '@DataList[0].createTime.ToString().Substring(2, 15)'];
 
     // Web~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //~~~~~溫度

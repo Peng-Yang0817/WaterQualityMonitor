@@ -59,6 +59,7 @@
     <Property Name="TurbidityUpperBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="WaterLevelLowerBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="NotifyTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AquariumId" Type="Int32" />
   </EntityType>
   <EntityType Name="ViewAquaruimSituation_ForMobile">
     <Key>

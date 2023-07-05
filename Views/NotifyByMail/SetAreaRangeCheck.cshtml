@@ -166,7 +166,7 @@
         border-radius: 5px;
         margin-top: 0px;
         margin-bottom: 16px;
-        font-weight:bold
+        font-weight: bold
         /*border-top-left-radius: 20px;
         border-bottom-right-radius: 20px;*/
     }
@@ -202,7 +202,9 @@
                                 </tr>
                                 <tr>
                                     <th width="10%" style="text-align:left;padding-left:5px;">水位下限 :<br />&nbsp;&nbsp;<span style="font-size:15px">請輸入對應數字</span></th>
-                                    <td width="60%" colspan="1"> <input type="text" name="WaterLevelLowerBound" value=@DataTarget.WaterLevelLowerBound required /></td>
+                                    <td width="60%" colspan="1">
+                                        <input type="text" name="WaterLevelLowerBound" value=@DataTarget.WaterLevelLowerBound required />
+                                    </td>
                                     <td width="20%" class="UnitTd" style="font-size:17px">1&nbsp;:&nbsp;低水位<br />2&nbsp;:&nbsp;中水位</td>
                                 </tr>
                                 <tr>
@@ -242,7 +244,6 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="background-color:#fff">
-
                                     </td>
                                     <td style="background-color:#fff">
                                         <button type="submit" class="btn btn-primary">送出</button>

@@ -7,6 +7,9 @@
     <title>魚缸水質監控網</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
 </head>
 
 
@@ -133,8 +136,7 @@
                 </div>
             </footer>*@
     </div>
-    <script src="~/Scripts/sweetalert.min.js"></script>
-    @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

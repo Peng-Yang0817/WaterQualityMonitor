@@ -228,8 +228,15 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" placeholder="請輸入對應數字即可">
+                                            <label for="WaterType">水質類型<br />&nbsp;&nbsp;飼養的水質環境</label><br />
+                                            @*<input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" placeholder="請輸入對應數字即可">*@
+                                            <div class="input-group" style="width:100%">
+                                                <select class="form-control" name="WaterType">
+                                                    <option value="2">中性</option>
+                                                    <option value="1">弱酸</option>
+                                                    <option value="3">若鹼</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -269,8 +276,15 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" value=@base.TempData["WaterType"]>
+                                            <label for="WaterType">水質類型</label><br />
+                                            @*<input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" value=@base.TempData["WaterType"]>*@
+                                            <div class="input-group" style="width:100%">
+                                                <select class="form-control" name="WaterType">
+                                                    <option value="2">中性</option>
+                                                    <option value="1">弱酸</option>
+                                                    <option value="3">若鹼</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -333,8 +347,15 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" placeholder="請輸入對應數字即可">
+                                            <label for="WaterType">飼養類型</label><br />
+                                            @*<input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" placeholder="請輸入對應數字即可">*@
+                                            <div class="input-group" style="width:100%">
+                                                <select class="form-control" name="WaterType">
+                                                    <option value="2">中性</option>
+                                                    <option value="1">弱酸</option>
+                                                    <option value="3">若鹼</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -379,7 +400,15 @@
                                     <td>
                                         <div>
                                             <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
-                                            <input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" value=@base.TempData["WaterType"]>
+                                            @*<input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" value=@base.TempData["WaterType"]>*@
+
+                                            <div class="input-group" style="width:100%">
+                                                <select class="form-control" name="WaterType">
+                                                    <option value="2">中性</option>
+                                                    <option value="1">弱酸</option>
+                                                    <option value="3">若鹼</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

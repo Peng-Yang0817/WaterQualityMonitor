@@ -25,5 +25,6 @@ namespace TestProject.Models
         public string TurbidityUpperBound { get; set; }
         public string WaterLevelLowerBound { get; set; }
         public string NotifyTag { get; set; }
+        public Nullable<int> AquariumId { get; set; }
     }
 }

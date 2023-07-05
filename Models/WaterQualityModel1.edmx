@@ -47,6 +47,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AquariumId" Type="int" />
           <Property Name="AquariumUnitNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="temperatureUpperBound" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="temperatureLowerBound" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -169,6 +170,7 @@
           <Property Name="TurbidityUpperBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WaterLevelLowerBound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NotifyTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AquariumId" Type="Int32" />
         </EntityType>
         <EntityType Name="ViewAquaruimSituation_ForMobile">
           <Key>
@@ -243,6 +245,7 @@
           <EntitySetMapping Name="NotifySetRange">
             <EntityTypeMapping TypeName="WaterQualityModel.NotifySetRange">
               <MappingFragment StoreEntitySet="NotifySetRange">
+                <ScalarProperty Name="AquariumId" ColumnName="AquariumId" />
                 <ScalarProperty Name="NotifyTag" ColumnName="NotifyTag" />
                 <ScalarProperty Name="WaterLevelLowerBound" ColumnName="WaterLevelLowerBound" />
                 <ScalarProperty Name="TurbidityUpperBound" ColumnName="TurbidityUpperBound" />

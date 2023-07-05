@@ -42,6 +42,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AquariumId" Type="int" />
     <Property Name="AquariumUnitNum" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="temperatureUpperBound" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="temperatureLowerBound" Type="nvarchar" MaxLength="50" Nullable="false" />
