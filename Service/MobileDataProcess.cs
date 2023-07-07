@@ -55,10 +55,10 @@ namespace TestProject.Service
         /// </summary>
         /// <param name="AquariumNum">要查詢的魚缸編號! 必須先確保該魚缸有人綁定且正在使用!</param>
         /// <returns></returns>
-        public List<AquariumSituationMotify> PeriodQuality(string AquariumNum)
+        public List<AquariumSituationMotify> PeriodQuality(string AquariumNum, int queryitemCount)
         {
             // 取幾筆資料設定
-            int RowRange = 6;
+            int RowRange = queryitemCount;
 
             // 透過魚缸編號得知該魚缸目前跟使用者對應的AquariumId
             Aquarium Aquarium = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum && x.BindTag == "0");
@@ -85,7 +85,7 @@ namespace TestProject.Service
                                                                     .ToList();
 
             // 不能小於 6 筆
-            if (DataList.Count < RowRange)
+            if (DataList.Count == 0)
             {
                 // TODO!!!!!!!
                 // 要是回傳為空集合，那呼叫者要在做處裡

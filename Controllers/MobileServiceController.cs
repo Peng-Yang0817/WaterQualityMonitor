@@ -21,6 +21,13 @@ namespace TestProject.Controllers
         [HttpPost]
         public ActionResult LoginUserCheckingPost(string email, string password)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             // 檢查用戶是否存在
             Auth001 userTarget = db.Auth001.FirstOrDefault(x =>
                                                                 x.Email == email &&
@@ -54,6 +61,13 @@ namespace TestProject.Controllers
         public ActionResult RegisterUser(string username, string password,
                                          string email, string lineID)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             // 看DB內有沒有用戶已經使用過這個信箱
             Auth001 DataTrack = db.Auth001.FirstOrDefault(x => x.Email == email);
 
@@ -101,6 +115,13 @@ namespace TestProject.Controllers
         [HttpPost]
         public ActionResult GetAquariumDatas(int Auth001Id)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             // 創建取資料服務
             MobileDataProcess mobileDataProcess = new MobileDataProcess();
 
@@ -120,6 +141,13 @@ namespace TestProject.Controllers
         [HttpPost]
         public ActionResult GetAquariumDataStatus(int Auth001Id)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             // 創建取資料服務
             MobileDataProcess mobileDataProcess = new MobileDataProcess();
 
@@ -138,7 +166,7 @@ namespace TestProject.Controllers
                 // 將對應 AquaruimId 的數據全部抓出
                 List<AquariumSituation> DataArray = db.AquariumSituation.Where(x => x.AquariumId == item.AquariumId).ToList();
 
-                if (DataArray.Count >= 6)
+                if (DataArray.Count > 0)
                 {
                     keyValues.Add(item.AquariumUnitNum, true);
                     continue;
@@ -158,19 +186,26 @@ namespace TestProject.Controllers
         /// 給予用戶圖表資訊
         /// </summary>
         [HttpPost]
-        public ActionResult GetAquariumDatasForAquaruimId(string AquariumNum)
+        public ActionResult GetAquariumDatasForAquaruimId(string AquariumNum, int queryitemCount)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             // 創建取資料服務
             MobileDataProcess mobileDataProcess = new MobileDataProcess();
 
             // 透過手機服務類，取得資料!
-            List<AquariumSituationMotify> aquariumDataList = mobileDataProcess.PeriodQuality(AquariumNum);
+            List<AquariumSituationMotify> aquariumDataList = mobileDataProcess.PeriodQuality(AquariumNum, queryitemCount);
 
             // 準備 json 字串
             string json;
 
             // 理論上來說不可能會等於0，但這裡先做個保險
-            if (aquariumDataList.Count < 6)
+            if (aquariumDataList.Count == 0)
             {
                 // 使用 Newtonsoft.Json 將列表轉換為 JSON
                 json = JsonConvert.SerializeObject(new List<AquariumSituationMotify>());
@@ -195,6 +230,13 @@ namespace TestProject.Controllers
         [HttpPost]
         public ActionResult GetAquaruimNumBindHistory(string AquariumNum)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             // 將該魚缸編號所有的使用紀錄都掉出來
             List<Aquarium> Datalist = db.Aquarium.Where(x => x.AquariumUnitNum == AquariumNum).ToList();
 
@@ -243,6 +285,13 @@ namespace TestProject.Controllers
         public ActionResult BindAquariumService(string Email, string Password,
                                                 string AquariumNum, string WaterType)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             // 準備 json 字串
             string json;
             // 準備 回傳給用戶的資訊物件
@@ -315,13 +364,20 @@ namespace TestProject.Controllers
 
 
         /// <summary>
-        /// 解綁定魚缸服務__查看用戶資訊是否正確
+        /// 綁定魚缸服務__查看用戶資訊是否正確
         /// </summary>
         /// <param name="Auth001Id">用戶Id</param>
         /// /// <param name="AquariumNum">魚缸編號</param>
         [HttpPost]
         public ActionResult unBindService(string Auth001Id, string AquariumNum)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             // 準備 json 字串
             string json;
             // 準備 回傳給用戶的資訊物件
@@ -380,6 +436,12 @@ namespace TestProject.Controllers
         [HttpPost]
         public ActionResult AquariumRangeSetNotifyState(int Auth001Id)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             // 準備 json 字串
             string json;
             // 準備 回傳給用戶的資訊物件
@@ -436,6 +498,12 @@ namespace TestProject.Controllers
         [HttpPost]
         public ActionResult AquariumRangeSetGetDeatilToEdit(int Auth001Id, string AquariumNum)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             // 準備 json 字串
             string json;
 
@@ -519,6 +587,12 @@ namespace TestProject.Controllers
         [HttpPost]
         public ActionResult SetAquaruimRangeService(NotifySetRange DataTarget)
         {
+            string authToken = Request.Headers["Authorization"];
+
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             // 準備 json 字串
             string json;
             // 準備 回傳給用戶的資訊物件
