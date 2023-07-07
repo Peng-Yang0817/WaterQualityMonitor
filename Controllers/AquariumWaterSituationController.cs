@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using TestProject.Models;
 using System.Data.Entity;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace TestProject.Controllers
 {
@@ -52,12 +54,14 @@ namespace TestProject.Controllers
                 }
 
                 //資料必須要大於等於6比，按鈕才能給按
-                if (DataArray.Count >= 6)
+                if (DataArray.Count > 0)
                 {
+                    // 為 1 代表有資料，所以提供圖表顯示
                     ButtonJudge.Add(1);
                 }
                 else
                 {
+                    // 為 0 代表不能按
                     ButtonJudge.Add(0);
                 }
 
@@ -83,22 +87,22 @@ namespace TestProject.Controllers
             string Email = Session["UserEmail"].ToString();
             int Auth001Id = int.Parse(Session["Auth001Id"].ToString());
 
-            //取幾筆資料設定
-            int RowRange = 6;
-
             //透過魚缸編號得知該魚缸目前跟使用者對應的AquariumId
             int AquariumIdNum = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum && x.BindTag == "0").Id;
-
-            //將最接近目前的資料抓出一個區塊
-            List<AquariumSituation> DataList = db.AquariumSituation.Where(x => x.AquariumId == AquariumIdNum).OrderByDescending(x => x.createTime).ToList().Take(RowRange).ToList();
-
-            if (DataList.Count < RowRange)
+    
+            // ALL DATA，把該魚缸代碼所有的資料全部丟到前端
+            List<AquariumSituation> AllData = db.AquariumSituation.Where(x => x.AquariumId == AquariumIdNum)
+                                                                  .OrderByDescending(x => x.createTime).ToList().ToList();
+            // 不讓用戶知道魚缸代碼
+            foreach (var data in AllData)
             {
-                return RedirectToAction("Index", "AquariumWaterSituation");
+                data.AquariumId = 0;
             }
+            ViewBag.AllData = Newtonsoft.Json.JsonConvert.SerializeObject(AllData);
 
+            // 資料長度
+            ViewBag.AllDataCount = AllData.Count;
             ViewBag.AquariumNum = AquariumNum;
-            ViewBag.DataList = DataList;
             return View();
         }
     }

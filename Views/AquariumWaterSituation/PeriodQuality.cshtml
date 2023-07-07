@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "PeriodQuality";
     var AquairmNum = ViewBag.AquariumNum;
-    List<AquariumSituation> DataList = ViewBag.DataList;
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <style>
@@ -28,446 +27,416 @@
         font-weight: bold;
     }
 
-    .D1_box {
-        text-align: left;
-    }
-
-    .D2_box {
-        text-align: center;
-        padding-right: 60%;
-    }
-    /*小於1200px就*/
-    @@media only screen and (max-width:1200px) {
-        .D1_box {
-            padding-left: 50%;
-        }
-    }
-    /*大於1200px就*/
-    @@media only screen and (min-width:1200px) {
-        .D1_box {
-            padding-left: 0px;
-        }
-    }
-
-    /*小於500px就*/
-    @@media only screen and (max-width:500px) {
-        .D2_box {
-            width: 350px;
-            padding-left: 10%;
-            text-align: right;
-        }
-    }
-    /*大於1200px就*/
-    @@media only screen and (min-width:500px) {
-        .D2_box {
-            padding-left: 0px;
-        }
-    }
-
-
-
     .TitleSet {
         font-weight: bold;
         margin-left: 30px;
     }
-
-
-
-    @@media only screen and (max-width:850px) {
-        .PeriodQuality_D1 {
-            display: none;
-        }
-
-        .PeriodQuality_D2 {
-            display: block;
-        }
-    }
-
-    @@media only screen and (min-width:850px) {
-        .PeriodQuality_D1 {
-            display: block;
-        }
-
-        .PeriodQuality_D2 {
-            display: none;
-        }
-    }
 </style>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h2>查看歷史圖表&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="redirectToWebsite()">返回</button></h2>
+            </div>
+        </div>
+       
+        <div class="TitleSet">
+            <h3>魚缸編號: @AquairmNum </h3>
+            <h4>
+                顯示過去
+                <span class="dropdown">
 
-<div style="margin-left:50px;">
-    <h2>查看歷史圖表</h2>
-    <div class="TitleSet">
-        <h3>魚缸編號: @AquairmNum </h3>
-        <h4 style="margin-top:20px;">過去六小時的水質紀錄</h4>
+                    <button id="dropdown-btn" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        6
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        @if (ViewBag.AllDataCount < 6)
+                        {
+                            <li><a href="#">@ViewBag.AllDataCount</a></li>
+                        }
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">12</a></li>
+                        <li><a href="#">18</a></li>
+                        <li><a href="#">24</a></li>
+                    </ul>
+                </span>
+                筆資料
+            </h4>
+        </div>
     </div>
 </div>
 
-<div style="height: 100%; width: 100%" class="PeriodQuality_D1">
-    <table border="0" cellpadding="8">
-        <tr>
-            <td style="padding-right: 50px">
-                <div class="ShowBoxStyle">
-                    <div style="height: 100%; width: 100%; ">
-                        <h3 class="D1_box">溫度</h3>
-                        <canvas id="myTemperature" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="ShowBoxStyle">
-                    <div style="height: 100%; width: 100%; ">
-                        <h3 class="D1_box">濁度</h3>
-                        <canvas id="myTurbidity" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding-right: 50px">
-                <div class="ShowBoxStyle" style="margin-top:10%;">
-                    <div style="height: 400px; width: 400px; ">
-                        <h3 class="D1_box">PH</h3>
-                        <canvas id="myPH" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="ShowBoxStyle" style="margin-top:10%;">
-                    <div style="height: 400px; width: 400px; ">
-                        <h3 class="D1_box">TDS</h3>
-                        <canvas id="myTDS" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding-right: 50px">
-                <div class="ShowBoxStyle" style="margin-top:10%;">
-                    <div style="height: 400px; width: 400px; ">
-                        <h3 class="D1_box">水位高度</h3>
-                        <canvas id="myWaterLevel" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-
-        </tr>
-    </table>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h3>溫度</h3>
+        <div id="myTemperature_div"><canvas id="myTemperature" width="100" height="100"></canvas></div>
+    </div>
+    <div class="col-md-6 text-left">
+        <h3>濁度</h3>
+        <div id="myTurbidity_div"><canvas id="myTurbidity" width="100" height="100"></canvas></div>
+    </div>
+    <div class="col-md-12 text-left">
+        <hr />
+    </div>
+    <div class="col-md-6 text-left">
+        <h3>PH</h3>
+        <div id="myPH_div"><canvas id="myPH" width="100" height="100"></canvas></div>
+    </div>
+    <div class="col-md-6 text-left">
+        <h3>TDS</h3>
+        <div id="myTDS_div"><canvas id="myTDS" width="100" height="100"></canvas></div>
+    </div>
+    <div class="col-md-12 text-left">
+        <hr />
+    </div>
+    <div class="col-md-6 text-left">
+        <h3>水位高度</h3>
+        <div id="myWaterLevel_div"><canvas id="myWaterLevel" width="100" height="100"></canvas></div>
+    </div>
 </div>
 
-<div style="height: 100%; width: 100%" class="PeriodQuality_D2">
-    <table border="0" cellpadding="8">
-        <tr>
-            <td>
-                <div class="ShowBoxStyle" style="padding-bottom:40px;">
-                    <div style="height: 400px; width: 400px;">
-                        <h3 class="D2_box">溫度</h3>
-                        <canvas id="myTemperatureMobile" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="ShowBoxStyle">
-                    <div style="height: 400px; width: 400px; ">
-                        <h3 class="D2_box">濁度</h3>
-                        <canvas id="myTurbidityMobile" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="ShowBoxStyle" style="margin-top:10%;">
-                    <div style="height: 400px; width: 400px; ">
-                        <h3 class="D2_box">PH</h3>
-                        <canvas id="myPHMobile" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="ShowBoxStyle" style="margin-top:10%;">
-                    <div style="height: 400px; width: 400px; ">
-                        <h3 class="D2_box">TDS</h3>
-                        <canvas id="myTDSMobile" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="ShowBoxStyle" style="margin-top:10%;">
-                    <div style="height: 400px; width: 400px; ">
-                        <h3 class="D2_box">水位高度</h3>
-                        <canvas id="myWaterLevelMobile" width="100" height="100"></canvas>
-                    </div>
-                </div>
-            </td>
 
-        </tr>
-    </table>
-</div>
 <br />
 <br />
 
 
 <script>
-    const LablesDataTime = ['@DataList[5].createTime.ToString().Substring(2,15)',
-        '@DataList[4].createTime.ToString().Substring(2, 15)',
-        '@DataList[3].createTime.ToString().Substring(2, 15)',
-        '@DataList[2].createTime.ToString().Substring(2, 15)',
-        '@DataList[1].createTime.ToString().Substring(2, 15)',
-        '@DataList[0].createTime.ToString().Substring(2, 15)'];
+    // 該頁面的魚缸編號
+    let AquariumNum = '@AquairmNum';
 
-    // Web~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //~~~~~溫度
-    const ctx0 = document.getElementById('myTemperature').getContext('2d');
-    const myChart0 = new Chart(ctx0, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: 'Temperature',
-                data: [@DataList[5].temperature, @DataList[4].temperature, @DataList[3].temperature,
-                    @DataList[2].temperature, @DataList[1].temperature, @DataList[0].temperature],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-    //~~~~~濁度
-    const ctx1 = document.getElementById('myTurbidity').getContext('2d');
-    const myChart1 = new Chart(ctx1, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: 'Turbidity',
-                data: [@DataList[5].Turbidity, @DataList[4].Turbidity, @DataList[3].Turbidity,
-                    @DataList[2].Turbidity, @DataList[1].Turbidity, @DataList[0].Turbidity],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    // 接後端給的所有資料
+    var allData = JSON.parse('@Html.Raw(ViewBag.AllData)');
+    if (allData.length < 6) {
+        let dropdownBtn = document.getElementById('dropdown-btn');
+        dropdownBtn.innerHTML = allData.length + ' <span class="caret"></span>';
+    }
 
-    //~~~~~PH
-    const ctx2 = document.getElementById('myPH').getContext('2d');
-    const myChart2 = new Chart(ctx2, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: 'pH',
-                data: [@DataList[5].PH, @DataList[4].PH, @DataList[3].PH,
-                    @DataList[2].PH, @DataList[1].PH, @DataList[0].PH],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    type: 'linear',
-                    min: 0,
-                    max: 14
-                }
-            }
-        }
-    });
+    // 是否是初次載入這個畫面
+    let isInit = true;
+    sendValueToGetDatas(6);
 
-    //~~~~~TDS
-    const ctx3 = document.getElementById('myTDS').getContext('2d');
-    const myChart3 = new Chart(ctx3, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: 'TDS',
-                data: [@DataList[5].TDS, @DataList[4].TDS, @DataList[3].TDS,
-                    @DataList[2].TDS, @DataList[1].TDS, @DataList[0].TDS],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    // 返回按鈕被點下後，到魚缸總攬
+    function redirectToWebsite() {
+        // 使用 window.location.href 進行導航
+        window.location.href = "/AquariumWaterSituation";
+    }
 
-    //~~~~~WaterLevel
-    const ctx4 = document.getElementById('myWaterLevel').getContext('2d');
-    const myChart4 = new Chart(ctx4, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: '水位高度',
-                data: [@DataList[5].WaterLevelNum, @DataList[4].WaterLevelNum, @DataList[3].WaterLevelNum,
-                    @DataList[2].WaterLevelNum, @DataList[1].WaterLevelNum, @DataList[0].WaterLevelNum],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    type: 'linear',
-                    min: 0,
-                    max: 3
-                }
-            }
+    // 下拉式選單更動的監聽器
+    // 取得選單元素
+    var dropdownMenu = document.querySelector('.dropdown-menu');
+
+    // 監聽選單點擊事件
+    dropdownMenu.addEventListener('click', function (event) {
+        // 取得點擊的元素
+        var target = event.target;
+        // 確認點擊的是 <a> 標籤
+        if (target.tagName.toLowerCase() === 'a') {
+            // 取得選擇的數值
+            let value = target.textContent;
+
+            // 更新按鈕文字
+            var dropdownBtn = document.getElementById('dropdown-btn');
+            dropdownBtn.innerHTML = value + ' <span class="caret"></span>';
+
+            // 執行取資料函數
+            sendValueToGetDatas(value);
         }
+
     });
 
 
-    // 行動裝置~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    //~~~~~溫度Mobile
-    const ctx5 = document.getElementById('myTemperatureMobile').getContext('2d');
-    const myChart5 = new Chart(ctx5, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: 'Temperature',
-                data: [@DataList[5].temperature, @DataList[4].temperature, @DataList[3].temperature,
-                    @DataList[2].temperature, @DataList[1].temperature, @DataList[0].temperature],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-    //~~~~~濁度Mobile
-    const ctx6 = document.getElementById('myTurbidityMobile').getContext('2d');
-    const myChart6 = new Chart(ctx6, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: 'Turbidity',
-                data: [@DataList[5].Turbidity, @DataList[4].Turbidity, @DataList[3].Turbidity,
-                    @DataList[2].Turbidity, @DataList[1].Turbidity, @DataList[0].Turbidity],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    // 取得數值後的函數
+    function sendValueToGetDatas(value) {
+        /*swal(`開始查詢${value}筆資料...`);*/
 
-    //~~~~~PHMobile
-    const ctx7 = document.getElementById('myPHMobile').getContext('2d');
-    const myChart7 = new Chart(ctx7, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: 'pH',
-                data: [@DataList[5].PH, @DataList[4].PH, @DataList[3].PH,
-                    @DataList[2].PH, @DataList[1].PH, @DataList[0].PH],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    type: 'linear',
-                    min: 0,
-                    max: 14
-                }
-            }
-        }
-    });
+        let dateTimeDatas = [];
+        let temperatureDatas = [];
+        let turbidityDatas = [];
+        let PHDatas = [];
+        let TDSDatas = [];
+        let WaterLevelDatas = [];
+        let dateDataTemp = "";
 
-    //~~~~~TDSMobile
-    const ctx8 = document.getElementById('myTDSMobile').getContext('2d');
-    const myChart8 = new Chart(ctx8, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: 'TDS',
-                data: [@DataList[5].TDS, @DataList[4].TDS, @DataList[3].TDS,
-                    @DataList[2].TDS, @DataList[1].TDS, @DataList[0].TDS],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+        // 若選取的資料筆數超過該魚缸資料所擁有的長度，則設定把所有的資料都SHOW出來
+        if (value > allData.length) {
+            value = allData.length;
+            if (!isInit) {
+                swal(`資料數還未達到要求數量!`);
             }
+            isInit = false;
         }
-    });
 
-    //~~~~~WaterLevelMobile
-    const ctx9 = document.getElementById('myWaterLevelMobile').getContext('2d');
-    const myChart9 = new Chart(ctx9, {
-        type: 'line',
-        data: {
-            labels: LablesDataTime,
-            datasets: [{
-                label: '水位高度',
-                data: [@DataList[5].WaterLevelNum, @DataList[4].WaterLevelNum, @DataList[3].WaterLevelNum,
-                    @DataList[2].WaterLevelNum, @DataList[1].WaterLevelNum, @DataList[0].WaterLevelNum],
-                backgroundColor: "rgba(74, 74, 255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    type: 'linear',
-                    min: 0,
-                    max: 3
+        for (let i = 0; i < value; i++)
+        {
+            dateDataTemp = allData[value - (i + 1)].createTime.substring(2, 16).replace('T', ' ')
+            dateTimeDatas.push(dateDataTemp);
+            temperatureDatas.push(allData[value - (i + 1)].temperature);
+            turbidityDatas.push(allData[value - (i + 1)].Turbidity);
+            PHDatas.push(allData[value - (i + 1)].PH);
+            TDSDatas.push(allData[value - (i + 1)].TDS);
+            WaterLevelDatas.push(allData[value - (i + 1)].WaterLevelNum);
+        }
+
+        // 清空畫布
+        clearAllCanvas();
+        // 加入初始畫布
+        addAllCanvasInit();
+
+        // 溫度畫布塞值
+        temperatureDatasInsert(dateTimeDatas, temperatureDatas);
+        turbidityDatasInsert(dateTimeDatas, turbidityDatas);
+        PHDatasInsert(dateTimeDatas, PHDatas);
+        TDSDatasInsert(dateTimeDatas, TDSDatas);
+        WaterLevelDatasInsert(dateTimeDatas, WaterLevelDatas);
+    }
+
+    // 溫度模塊塞資料
+    function temperatureDatasInsert(dateTimeDatas, temperatureDatas) {
+        //~~~~~溫度
+        let ctx0 = document.getElementById('myTemperature').getContext('2d');
+        let myChart0 = new Chart(ctx0, {
+            type: 'line',
+            data: {
+                labels: dateTimeDatas,
+                datasets: [{
+                    label: '溫度',
+                    data: temperatureDatas,
+                    backgroundColor: "rgba(74, 74, 255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    borderWidth: 2,
+                    pointRadius: 6 // 調整點的半徑大小
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
                 }
             }
-        }
-    });
+        });
+    }
+
+    // 濁度模塊塞資料
+    function turbidityDatasInsert(dateTimeDatas, turbidityDatasInsert) {
+        //~~~~~濁度
+        let ctx1 = document.getElementById('myTurbidity').getContext('2d');
+        let myChart1 = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: dateTimeDatas,
+                datasets: [{
+                    label: '濁度',
+                    data: turbidityDatasInsert,
+                    backgroundColor: "rgba(74, 74, 255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    borderWidth: 2,
+                    pointRadius: 6 // 調整點的半徑大小
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // PH模塊塞資料
+    function PHDatasInsert(dateTimeDatas, PHDatas) {
+        //~~~~~PH
+        let ctx2 = document.getElementById('myPH').getContext('2d');
+        let myChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: dateTimeDatas,
+                datasets: [{
+                    label: '酸鹼值',
+                    data: PHDatas,
+                    backgroundColor: "rgba(74, 74, 255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    borderWidth: 2,
+                    pointRadius: 6 // 調整點的半徑大小
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        type: 'linear',
+                        min: 0,
+                        max: 14
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // TDS模塊塞資料
+    function TDSDatasInsert(dateTimeDatas, TDSDatas) {
+        //~~~~~TDS
+        let ctx3 = document.getElementById('myTDS').getContext('2d');
+        let myChart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: dateTimeDatas,
+                datasets: [{
+                    label: '總溶解固體',
+                    data: TDSDatas,
+                    backgroundColor: "rgba(74, 74, 255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    borderWidth: 2,
+                    pointRadius: 6 // 調整點的半徑大小
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // 水位高度
+    function WaterLevelDatasInsert(dateTimeDatas, WaterLevelDatas) {
+        //~~~~~WaterLevel
+        let ctx4 = document.getElementById('myWaterLevel').getContext('2d');
+        let myChart4 = new Chart(ctx4, {
+            type: 'line',
+            data: {
+                labels: dateTimeDatas,
+                datasets: [{
+                    label: '水位高度',
+                    data: WaterLevelDatas,
+                    backgroundColor: "rgba(74, 74, 255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    borderWidth: 2,
+                    pointRadius: 6 // 調整點的半徑大小
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        type: 'linear',
+                        min: 0,
+                        max: 3
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+    // 刪除所有的畫布
+    function clearAllCanvas() {
+        myTemperature_div.innerHTML = "";
+        myTurbidity_div.innerHTML = "";
+        myPH_div.innerHTML = "";
+        myTDS_div.innerHTML = "";
+        myWaterLevel_div.innerHTML = "";
+    }
+
+    // 建設初始的畫布(還未塞值)
+    function addAllCanvasInit() {
+        // ============================================================溫度
+        var temperatureDiv = document.getElementById("myTemperature_div");
+        // 創建canvas元素
+        var canvas = document.createElement("canvas");
+        canvas.id = "myTemperature";
+        canvas.width = 100;
+        canvas.height = 100;
+        // 將canvas元素加入到目標div內
+        temperatureDiv.appendChild(canvas);
+        // ============================================================濁度
+        var Turbiditydiv = document.getElementById("myTurbidity_div");
+        // 創建canvas元素
+        var canvas = document.createElement("canvas");
+        canvas.id = "myTurbidity";
+        canvas.width = 100;
+        canvas.height = 100;
+        // 將canvas元素加入到目標div內
+        Turbiditydiv.appendChild(canvas);
+        // ============================================================PH
+        var PHDiv = document.getElementById("myPH_div");
+        // 創建canvas元素
+        var canvas = document.createElement("canvas");
+        canvas.id = "myPH";
+        canvas.width = 100;
+        canvas.height = 100;
+        // 將canvas元素加入到目標div內
+        PHDiv.appendChild(canvas);
+        // ============================================================TDS
+        var TDSDiv = document.getElementById("myTDS_div");
+        // 創建canvas元素
+        var canvas = document.createElement("canvas");
+        canvas.id = "myTDS";
+        canvas.width = 100;
+        canvas.height = 100;
+        // 將canvas元素加入到目標div內
+        TDSDiv.appendChild(canvas);
+        // ============================================================溫度
+        var WaterLevelDiv = document.getElementById("myWaterLevel_div");
+        // 創建canvas元素
+        var canvas = document.createElement("canvas");
+        canvas.id = "myWaterLevel";
+        canvas.width = 100;
+        canvas.height = 100;
+        // 將canvas元素加入到目標div內
+        WaterLevelDiv.appendChild(canvas);
+    }
 </script>
