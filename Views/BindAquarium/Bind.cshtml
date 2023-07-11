@@ -162,7 +162,7 @@
                 <tr>
                     <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">序列</td>
                     <td width="30%" style="text-align: center; font-weight: bold; font-size: 100% ">魚缸編號</td>
-                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">刪除</td>
+                    <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">解綁功能</td>
                 </tr>
             </thead>
             <tbody>
@@ -208,13 +208,13 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="Email">使用者Email</label><br />
+                                            <label for="Email">電子郵件</label><br />
                                             <input type="email" id="Email" name="Email" required>
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <label for="Password">使用者密碼</label><br />
+                                            <label for="Password">密碼</label><br />
                                             <input type="password" id="Password" name="Password" required>
                                         </div>
                                     </td>
@@ -222,7 +222,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                            <label for="UnitNum">魚缸編號<br />&nbsp;&nbsp;16位元英數組合</label><br />
                                             <input type="text" id="UnitNum" name="UnitNum" maxlength="16" required maxlength="16" pattern="[a-zA-Z0-9]{16}">
                                         </div>
                                     </td>
@@ -234,7 +234,7 @@
                                                 <select class="form-control" name="WaterType">
                                                     <option value="2">中性</option>
                                                     <option value="1">弱酸</option>
-                                                    <option value="3">若鹼</option>
+                                                    <option value="3">弱鹼</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -256,13 +256,13 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="Email">使用者Email</label><br />
+                                            <label for="Email">電子郵件</label><br />
                                             <input type="email" id="Email" name="Email" required value=@Model.Email>
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <label for="Password">使用者密碼</label><br />
+                                            <label for="Password">密碼</label><br />
                                             <input type="password" id="Password" name="Password" required value=@Model.Password>
                                         </div>
                                     </td>
@@ -270,7 +270,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                            <label for="UnitNum">魚缸編號<br />&nbsp;&nbsp;16位元英數組合</label><br />
                                             <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] maxlength="16" pattern="[a-zA-Z0-9]{16}">
                                         </div>
                                     </td>
@@ -323,7 +323,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="Email">使用者Email</label><br />
+                                            <label for="Email">電子郵件</label><br />
                                             <input type="email" id="Email" name="Email" required>
                                         </div>
                                     </td>
@@ -331,7 +331,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="Password">使用者密碼</label><br />
+                                            <label for="Password">密碼</label><br />
                                             <input type="password" id="Password" name="Password" required>
                                         </div>
                                     </td>
@@ -339,7 +339,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                            <label for="UnitNum">魚缸編號<br />&nbsp;&nbsp;16位元英數組合</label><br />
                                             <input type="text" id="UnitNum" name="UnitNum" required maxlength="16" pattern="[a-zA-Z0-9]{16}">
                                         </div>
                                     </td>
@@ -347,7 +347,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="WaterType">飼養類型</label><br />
+                                            <label for="WaterType">水質類型</label><br />
                                             @*<input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" placeholder="請輸入對應數字即可">*@
                                             <div class="input-group" style="width:100%">
                                                 <select class="form-control" name="WaterType">
@@ -375,7 +375,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="Email">使用者Email</label><br />
+                                            <label for="Email">電子郵件</label><br />
                                             <input type="email" id="Email" name="Email" required value=@Model.Email>
                                         </div>
                                     </td>
@@ -383,7 +383,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="Password">使用者密碼</label><br />
+                                            <label for="Password">密碼</label><br />
                                             <input type="password" id="Password" name="Password" required value=@Model.Password>
                                         </div>
                                     </td>
@@ -391,7 +391,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="UnitNum">對應魚缸完整的<br />&nbsp;&nbsp;16位元英數組合</label><br />
+                                            <label for="UnitNum">魚缸編號<br />&nbsp;&nbsp;16位元英數組合</label><br />
                                             <input type="text" id="UnitNum" name="UnitNum" required value=@base.TempData["UnitNum"] maxlength="16" pattern="[a-zA-Z0-9]{16}">
                                         </div>
                                     </td>
@@ -399,7 +399,7 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <label for="WaterType">飼養類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
+                                            <label for="WaterType">水質類型 <br />&nbsp;&nbsp;弱酸:1 、 中性:2 、 若鹼:3 、 海水:4</label><br />
                                             @*<input type="text" id="WaterType" name="WaterType" pattern="[1-4]{1}" maxlength="1" value=@base.TempData["WaterType"]>*@
 
                                             <div class="input-group" style="width:100%">

@@ -1,8 +1,28 @@
 ﻿@model TestProject.Models.Auth001
+
 @{
     ViewBag.Title = "Create";
 }
+
 <style>
+    /* 自定義 Swal 視窗以外的背景顏色 */
+    .swal-overlay {
+        background-color: rgba(31, 31, 31, 0.45);
+        /*animation: blink 4s;*/
+    }
+
+    /*@@keyframes blink {
+        0%, 20%, 40%, 60%, 80%, 100% {
+            background-color: rgba(248, 114, 137, 0.45);
+        }
+
+        10%, 30%, 50%, 70%, 90% {
+            background-color: rgba(31, 31, 31, 0.45);
+        }
+    }*/
+
+
+
     .CreateAccount {
         float: left;
         background-color: #f2f2f2;
@@ -135,13 +155,13 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="UserName">使用者名稱</label><br />
+                                        <label for="UserName">名稱</label><br />
                                         <input type="text" id="UserName" name="UserName" required value=@Model.UserName>
                                     </div>
                                 </td>
                                 <td>
                                     <div>
-                                        <label for="Password">使用者密碼</label><br />
+                                        <label for="Password">密碼</label><br />
                                         <input type="password" id="Password" name="Password" required value=@Model.Password>
                                     </div>
                                 </td>
@@ -149,13 +169,13 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="Email">使用者 E-mail</label><br />
+                                        <label for="Email">電子郵件</label><br />
                                         <input type="email" id="Email" name="Email" required value=@Model.Email>
                                     </div>
                                 </td>
                                 <td>
                                     <div>
-                                        <label for="LineID">使用者 Line ID</label><br />
+                                        <label for="LineID">LINE ID</label><br />
                                         <input type="text" id="LineID" name="LineID" required value=@Model.LineID>
                                     </div>
                                 </td>
@@ -176,27 +196,27 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="UserName">使用者名稱</label><br />
+                                        <label for="UserName">名稱</label><br />
                                         <input type="text" id="UserName" name="UserName" required>
                                     </div>
                                 </td>
                                 <td>
                                     <div>
-                                        <label for="Password">使用者密碼</label><br />
-                                        <input type="password" id="Password" name="Password" required>
+                                        <label for="Password">密碼</label><br />
+                                        <input type="password" id="Password" name="Password" placeholder="Password" required>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="Email">使用者 E-mail</label><br />
+                                        <label for="Email">電子郵件</label><br />
                                         <input type="email" id="Email" name="Email" required>
                                     </div>
                                 </td>
                                 <td>
                                     <div>
-                                        <label for="LineID">使用者 Line ID</label><br />
+                                        <label for="LineID">LINE ID</label><br />
                                         <input type="text" id="LineID" name="LineID" required>
                                     </div>
                                 </td>
@@ -227,7 +247,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LogInEmail">使用者 E-mail</label><br />
+                                        <label for="LogInEmail">電子郵件</label><br />
                                         <input type="email" id="LogInEmail" name="Email" required value=@base.TempData["Email"]>
                                     </div>
                                 </td>
@@ -235,7 +255,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LogInPassword">使用者密碼</label><br />
+                                        <label for="LogInPassword">密碼</label><br />
                                         <input type="password" id="LogInPassword" name="Password" required>
                                     </div>
                                 </td>
@@ -257,7 +277,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LogInEmail">使用者 E-mail</label><br />
+                                        <label for="LogInEmail">電子郵件</label><br />
                                         <input type="email" id="LogInEmail" name="Email" required>
                                     </div>
                                 </td>
@@ -265,7 +285,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LogInPassword">使用者密碼</label><br />
+                                        <label for="LogInPassword">密碼</label><br />
                                         <input type="password" id="LogInPassword" name="Password" required>
                                     </div>
                                 </td>
@@ -302,7 +322,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LogInEmail">使用者 E-mail</label><br />
+                                        <label for="LogInEmail">電子郵件</label><br />
                                         <input type="email" id="LogInEmail" name="Email" required value=@base.TempData["Email"]>
                                     </div>
                                 </td>
@@ -310,7 +330,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LogInPassword">使用者密碼</label><br />
+                                        <label for="LogInPassword">密碼</label><br />
                                         <input type="password" id="LogInPassword" name="Password" required>
                                     </div>
                                 </td>
@@ -332,7 +352,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LogInEmail">使用者 E-mail</label><br />
+                                        <label for="LogInEmail">電子郵件</label><br />
                                         <input type="email" id="LogInEmail" name="Email" required>
                                     </div>
                                 </td>
@@ -340,7 +360,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LogInPassword">使用者密碼</label><br />
+                                        <label for="LogInPassword">密碼</label><br />
                                         <input type="password" id="LogInPassword" name="Password" required>
                                     </div>
                                 </td>
@@ -375,7 +395,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="UserName">使用者名稱</label><br />
+                                        <label for="UserName">名稱</label><br />
                                         <input type="text" id="UserName" name="UserName" required value=@Model.UserName>
                                     </div>
                                 </td>
@@ -383,7 +403,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="Password">使用者密碼</label><br />
+                                        <label for="Password">密碼</label><br />
                                         <input type="password" id="Password" name="Password" required value=@Model.Password>
                                     </div>
                                 </td>
@@ -391,7 +411,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="Email">使用者 E-mail</label><br />
+                                        <label for="Email">電子郵件</label><br />
                                         <input type="email" id="Email" name="Email" required value=@Model.Email>
                                     </div>
                                 </td>
@@ -399,7 +419,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LineID">使用者 Line ID</label><br />
+                                        <label for="LineID">LINE ID</label><br />
                                         <input type="text" id="LineID" name="LineID" required value=@Model.LineID>
                                     </div>
                                 </td>
@@ -420,7 +440,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="UserName">使用者名稱</label><br />
+                                        <label for="UserName">名稱</label><br />
                                         <input type="text" id="UserName" name="UserName" required>
                                     </div>
                                 </td>
@@ -428,7 +448,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="Password">使用者密碼</label><br />
+                                        <label for="Password">密碼</label><br />
                                         <input type="password" id="Password" name="Password" required>
                                     </div>
                                 </td>
@@ -436,7 +456,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="Email">使用者 E-mail</label><br />
+                                        <label for="Email">電子郵件</label><br />
                                         <input type="email" id="Email" name="Email" required>
                                     </div>
                                 </td>
@@ -444,7 +464,7 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <label for="LineID">使用者 Line ID</label><br />
+                                        <label for="LineID">LINE ID</label><br />
                                         <input type="text" id="LineID" name="LineID" required>
                                     </div>
                                 </td>
@@ -463,6 +483,7 @@
 
 
 </div>
+
 
 
 <script>
