@@ -58,6 +58,7 @@ namespace TestProject.Service
                     {
                         Auth001Id = Auth001Id,
                         AquariumUnitNum = item.AquariumUnitNum,
+                        customAquaruimName = "未定義",
                         WaterType = item.WaterType,
                         BindTag = "",
                         AquariumId = item.Id,
@@ -69,6 +70,12 @@ namespace TestProject.Service
                         createTime = DateTime.Now,
                         WaterLevelNum = ""
                     };
+                }
+                // 如果沒有設定魚缸名稱，則顯示未定義
+                if (viewAquaruimSituation_ForMobile.customAquaruimName == null ||
+                    viewAquaruimSituation_ForMobile.customAquaruimName == "")
+                {
+                    viewAquaruimSituation_ForMobile.customAquaruimName = "未定義";
                 }
 
                 DataList.Add(viewAquaruimSituation_ForMobile);

@@ -1,24 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="WaterQualityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="WaterQualityEntities1" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Aquarium" EntityType="WaterQualityModel.Aquarium" />
     <EntitySet Name="AquariumSituation" EntityType="WaterQualityModel.AquariumSituation" />
-    <EntitySet Name="Auth001" EntityType="WaterQualityModel.Auth001" />
     <EntitySet Name="NotifySetRange" EntityType="WaterQualityModel.NotifySetRange" />
     <EntitySet Name="ViewAquaruimSituation_ForMobile" EntityType="WaterQualityModel.ViewAquaruimSituation_ForMobile" />
+    <EntitySet Name="Aquarium" EntityType="WaterQualityModel.Aquarium" />
+    <EntitySet Name="Auth001" EntityType="WaterQualityModel.Auth001" />
   </EntityContainer>
-  <EntityType Name="Aquarium">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Auth001Id" Type="Int32" Nullable="false" />
-    <Property Name="AquariumUnitNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="WaterType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BindTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="createTime" Type="DateTime" Precision="3" />
-    <Property Name="modifyTime" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="AquariumSituation">
     <Key>
       <PropertyRef Name="Id" />
@@ -32,17 +20,6 @@
     <Property Name="WaterLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="createTime" Type="DateTime" Precision="3" />
     <Property Name="WaterLevelNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Auth001">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="LineID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="LineToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NotifySetRange">
     <Key>
@@ -84,5 +61,30 @@
     <Property Name="WaterLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="createTime" Type="DateTime" Precision="3" />
     <Property Name="WaterLevelNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="customAquaruimName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Aquarium">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Auth001Id" Type="Int32" Nullable="false" />
+    <Property Name="AquariumUnitNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WaterType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BindTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createTime" Type="DateTime" Precision="3" />
+    <Property Name="modifyTime" Type="DateTime" Precision="3" />
+    <Property Name="customAquaruimName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Auth001">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LineID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LineToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -11,6 +11,7 @@
     <Property Name="BindTag" Type="nvarchar" MaxLength="50" />
     <Property Name="createTime" Type="datetime" />
     <Property Name="modifyTime" Type="datetime" />
+    <Property Name="customAquaruimName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="AquariumSituation">
     <Key>
@@ -69,6 +70,7 @@
     </Key>
     <Property Name="Auth001Id" Type="int" Nullable="false" />
     <Property Name="AquariumUnitNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="customAquaruimName" Type="nvarchar" MaxLength="50" />
     <Property Name="WaterType" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="BindTag" Type="nvarchar" MaxLength="50" />
     <Property Name="AquariumId" Type="int" Nullable="false" />
@@ -89,6 +91,7 @@
       <DefiningQuery>SELECT 
     [ViewAquaruimSituation_ForMobile].[Auth001Id] AS [Auth001Id], 
     [ViewAquaruimSituation_ForMobile].[AquariumUnitNum] AS [AquariumUnitNum], 
+    [ViewAquaruimSituation_ForMobile].[customAquaruimName] AS [customAquaruimName], 
     [ViewAquaruimSituation_ForMobile].[WaterType] AS [WaterType], 
     [ViewAquaruimSituation_ForMobile].[BindTag] AS [BindTag], 
     [ViewAquaruimSituation_ForMobile].[AquariumId] AS [AquariumId], 

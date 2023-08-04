@@ -21,5 +21,6 @@ namespace TestProject.Models
         public string BindTag { get; set; }
         public Nullable<System.DateTime> createTime { get; set; }
         public Nullable<System.DateTime> modifyTime { get; set; }
+        public string customAquaruimName { get; set; }
     }
 }

@@ -176,82 +176,128 @@
 <div class="SituationIndex_D1">
     <div style="margin-left:50px">
         <h2>
-            水質範圍設置<h2>
-                <div class="TitleSet">
-                    <h3>編號 : @AquarinmNum</h3>
-                    <div class="DataSet">
-                        <form action="/NotifyByMail/GetUserRangeData" method="post">
-                            <input type="text" name="AquariumUnitNum" value=@AquarinmNum style="display:none">
-                            <table>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">通知 On/Off :</th>
-                                    <td width="5%" colspan="2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="NotifyTag" value="1" id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                On
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="NotifyTag" value="0" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Off
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">水位下限 :<br />&nbsp;&nbsp;<span style="font-size:15px">請輸入對應數字</span></th>
-                                    <td width="60%" colspan="1">
-                                        <input type="text" name="WaterLevelLowerBound" value=@DataTarget.WaterLevelLowerBound required />
-                                    </td>
-                                    <td width="20%" class="UnitTd" style="font-size:17px">1&nbsp;:&nbsp;低水位<br />2&nbsp;:&nbsp;中水位</td>
-                                </tr>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">濁度上限 :</th>
-                                    <td width="60%" colspan="1"> <input type="text" name="TurbidityUpperBound" value=@DataTarget.TurbidityUpperBound required /></td>
-                                    <td width="20%" class="UnitTd">NTU</td>
-                                </tr>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">水溫上限 :</th>
-                                    <td width="60%" colspan="1"> <input type="text" name="temperatureUpperBound" value=@DataTarget.temperatureUpperBound required /></td>
-                                    <td width="20%" class="UnitTd">°C</td>
-                                </tr>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">水溫下限 :</th>
-                                    <td width="60%" colspan="1"> <input type="text" name="temperatureLowerBound" value=@DataTarget.temperatureLowerBound required /></td>
-                                    <td width="20%" class="UnitTd">°C</td>
-                                </tr>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">pH上限 :</th>
-                                    <td width="60%" colspan="1"> <input type="text" name="pHUpperBound" value=@DataTarget.pHUpperBound required /></td>
-                                    <td width="20%" class="UnitTd">mol/L</td>
-                                </tr>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">pH下限 :</th>
-                                    <td width="60%" colspan="1"> <input type="text" name="phLowerBound" value=@DataTarget.phLowerBound required /></td>
-                                    <td width="20%" class="UnitTd">mol/L</td>
-                                </tr>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">TDS上限 :</th>
-                                    <td width="60%" colspan="1"> <input type="text" name="TDSUpperBound" value=@DataTarget.TDSUpperBound required /></td>
-                                    <td width="20%" class="UnitTd">ppm</td>
-                                </tr>
-                                <tr>
-                                    <th width="10%" style="text-align:left;padding-left:5px;">TDS下限 :</th>
-                                    <td width="60%" colspan="1"> <input type="text" name="TDSLowerBound" value=@DataTarget.TDSLowerBound required /></td>
-                                    <td width="20%" class="UnitTd">ppm</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" style="background-color:#fff">
-                                    </td>
-                                    <td style="background-color:#fff">
-                                        <button type="submit" class="btn btn-primary">送出</button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                </div>
+            水質範圍設置
+        </h2>
+        <div class="TitleSet">
+            <h3>編號 : @AquarinmNum</h3>
+            <div class="DataSet">
+                <form action="/NotifyByMail/GetUserRangeData" method="post">
+                    <input type="text" name="AquariumUnitNum" value=@AquarinmNum style="display:none">
+                    <table>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">通知 On/Off :</th>
+                            <td width="5%" colspan="2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="NotifyTag" value="1" id="flexRadioDefault1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        On
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="NotifyTag" value="0" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Off
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">水位下限 :<br />&nbsp;&nbsp;<span style="font-size:15px">請輸入對應數字</span></th>
+                            <td width="60%" colspan="1">
+                                <input type="text" name="WaterLevelLowerBound" value=@DataTarget.WaterLevelLowerBound required />
+                            </td>
+                            <td width="20%" class="UnitTd" style="font-size:17px">1&nbsp;:&nbsp;低水位<br />2&nbsp;:&nbsp;中水位</td>
+                        </tr>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">濁度上限 :</th>
+                            <td width="60%" colspan="1"> <input type="text" name="TurbidityUpperBound" value=@DataTarget.TurbidityUpperBound required /></td>
+                            <td width="20%" class="UnitTd">NTU</td>
+                        </tr>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">水溫上限 :</th>
+                            <td width="60%" colspan="1"> <input type="text" name="temperatureUpperBound" value=@DataTarget.temperatureUpperBound required /></td>
+                            <td width="20%" class="UnitTd">°C</td>
+                        </tr>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">水溫下限 :</th>
+                            <td width="60%" colspan="1"> <input type="text" name="temperatureLowerBound" value=@DataTarget.temperatureLowerBound required /></td>
+                            <td width="20%" class="UnitTd">°C</td>
+                        </tr>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">pH上限 :</th>
+                            <td width="60%" colspan="1"> <input type="text" name="pHUpperBound" value=@DataTarget.pHUpperBound required /></td>
+                            <td width="20%" class="UnitTd">mol/L</td>
+                        </tr>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">pH下限 :</th>
+                            <td width="60%" colspan="1"> <input type="text" name="phLowerBound" value=@DataTarget.phLowerBound required /></td>
+                            <td width="20%" class="UnitTd">mol/L</td>
+                        </tr>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">TDS上限 :</th>
+                            <td width="60%" colspan="1"> <input type="text" name="TDSUpperBound" value=@DataTarget.TDSUpperBound required /></td>
+                            <td width="20%" class="UnitTd">ppm</td>
+                        </tr>
+                        <tr>
+                            <th width="10%" style="text-align:left;padding-left:5px;">TDS下限 :</th>
+                            <td width="60%" colspan="1"> <input type="text" name="TDSLowerBound" value=@DataTarget.TDSLowerBound required /></td>
+                            <td width="20%" class="UnitTd">ppm</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="background-color:#fff">
+                            </td>
+                            <td style="background-color:#fff">
+                                <button type="submit" class="btn btn-primary">送出</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+
     </div>
 </div>
+
+<style>
+    .reaomentFontSize {
+        font-size: 20px;
+    }
+</style>
+<div class="container">
+    <div class="row" style="margin-left: 50px;">
+        <h2 class="col-md-12 alert alert-success text-center">水質設置範圍建議</h2>
+
+        <div class="col-md-4">
+            <h3 class="text-left">中性</h3>
+            <ul class="list-unstyled reaomentFontSize">
+                <li>水位高度：中水位</li>
+                <li>濁度：20 - 30 NTU</li>
+                <li>溫度：25°C - 28°C</li>
+                <li>pH值：7.0 - 7.5</li>
+                <li>TDS：200 - 300 ppm</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-left">弱酸</h3>
+            <ul class="list-unstyled reaomentFontSize">
+                <li>水位高度：中水位</li>
+                <li>濁度：15 - 25 NTU</li>
+                <li>溫度：24°C - 27°C</li>
+                <li>pH值：6.5 - 7.0</li>
+                <li>TDS：150 - 250 ppm</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-left">弱鹼</h3>
+            <ul class="list-unstyled reaomentFontSize">
+                <li>水位高度：中水位</li>
+                <li>濁度：25 - 35 NTU</li>
+                <li>溫度：26°C - 29°C</li>
+                <li>pH值：7.5 - 8.0</li>
+                <li>TDS：250 - 350 ppm</li>
+            </ul>
+        </div>
+    </div>
+</div>
+

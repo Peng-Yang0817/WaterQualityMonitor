@@ -26,5 +26,6 @@ namespace TestProject.Models
         public string WaterLevel { get; set; }
         public Nullable<System.DateTime> createTime { get; set; }
         public string WaterLevelNum { get; set; }
+        public string customAquaruimName { get; set; }
     }
 }

@@ -25,8 +25,25 @@ namespace TestProject.Controllers
         [EnableCors("Policy1")]
         public ActionResult GetUserData(string AquariumNum)
         {
-            //第一個物件
+            // 取得帳戶ID
+            int Auth001Id = int.Parse(Session["Auth001Id"].ToString());
+
+            // 先把所有對應魚缸編號的魚缸抓出
             List<Aquarium> Datalist = db.Aquarium.Where(x => x.AquariumUnitNum == AquariumNum).ToList();
+
+
+            if (Datalist.Count == 0)
+            {
+                // 有可能用戶是輸入魚缸暱稱，因此將用戶的暱稱轉成AquariumNum 再找一次
+                Aquarium CustomNameToAquariumNum = db.Aquarium.FirstOrDefault(x => x.Auth001Id == Auth001Id &&
+                                                                          x.customAquaruimName == AquariumNum);
+                if (CustomNameToAquariumNum != null)
+                {
+                    Datalist = db.Aquarium.Where(x => x.AquariumUnitNum == CustomNameToAquariumNum.AquariumUnitNum).ToList();
+                }
+                
+            }
+
             List<string[]> data = new List<string[]>();
             for (int i = 0; i < Datalist.Count; i++)
             {

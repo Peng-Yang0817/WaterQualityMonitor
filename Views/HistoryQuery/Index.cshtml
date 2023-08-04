@@ -147,9 +147,9 @@
         <div class="L2Div">
             <table border="0">
                 <tr>
-                    <td width="25%">
+                    <td width="40%">
                         <div class="form-group">
-                            <label for="AquariumNum">魚缸編號&nbsp;:</label>
+                            <label for="AquariumNum">魚缸編號或定義名稱&nbsp;:</label>
                         </div>
                     </td>
                     <td width="40%">
@@ -157,7 +157,7 @@
                             <input type="text" name="AquariumNum" value="" id="AquariumNumD1" maxlength="16"/>
                         </div>
                     </td>
-                    <td width="35%" style="padding-left:0px">
+                    <td width="20%" style="padding-left:0px">
                         <button type="submit" class="btn btn-primary" id="SearchBtnD1">查詢</button>
                     </td>
                 </tr>
@@ -176,7 +176,7 @@
                 <tr>
                     <td width="70%" style="padding:10px 20px">
                         <div class="form-group" style="margin-bottom:0px">
-                            <label for="AquariumNum">魚缸編號</label>
+                            <label for="AquariumNum">魚缸編號或定義名稱</label>
                         </div>
                     </td>
                     <td  width="30%">
@@ -230,7 +230,7 @@
             let ClearTag = $('#info').empty(); // 清空該 TAG 內部
             $.ajax({
                 async: false,
-                url: `https://localhost:44371/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置
+                url: `/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置
                 type: 'get',// post/get
                 dataType: 'json',
                 data: {},// 輸入的資料
@@ -247,10 +247,10 @@
                                     ${indexNum}
                                 </td>
                                 <td>
-                                    ${element[0]}
+                                    ${element[0].substring(0, element[0].length - 3) }
                                 </td>
                                 <td>
-                                    ${element[1]}
+                                    ${element[1].substring(0, element[1].length - 3) }
                                 </td>
                                 <td style="text-align:center">
                                     ${element[2]}
@@ -268,7 +268,7 @@
             let ClearTag = $('#info').empty();
             $.ajax({
                 async: false,
-                url: `https://localhost:44371/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置
+                url: `/HistoryQuery/GetUserData?AquariumNum=${AquariumNum}`,// url位置
                 type: 'get',// post/get
                 dataType: 'json',
                 data: {},// 輸入的資料
@@ -285,10 +285,10 @@
                                     ${indexNum}
                                 </td>
                                 <td>
-                                    ${element[0]}
+                                    ${element[0].substring(0, element[0].length - 3) }
                                 </td>
                                 <td>
-                                    ${element[1]}
+                                    ${element[1].substring(0, element[1].length - 3) }
                                 </td>
                                 <td style="text-align:center">
                                     ${element[2]}

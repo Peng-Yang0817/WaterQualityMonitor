@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "CustomAquariumNameSet";
+}
+
+<h1 style="font-weight:bold">定義魚缸名稱</h1>
+<div class="form-group">
+    <button type="submit" class="btn btn-success" onclick="window.location.href='@Url.Action("Bind", "BindAquarium")'" style="width:90px">Go Back</button>
+</div>
+
+
+<div class="container" style="font-size:24px">
+    <div class="alert alert-info">
+        <strong>提醒!</strong> 請輸入對魚缸編號想對應的名稱。
+    </div>
+    <form action="/BindAquarium/CustomAquariumNameSetPost" class="form-inline" method="post">
+        <div class="form-group" style="margin:10px">
+            <label for="AquariumNum">魚缸編號:@ViewBag.AquariumNum</label>
+            <input type="hidden" class="form-control" id="AquariumNum" name="AquariumNum" value="@ViewBag.AquariumNum">
+        </div><br />
+        <div class="form-group" style="margin:10px">
+            <label for="CustomName">魚缸名稱:</label>
+            <input type="text" class="form-control" id="CustomName" placeholder="請輸入魚缸名稱" name="CustomName" required>
+        </div><br />
+        <div class="form-group" style="margin:10px">
+
+            <button type="submit" class="btn btn-primary" style="width:90px">Send</button>
+        </div><br />
+    </form>
+    
+    
+</div>
+

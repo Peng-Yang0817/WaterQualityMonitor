@@ -160,5 +160,39 @@ namespace TestProject.Controllers
             }
         }
 
+
+        /// <summary>
+        /// 魚缸名稱字定義__GET
+        /// </summary>
+        public ActionResult CustomAquariumNameSet(string AquariumNum, string CustomName)
+        {
+            ViewBag.AquariumNum = AquariumNum;
+            ViewBag.CustomName = CustomName;
+            return View();
+        }
+        /// <summary>
+        /// 魚缸名稱字定義__POST
+        /// </summary>
+        [HttpPost]
+        public ActionResult CustomAquariumNameSetPost(string AquariumNum, string CustomName)
+        {
+            // 取得更改目標
+            Aquarium JudgeUser = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum &&
+                                                                 x.BindTag == "0");
+
+            // 沒抓到目標，請求方式異常
+            if (JudgeUser == null)
+            {
+                return View("Error");
+            }
+
+            JudgeUser.customAquaruimName = CustomName;
+            db.Entry(JudgeUser).State = EntityState.Modified;
+            db.SaveChanges();
+
+            base.TempData["ErMsg"] = "成功! 已成功定義名稱。";
+            return RedirectToAction("Bind", "BindAquarium", new { UerInfo = new Auth001() });
+        }
+
     }
 }

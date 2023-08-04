@@ -228,7 +228,7 @@ namespace TestProject.Controllers
         /// </summary>
         /// <param name="AquariumNum">魚缸編號</param>
         [HttpPost]
-        public ActionResult GetAquaruimNumBindHistory(string AquariumNum)
+        public ActionResult GetAquaruimNumBindHistory(string Auth001Id, string AquariumNum)
         {
             string authToken = Request.Headers["Authorization"];
 
@@ -239,6 +239,21 @@ namespace TestProject.Controllers
 
             // 將該魚缸編號所有的使用紀錄都掉出來
             List<Aquarium> Datalist = db.Aquarium.Where(x => x.AquariumUnitNum == AquariumNum).ToList();
+
+            int _Auth001Id = Convert.ToInt32(Auth001Id);
+
+            // 找不到代表用戶可能輸入的是暱稱，因此透過暱稱來看是否有對應用戶的魚缸編浩
+            if (Datalist.Count == 0)
+            {
+                // 有可能用戶是輸入魚缸暱稱，因此將用戶的暱稱轉成AquariumNum 再找一次
+                Aquarium CustomNameToAquariumNum = db.Aquarium.FirstOrDefault(x => x.Auth001Id == _Auth001Id &&
+                                                                          x.customAquaruimName == AquariumNum);
+                if (CustomNameToAquariumNum != null)
+                {
+                    Datalist = db.Aquarium.Where(x => x.AquariumUnitNum == CustomNameToAquariumNum.AquariumUnitNum).ToList();
+                }
+
+            }
 
             // 創建歷史紀錄的集合，等等裝MOBILE所需要的資料
             List<AquaruimNumBindHistory> datas = new List<AquaruimNumBindHistory>();
@@ -727,6 +742,71 @@ namespace TestProject.Controllers
                 return Redirect(URL);
             }
         }
+
+        /// <summary>
+        /// 魚缸名稱定義
+        /// </summary>
+        /// <param name="AquariumUnitNum">魚缸編號</param>
+        /// <param name="customAquaruimName">魚缸名稱</param>
+        [HttpPost]
+        public ActionResult CustomAquariumNamePost(string AquariumUnitNum, string customAquaruimName)
+        {
+            string authToken = Request.Headers["Authorization"];
+            if (authToken != "Bearer jpymJUKgpjPp49GbC6onVCBlNYZfIDHfi5hypNrPXh1")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            string json;
+
+            // 取得更改目標
+            Aquarium JudgeUser = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumUnitNum &&
+                                                                 x.BindTag == "0");
+
+            // 沒抓到目標，請求方式異常
+            if (JudgeUser == null)
+            {
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(new ResponseState
+                {
+                    state = false,
+                    msg = "請求方式異常"
+                });
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+            }
+
+            try // 嘗試更動對應item
+            {
+                JudgeUser.customAquaruimName = customAquaruimName;
+                db.Entry(JudgeUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception e) // 與DB操作時發生異常
+            {
+                // 使用 Newtonsoft.Json 將列表轉換為 JSON
+                json = JsonConvert.SerializeObject(new ResponseState
+                {
+                    state = false,
+                    msg = "伺服器發生錯誤!"
+                });
+
+                // 將 JSON 作為 FileResult 返回
+                return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+            }
+
+            // 更動成功
+            json = JsonConvert.SerializeObject(new ResponseState
+            {
+                state = true,
+                msg = "更動成功!"
+            });
+
+            // 將 JSON 作為 FileResult 返回
+            return File(Encoding.UTF8.GetBytes(json), "application/json", "AquariumData.json");
+        }
+
     }
 
 
@@ -768,5 +848,14 @@ namespace TestProject.Controllers
     {
         public string aquariumNum { get; set; }
         public string notifyTage { get; set; }
+    }
+
+    // 魚缸名稱定義
+    public class ResponseState
+    {
+        // 狀態
+        public bool state { get; set; }
+        // 資訊
+        public string msg { get; set; }
     }
 }

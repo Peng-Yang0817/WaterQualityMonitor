@@ -1,7 +1,8 @@
 ﻿@model TestProject.Models.Auth001
+@using TestProject.Models
 @{
     ViewBag.Title = "Bind Page";
-    var AquariumDataList = ViewBag.AquariumDataList;
+    List<Aquarium> AquariumDataList = ViewBag.AquariumDataList;
     var DataListSize = AquariumDataList.Count;
     var DataCount = 0;
 }
@@ -161,7 +162,8 @@
             <thead>
                 <tr>
                     <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">序列</td>
-                    <td width="30%" style="text-align: center; font-weight: bold; font-size: 100% ">魚缸編號</td>
+                    <td width="15%" style="text-align: center; font-weight: bold; font-size: 100% ">魚缸編號</td>
+                    <td width="15%" style="text-align: center; font-weight: bold; font-size: 100% ">魚缸名稱</td>
                     <td width="10%" style="text-align: center; font-weight: bold; font-size: 100%">解綁功能</td>
                 </tr>
             </thead>
@@ -174,7 +176,26 @@
                                 DataCount += 1;
                             }
                             <td width="10%" style="text-align:center">@DataCount</td>
-                            <td width="30%" style="text-align:center">@AquariumDataList[i].AquariumUnitNum</td>
+                            <td width="15%" style="text-align:center">@AquariumDataList[i].AquariumUnitNum</td>
+                            @if (AquariumDataList[i].customAquaruimName == null || AquariumDataList[i].customAquaruimName == "")
+                            {
+                                <td width="15%" style="text-align:center">
+                                    未定義
+                                    <button type="button" class="btn btn-info" aria-label="Left Align" onclick="window.location.href='@Url.Action("CustomAquariumNameSet", "BindAquarium", new {AquariumNum = AquariumDataList[i].AquariumUnitNum,CustomName ="undefind" })'">
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td width="15%" style="text-align:center">
+                                    @AquariumDataList[i].customAquaruimName
+                                    <button type="button" class="btn btn-info" aria-label="Left Align" onclick="window.location.href='@Url.Action("CustomAquariumNameSet","BindAquarium", new {AquariumNum = AquariumDataList[i].AquariumUnitNum,CustomName = AquariumDataList[i].customAquaruimName})'" >
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            }
+
                             <td width="10%" style="text-align:center">
                                 <div style="font-size: 15px; font-size: 100%">
                                     <button class="btn btn-danger unBindButton">

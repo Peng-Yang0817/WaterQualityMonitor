@@ -25,10 +25,10 @@ namespace TestProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Aquarium> Aquarium { get; set; }
         public virtual DbSet<AquariumSituation> AquariumSituation { get; set; }
-        public virtual DbSet<Auth001> Auth001 { get; set; }
         public virtual DbSet<NotifySetRange> NotifySetRange { get; set; }
         public virtual DbSet<ViewAquaruimSituation_ForMobile> ViewAquaruimSituation_ForMobile { get; set; }
+        public virtual DbSet<Aquarium> Aquarium { get; set; }
+        public virtual DbSet<Auth001> Auth001 { get; set; }
     }
 }

@@ -41,8 +41,17 @@
         </div>
        
         <div class="TitleSet">
+            @if (ViewBag.AquariumData.customAquaruimName == null || 
+                 ViewBag.AquariumData.customAquaruimName == "")
+            {
+                <h3>魚缸名稱 : 未定義</h3>
+            }
+            else
+            {
+                <h3>魚缸名稱 : @ViewBag.AquariumData.customAquaruimName</h3>
+            }
             <h3>魚缸編號: @AquairmNum </h3>
-            <h4>
+            <h3>
                 顯示過去
                 <span class="dropdown">
 
@@ -62,7 +71,7 @@
                     </ul>
                 </span>
                 筆資料
-            </h4>
+            </h3>
         </div>
     </div>
 </div>

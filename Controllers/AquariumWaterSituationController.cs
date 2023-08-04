@@ -87,8 +87,10 @@ namespace TestProject.Controllers
             string Email = Session["UserEmail"].ToString();
             int Auth001Id = int.Parse(Session["Auth001Id"].ToString());
 
+            Aquarium AquariumData = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum && x.BindTag == "0");
+
             //透過魚缸編號得知該魚缸目前跟使用者對應的AquariumId
-            int AquariumIdNum = db.Aquarium.FirstOrDefault(x => x.AquariumUnitNum == AquariumNum && x.BindTag == "0").Id;
+            int AquariumIdNum = AquariumData.Id;
     
             // ALL DATA，把該魚缸代碼所有的資料全部丟到前端
             List<AquariumSituation> AllData = db.AquariumSituation.Where(x => x.AquariumId == AquariumIdNum)
@@ -103,6 +105,7 @@ namespace TestProject.Controllers
             // 資料長度
             ViewBag.AllDataCount = AllData.Count;
             ViewBag.AquariumNum = AquariumNum;
+            ViewBag.AquariumData = AquariumData;
             return View();
         }
     }
